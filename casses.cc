@@ -303,9 +303,18 @@ int main () {
                     cin>>project_id;
                     cout<<"Enter Project Due Date: ";
                     cin>>project_due_date;
-                    ProjectManangement(project_name,project_id,team,project_due_date);
+                    ProjectManangement(project_name,0,team,project_due_date);
                     cout<<"Project have been successfully created."<<endl;
-                    case 2:
+                    break;
+                    
+                    case 2:  //Add a Project
+                    break;
+
+                    case 3:  //Manage Projects
+                    
+                    
+
+
 
                 }
             } while (1);
