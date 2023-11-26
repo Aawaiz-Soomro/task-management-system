@@ -10,9 +10,20 @@ class ProjectManangement {
     ProjectTeam team_;
     string project_due_date_;
     int no_of_tasks_;
-    
-
     public:
+    ProjectManangement()
+    {
+        project_name_="";
+        project_id_=0;
+        project_due_date_="";
+    }
+    ProjectManangement(string name,int id,ProjectTeam team,string due_date)
+    {
+        project_name_=name;
+        project_id_=id;
+        project_due_date_=project_due_date_;
+    }
+    
     string
     get_project_name_ () {
         return project_name_;
@@ -282,6 +293,7 @@ int main () {
                     cout<<"Enter Project Due Date: ";
                     cin>>project_due_date;
                     ProjectManangement(project_name,project_id,team,project_due_date);
+                    cout<<"Project have been successfully created."<<endl;
                     case 2:
 
                 }
