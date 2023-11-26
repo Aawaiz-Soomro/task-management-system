@@ -11,6 +11,7 @@ class ProjectManangement {
     int no_of_tasks_;
     };
 
+
 class ProjectTeam : public ProjectManangement {
     private:
     string team_members_ [20] ;
@@ -147,7 +148,6 @@ class Task : public ProjectManangement {
             break;
         }
         }
-
     }
 
 
@@ -179,6 +179,13 @@ class User {
     }
 
     void
+    display_projects_ () {
+        for (int i=0 ; i < project_count ; i++) {
+        cout <<endl <<project_ [i].project_id_ <<" - " <<project_ [i].project_name_ ;  
+        }
+    }
+
+    void
     generateReport () {}
 
 
@@ -187,6 +194,7 @@ class User {
         project_ [ project_count ] = newproject;
         project_count++;
     }
+
 
 };
 int
