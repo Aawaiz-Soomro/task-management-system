@@ -2,45 +2,6 @@
 #include <ctime>
 using namespace std;
 
-class User {
-    private:
-    static int user_count_;
-    int user_id_;
-    string user_name_;
-    string user_email_;
-    string user_password_;
-    ProjectManangement project_ [5];
-    int project_count;
-    
-    public:
-    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password) {
-        user_count_++;
-    }
-    
-    User()
-    {
-        user_id_ = user_count_;
-        user_name_="";
-        user_email_="";
-        user_password_="";
-        user_count_ ++;
-    }
-
-    void
-    generateReport () {}
-
-
-    void
-    add_project (ProjectManangement newproject ) {
-        project_ [ project_count ] = newproject;
-        project_count++;
-    }
-
-
-
-};
-int
-User :: user_count_ = 0;
 
 class ProjectManangement {
     private:
@@ -191,6 +152,45 @@ class Tags {
     }
 
 };
+
+class User {
+    private:
+    static int user_count_;
+    int user_id_;
+    string user_name_;
+    string user_email_;
+    string user_password_;
+    ProjectManangement project_ [5];
+    int project_count;
+    
+    public:
+    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password) {
+        user_count_++;
+    }
+    
+    User()
+    {
+        user_id_ = user_count_;
+        user_name_="";
+        user_email_="";
+        user_password_="";
+        user_count_ ++;
+    }
+
+    void
+    generateReport () {}
+
+
+    void
+    add_project (ProjectManangement newproject ) {
+        project_ [ project_count ] = newproject;
+        project_count++;
+    }
+
+};
+int
+User :: user_count_ = 0;
+
 
 int main () {
     
