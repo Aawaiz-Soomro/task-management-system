@@ -7,10 +7,22 @@ class ProjectManangement {
     private:
     string project_name_;
     int project_id_;
+    ProjectTeam team;
     string project_due_date;
     int no_of_tasks_;
-    };
+    
 
+    public:
+    string
+    get_project_name_ () {
+        return project_name_;
+    }
+
+    int
+    get_project_id_ () {
+        return project_id_;
+    }
+};
 
 class ProjectTeam : public ProjectManangement {
     private:
@@ -181,7 +193,7 @@ class User {
     void
     display_projects_ () {
         for (int i=0 ; i < project_count ; i++) {
-        cout <<endl <<project_ [i].project_id_ <<" - " <<project_ [i].project_name_ ;  
+    //    cout <<endl <<project_ [i].project_id_ <<" - " <<project_ [i].project_name_ ;  
         }
     }
 
