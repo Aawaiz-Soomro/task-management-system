@@ -1,6 +1,46 @@
 #include <iostream>
-using namespace std;
 #include <ctime>
+using namespace std;
+
+class User {
+    private:
+    static int user_count_;
+    int user_id_;
+    string user_name_;
+    string user_email_;
+    string user_password_;
+    ProjectManangement project_ [5];
+    int project_count;
+    
+    public:
+    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password) {
+        user_count_++;
+    }
+    
+    User()
+    {
+        user_id_ = user_count_;
+        user_name_="";
+        user_email_="";
+        user_password_="";
+        user_count_ ++;
+    }
+
+    void
+    generateReport () {}
+
+
+    void
+    add_project (ProjectManangement newproject ) {
+        project_ [ project_count ] = newproject;
+        project_count++;
+    }
+
+
+
+};
+int
+User :: user_count_ = 0;
 
 class ProjectManangement {
     private:
@@ -8,7 +48,7 @@ class ProjectManangement {
     int project_id_;
     string project_due_date;
     int no_of_tasks_;
-};
+    };
 
 class ProjectTeam : public ProjectManangement {
     private:
@@ -20,8 +60,8 @@ const int MAX_TASK_TAGS_ = 5;
 class Task : public ProjectManangement {
     private:
 
-    string task_name_;
     int task_id_;
+    string task_name_;
     string task_due_date;
     string task_status_;
     Tags task_tags_ [MAX_TASK_TAGS_];
@@ -152,22 +192,40 @@ class Tags {
 
 };
 
-class User {
-    private:
-    int user_id_;
-    string user_name_;
-    string user_email_;
-    string user_password_;
+int main () {
     
-    public:
-    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password),user_id_(userid){}
-    
-    User()
-    {
-        user_name_="";
-        user_email_="";
-        user_password_="";
-        user_id_ = 0;
-    }
+    int login_switch;
+    bool user_login = 0;
 
-};
+    do {
+        cout<< "1. Create New User" <<endl
+            << "2. Login" <<endl;
+
+        switch (login_switch) {
+
+            case1:
+            string user_name;
+            string user_email;
+            string user_password;
+
+            cout << "Enter Username: " <<endl ;
+            cin >> user_name;
+            cout << "Enter Email: " ;
+            cin >> user_email;
+            cout << "Enter Password" ;
+            User (user_name,user_email,user_password, 0) ;
+            break;
+
+            case2:
+            cout << "Enter Username: " <<endl ;
+            cin >> user_name;
+            cin >> user_email;
+            cout << "Enter Password" ;
+            break;
+            // call auth function;
+        
+        }
+    } while (user_login == 0) ;
+    
+return 0;
+}
