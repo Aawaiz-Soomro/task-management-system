@@ -16,7 +16,7 @@ class ProjectTeam : public ProjectManangement {
     string project_leader_name_;
 };
 
-const int MAX_TASK_TAGS_ = 10;
+const int MAX_TASK_TAGS_ = 5;
 class Task : public ProjectManangement {
     private:
 
@@ -27,10 +27,10 @@ class Task : public ProjectManangement {
     Tags task_tags_ [MAX_TASK_TAGS_];
     int task_members_;
 
+    public:
 
-    Task ()  {
+    Task ()  {}
 
-    }
 
     void
     changeTaskStatus (int option) {
@@ -82,9 +82,41 @@ class Task : public ProjectManangement {
         cout << "Please complete your task, you only have " <<due_day - today_day << " days to complete your task" ;
 
     }
- 
+    
+    int count = 0;
     void
-    addTaskTags () {
+    addTaskTags (Tags new_task_tag ) {
+
+        bool different = 1;
+        for (int i=0 ; i<count ; i++) 
+        if ( task_tags_ [i].get_tag_id_ () == new_task_tag.get_tag_id_ () ) {
+        different = 0;
+        cout << "This tag already exists in this task" <<endl ;
+        break;
+        }
+
+        
+        if ( different )
+        if (count < MAX_TASK_TAGS_) {
+        task_tags_ [count] = new_task_tag ;
+        ++count;
+        cout << "Tag: " <<new_task_tag.get_tag_name_ () <<" added succesfully" ;
+        }
+        else
+        cout << "Maximum limit of 5 tags exceeded, please remove a tag to add another one" <<endl ;
+    }
+
+    void
+    removeTaskTags (Tags new_task_tag ) {
+
+        for (int i=0 ; i<count ; i++) {
+        if ( task_tags_ [i].get_tag_id_ () == new_task_tag.get_tag_id_ () ) {
+            task_tags_ [i].set_tag_id_ (0);
+            task_tags_ [i].set_tag_name_ ("n/a");
+            --count;
+            break;
+        }
+        }
 
     }
 
@@ -94,25 +126,48 @@ class Task : public ProjectManangement {
 // seperate text file for tags to store all tags
 class Tags {
     private:
-    string tag_name;
-    int tag_id;
+    string tag_name_;
+    int tag_id_;
 
+    public:
+    int
+    get_tag_id_ () {
+        return tag_id_;
+    }
+
+    string
+    get_tag_name_ () {
+        return tag_name_;
+    }
+
+    void
+    set_tag_name_ (string new_tag_name) {
+        tag_name_ = new_tag_name;
+    }
+
+    void
+    set_tag_id_ (int new_tag_id) {
+        tag_id_ = new_tag_id;
+    }
 
 };
+
 class User {
     private:
+    int user_id_;
     string user_name_;
-    string email_;
-    string password_;
-    string user_id_;
+    string user_email_;
+    string user_password_;
+    
     public:
-    string password_;
-    User(string username,string email,string password,string userid):user_name_(username),email_(email),password_(password),user_id_(userid){}
+    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password),user_id_(userid){}
+    
     User()
     {
         user_name_="";
-        email_="";
-        password_="";
-        user_id_="";
+        user_email_="";
+        user_password_="";
+        user_id_ = 0;
     }
+
 };
