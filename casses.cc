@@ -17,6 +17,35 @@ class ProjectTeam : public ProjectManangement {
     string project_leader_name_;
 };
 
+// seperate text file for tags to store all tags
+class Tags {
+    private:
+    string tag_name_;
+    int tag_id_;
+
+    public:
+    int
+    get_tag_id_ () {
+        return tag_id_;
+    }
+
+    string
+    get_tag_name_ () {
+        return tag_name_;
+    }
+
+    void
+    set_tag_name_ (string new_tag_name) {
+        tag_name_ = new_tag_name;
+    }
+
+    void
+    set_tag_id_ (int new_tag_id) {
+        tag_id_ = new_tag_id;
+    }
+
+};
+
 const int MAX_TASK_TAGS_ = 5;
 class Task : public ProjectManangement {
     private:
@@ -124,34 +153,6 @@ class Task : public ProjectManangement {
 
 };
 
-// seperate text file for tags to store all tags
-class Tags {
-    private:
-    string tag_name_;
-    int tag_id_;
-
-    public:
-    int
-    get_tag_id_ () {
-        return tag_id_;
-    }
-
-    string
-    get_tag_name_ () {
-        return tag_name_;
-    }
-
-    void
-    set_tag_name_ (string new_tag_name) {
-        tag_name_ = new_tag_name;
-    }
-
-    void
-    set_tag_id_ (int new_tag_id) {
-        tag_id_ = new_tag_id;
-    }
-
-};
 
 class User {
     private:
@@ -193,38 +194,46 @@ User :: user_count_ = 0;
 
 
 int main () {
-    
+
     int login_switch;
+    string temp_user_name;
+    string temp_user_email;
+    string temp_user_password;
     bool user_login = 0;
 
     do {
         cout<< "1. Create New User" <<endl
-            << "2. Login" <<endl;
+            << "2. Login" <<endl ;
+        cin >> login_switch;
 
         switch (login_switch) {
+        
+            case 1:
 
-            case1:
-            string user_name;
-            string user_email;
-            string user_password;
-
-            cout << "Enter Username: " <<endl ;
-            cin >> user_name;
+            cout << "Enter Username: "  ;
+            cin >> temp_user_name;
             cout << "Enter Email: " ;
-            cin >> user_email;
-            cout << "Enter Password" ;
-            User (user_name,user_email,user_password, 0) ;
+            cin >> temp_user_email;
+            cout << "Enter Password: " ;
+            cin >> temp_user_password;
+
+            User (temp_user_name,temp_user_email,temp_user_password, 0) ;
+            cout <<endl;
             break;
 
-            case2:
-            cout << "Enter Username: " <<endl ;
-            cin >> user_name;
-            cin >> user_email;
-            cout << "Enter Password" ;
+            case 2:
+            
+            cout << "Enter E-Mail: " ;
+            cin >> temp_user_email;
+            cout << "Enter Password: " ;
+            cin >> temp_user_password;
+            user_login = 1;
+            cout <<endl;
             break;
             // call auth function;
         
         }
+
     } while (user_login == 0) ;
     
 return 0;
