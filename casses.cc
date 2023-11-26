@@ -86,6 +86,7 @@ class Tags {
         tag_id_ = new_tag_id;
     }
 
+
 };
 
 const int MAX_TASK_TAGS_ = 5;
@@ -94,9 +95,10 @@ class Task : public ProjectManangement {
 
     int task_id_;
     string task_name_;
-    string task_due_date;
+    string task_due_date_;
     string task_status_;
     Tags task_tags_ [MAX_TASK_TAGS_];
+    int tags_count_ = 0;
     int task_members_;
 
     public:
@@ -139,9 +141,9 @@ class Task : public ProjectManangement {
         int today_month = ( stoi (today_date) % 1000000) / 10000;
         int today_year = stoi (today_date) % 10000;
 
-        int due_day = stoi (task_due_date) / 1000000;
-        int due_month = ( stoi (task_due_date) % 1000000) / 10000;
-        int due_year = stoi (task_due_date) % 10000;
+        int due_day = stoi (task_due_date_) / 1000000;
+        int due_month = ( stoi (task_due_date_) % 1000000) / 10000;
+        int due_year = stoi (task_due_date_) % 10000;
 
 
         
@@ -155,12 +157,11 @@ class Task : public ProjectManangement {
 
     }
     
-    int count = 0;
     void
     addTaskTags (Tags new_task_tag ) {
 
         bool different = 1;
-        for (int i=0 ; i<count ; i++) 
+        for (int i=0 ; i<tags_count_ ; i++) 
         if ( task_tags_ [i].get_tag_id_ () == new_task_tag.get_tag_id_ () ) {
         different = 0;
         cout << "This tag already exists in this task" <<endl ;
@@ -169,9 +170,9 @@ class Task : public ProjectManangement {
 
         
         if ( different )
-        if (count < MAX_TASK_TAGS_) {
-        task_tags_ [count] = new_task_tag ;
-        ++count;
+        if (tags_count_ < MAX_TASK_TAGS_) {
+        task_tags_ [tags_count_] = new_task_tag ;
+        ++tags_count_;
         cout << "Tag: " <<new_task_tag.get_tag_name_ () <<" added succesfully" ;
         }
         else
@@ -181,13 +182,27 @@ class Task : public ProjectManangement {
     void
     removeTaskTags (Tags new_task_tag ) {
 
-        for (int i=0 ; i<count ; i++) {
+        for (int i=0 ; i<tags_count_ ; i++) {
         if ( task_tags_ [i].get_tag_id_ () == new_task_tag.get_tag_id_ () ) {
             task_tags_ [i].set_tag_id_ (0);
             task_tags_ [i].set_tag_name_ ("n/a");
-            --count;
+            --tags_count_;
             break;
         }
+        }
+    }
+
+    void
+    displayTaskDetails () {
+        cout <<"Task ID: " <<task_id_ <<endl;
+        cout <<"Task Name: " <<task_name_ <<endl;
+        cout <<"Task Due Date: " <<task_due_date_ <<endl;
+        cout <<"Task Status: " <<task_status_ <<endl;
+
+        cout <<"Task Tags: " <<endl;
+        for (int i=0 ; i<tags_count_; i++) {
+        cout <<task_tags_ [i].get_tag_id_ () <<" - " <<task_tags_ [i].get_tag_name_ () ;
+        
         }
     }
 
