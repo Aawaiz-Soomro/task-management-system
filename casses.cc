@@ -107,7 +107,7 @@ class User {
     string user_id_;
     public:
     string password_;
-    User(string username,string password,string userid):user_name_(username):email_(email),password_,(password),user_id_(userid){}
+    User(string username,string email,string password,string userid):user_name_(username),email_(email),password_(password),user_id_(userid){}
     User()
     {
         user_name_="";
