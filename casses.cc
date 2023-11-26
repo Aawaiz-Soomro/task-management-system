@@ -28,6 +28,8 @@ class ProjectManangement {
         cout <<"Project Name: " <<project_name_ <<endl;
         cout <<"Project ID: " <<project_id_ <<endl;
         cout <<"Project Due Date: " <<project_due_date_ <<endl;
+        cout <<"Project Leader: " <<team_.get_project_leader_name_() <<endl;
+    //    cout <<"Project Team: "  <<endl;
     }
 };
 
@@ -35,6 +37,15 @@ class ProjectTeam : public ProjectManangement {
     private:
     string team_members_ [20] ;
     string project_leader_name_;
+
+    public:
+    string
+    get_project_leader_name_ () {
+        return project_leader_name_;
+    }
+
+
+
 };
 
 // seperate text file for tags to store all tags
