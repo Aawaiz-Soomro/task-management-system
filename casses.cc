@@ -193,8 +193,14 @@ class User {
     void
     display_projects_ () {
         for (int i=0 ; i < project_count ; i++) {
-    //    cout <<endl <<project_ [i].project_id_ <<" - " <<project_ [i].project_name_ ;  
+        cout <<endl <<project_ [i].get_project_id_ () <<" - " <<project_ [i].get_project_name_ () ;  
         }
+    }
+
+    void
+    viewProfile () {
+        cout <<"Projects: " <<endl;
+
     }
 
     void
@@ -238,6 +244,7 @@ int main () {
             cin >> temp_user_password;
 
             User (temp_user_name,temp_user_email,temp_user_password, 0) ;
+            cout<<"New user created successfully."<<endl;
             cout <<endl;
             break;
 
@@ -247,6 +254,31 @@ int main () {
             cin >> temp_user_email;
             cout << "Enter Password: " ;
             cin >> temp_user_password;
+            do
+            {
+                int project_switch;
+                string project_name;
+                int project_id;
+                string project_due_date;
+                ProjectTeam team;
+                cout<< "1. Create a Project" <<endl
+                    << "2. Add Project" <<endl
+                    << "3. Manage Project" <<endl
+                    << "4. View Profile" <<endl;
+                switch(project_switch)
+                {
+                    case 1:    // Create a Project
+                    cout<<"Enter Project Name: "; 
+                    cin>>project_name;
+                    cout<<"Enter Project Id: ";
+                    cin>>project_id;
+                    cout<<"Enter Project Due Date: ";
+                    cin>>project_due_date;
+                    ProjectManangement(project_name,project_id,team,project_due_date);
+                    case 2:
+
+                }
+            } while (1);
             user_login = 1;
             cout <<endl;
             break;
@@ -255,6 +287,10 @@ int main () {
         }
 
     } while (user_login == 0) ;
-    
+    if(user_login=1)
+    {
+        
+        
+    }
 return 0;
 }
