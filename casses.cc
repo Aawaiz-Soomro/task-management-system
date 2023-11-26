@@ -7,8 +7,8 @@ class ProjectManangement {
     private:
     string project_name_;
     int project_id_;
-    ProjectTeam team;
-    string project_due_date;
+    ProjectTeam team_;
+    string project_due_date_;
     int no_of_tasks_;
     
 
@@ -21,6 +21,13 @@ class ProjectManangement {
     int
     get_project_id_ () {
         return project_id_;
+    }
+
+    void
+    displayProjectDetails () {
+        cout <<"Project Name: " <<project_name_ <<endl;
+        cout <<"Project ID: " <<project_id_ <<endl;
+        cout <<"Project Due Date: " <<project_due_date_ <<endl;
     }
 };
 
