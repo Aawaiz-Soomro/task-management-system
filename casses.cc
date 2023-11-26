@@ -99,3 +99,20 @@ class Tags {
 
 
 };
+class User {
+    private:
+    string user_name_;
+    string email_;
+    string password_;
+    string user_id_;
+    public:
+    string password_;
+    User(string username,string password,string userid):user_name_(username):email_(email),password_,(password),user_id_(userid){}
+    User()
+    {
+        user_name_="";
+        email_="";
+        password_="";
+        user_id_="";
+    }
+};
