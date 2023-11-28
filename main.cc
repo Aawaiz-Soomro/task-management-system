@@ -22,7 +22,7 @@ int main () {
             cout << "Enter Email: " ;
             cin >> user_email;
             cout << "Enter Password" ;
-            User (user_name,user_email,user_password, 0) ;
+            User (user_name,user_email,user_password) ;
             break;
 
             case2:

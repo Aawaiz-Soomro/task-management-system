@@ -145,8 +145,7 @@ class Task : public ProjectManangement {
         int due_month = ( stoi (task_due_date_) % 1000000) / 10000;
         int due_year = stoi (task_due_date_) % 10000;
 
-
-        
+ 
         if (today_year == due_year)
         if (today_month == due_month)
         // this block of code is only executed if todays year and month matches due dates year and month
@@ -221,7 +220,7 @@ class User {
     int project_count;
     
     public:
-    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password) {
+    User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
         user_count_++;
     }
     
@@ -262,6 +261,37 @@ class User {
 int
 User :: user_count_ = 0;
 
+void
+loginForm (int &login_switch) {
+    cout<< "1. Create New User" <<endl
+    << "2. Login" <<endl ;
+    cin >> login_switch;
+}
+
+void
+signupForm (string &temp_user_name, string &temp_user_email, string &temp_user_password) {
+
+    cout << "Enter Username: "  ;
+    cin >> temp_user_name;
+    cout << "Enter Email: " ;
+    cin >> temp_user_email;
+    cout << "Enter Password: " ;
+    cin >> temp_user_password;
+
+    User (temp_user_name,temp_user_email,temp_user_password) ;
+    cout<<"New user created successfully."<<endl;
+    cout <<endl;
+}
+
+void
+loginMenu (string &temp_user_email, string &temp_user_password) {
+
+    cout << "Enter E-Mail: " ;
+    cin >> temp_user_email;
+    cout << "Enter Password: " ;
+    cin >> temp_user_password;
+}
+
 
 int main () {
 
@@ -272,32 +302,19 @@ int main () {
     bool user_login = 0;
 
     do {
-        cout<< "1. Create New User" <<endl
-            << "2. Login" <<endl ;
-        cin >> login_switch;
+        
+        loginMenu (login_switch);
 
         switch (login_switch) {
         
             case 1:
-
-            cout << "Enter Username: "  ;
-            cin >> temp_user_name;
-            cout << "Enter Email: " ;
-            cin >> temp_user_email;
-            cout << "Enter Password: " ;
-            cin >> temp_user_password;
-
-            User (temp_user_name,temp_user_email,temp_user_password, 0) ;
-            cout<<"New user created successfully."<<endl;
-            cout <<endl;
+            signupForm (temp_user_name, temp_user_email, temp_user_password)
             break;
 
             case 2:
+            loginForm (temp_user_name, temp_user_email, temp_user_password)
+            break;
             
-            cout << "Enter E-Mail: " ;
-            cin >> temp_user_email;
-            cout << "Enter Password: " ;
-            cin >> temp_user_password;
             do
             {
                 int project_switch;
@@ -323,6 +340,7 @@ int main () {
                     break;
                     
                     case 2:  //Add a Project
+
                     break;
 
                     case 3:  //Manage Projects
