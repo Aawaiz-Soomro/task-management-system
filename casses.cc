@@ -259,6 +259,7 @@ class User {
 };
 int
 User :: user_count_ = 0;
+// ---------------------------------------------------------------------------------------------------------------------------- //
 
 void
 loginMenu (int &login_switch) {
@@ -292,6 +293,16 @@ loginForm (string &temp_user_email, string &temp_user_password) {
     cin >> temp_user_password;
 }
 
+void
+projectMenu (int &choice) {
+    cout<< "1. Create a Project" <<endl
+        << "2. Add Project" <<endl
+        << "3. Manage Project" <<endl
+        << "4. View Profile" <<endl;
+    
+    cin >> choice;
+}
+
 
 int main () {
 
@@ -321,10 +332,7 @@ int main () {
                 int project_id;
                 string project_due_date;
                 ProjectTeam team;
-                cout<< "1. Create a Project" <<endl
-                    << "2. Add Project" <<endl
-                    << "3. Manage Project" <<endl
-                    << "4. View Profile" <<endl;
+                projectMenu (project_switch);
 
                 switch(project_switch)
                 {
@@ -335,6 +343,7 @@ int main () {
                     cin>>project_id;
                     cout<<"Enter Project Due Date: ";
                     cin>>project_due_date;
+                    
                     ProjectManangement(project_name,0,team,project_due_date);
                     cout<<"Project have been successfully created."<<endl;
                     break;
@@ -359,5 +368,6 @@ int main () {
     {
                
     }
+
 return 0;
 }
