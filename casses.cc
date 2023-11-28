@@ -336,7 +336,8 @@ projectMenu (int &project_switch) {
         << "2. Add Project" <<endl
         << "3. Manage Project" <<endl
         << "4. View Profile" <<endl
-        << "5. Logout"<<endl;
+        << "5. Go Back"<<endl
+        << "6. Logout"<<endl;
     
     cin >> project_switch;
 }
