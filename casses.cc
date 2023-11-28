@@ -3,6 +3,19 @@
 using namespace std;
 
 
+class ProjectTeam  {
+    private:
+    string team_members_ [20] ;
+    string project_leader_name_;
+
+    public:
+    string
+    get_project_leader_name_ () {
+        return project_leader_name_;
+    }
+
+};
+
 class ProjectManangement {
     private:
     string project_name_;
@@ -44,20 +57,6 @@ class ProjectManangement {
     }
 };
 
-class ProjectTeam : public ProjectManangement {
-    private:
-    string team_members_ [20] ;
-    string project_leader_name_;
-
-    public:
-    string
-    get_project_leader_name_ () {
-        return project_leader_name_;
-    }
-
-
-
-};
 
 // seperate text file for tags to store all tags
 class Tags {
@@ -264,7 +263,8 @@ User :: user_count_ = 0;
 void
 loginMenu (int &login_switch) {
     cout<< "1. Create New User" <<endl
-    << "2. Login" <<endl ;
+    << "2. Login" <<endl 
+    << "3. Exit Program" <<endl ;
     cin >> login_switch;
 }
 
@@ -313,9 +313,8 @@ int main () {
 
             case 2:
             loginForm (temp_user_email, temp_user_password);
-            break;
-            
-            do
+
+            while (user_login)
             {
                 int project_switch;
                 string project_name;
@@ -326,6 +325,7 @@ int main () {
                     << "2. Add Project" <<endl
                     << "3. Manage Project" <<endl
                     << "4. View Profile" <<endl;
+
                 switch(project_switch)
                 {
                     case 1:    // Create a Project
@@ -340,29 +340,24 @@ int main () {
                     break;
                     
                     case 2:  //Add a Project
-
                     break;
 
                     case 3:  //Manage Projects
-                    
-                    
-
-
-
+                    break;
                 }
-            } while (1);
-            user_login = 1;
-            cout <<endl;
+
+            } ;
             break;
-            // call auth function;
-        
+            
+            case 3:
+            exit (0);
         }
 
     } while (user_login == 0) ;
+
     if(user_login=1)
     {
-        
-        
+               
     }
 return 0;
 }
