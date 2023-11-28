@@ -262,7 +262,7 @@ int
 User :: user_count_ = 0;
 
 void
-loginForm (int &login_switch) {
+loginMenu (int &login_switch) {
     cout<< "1. Create New User" <<endl
     << "2. Login" <<endl ;
     cin >> login_switch;
@@ -284,7 +284,7 @@ signupForm (string &temp_user_name, string &temp_user_email, string &temp_user_p
 }
 
 void
-loginMenu (string &temp_user_email, string &temp_user_password) {
+loginForm (string &temp_user_email, string &temp_user_password) {
 
     cout << "Enter E-Mail: " ;
     cin >> temp_user_email;
@@ -308,11 +308,11 @@ int main () {
         switch (login_switch) {
         
             case 1:
-            signupForm (temp_user_name, temp_user_email, temp_user_password)
+            signupForm (temp_user_name, temp_user_email, temp_user_password);
             break;
 
             case 2:
-            loginForm (temp_user_name, temp_user_email, temp_user_password)
+            loginForm (temp_user_email, temp_user_password);
             break;
             
             do
