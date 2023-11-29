@@ -1,113 +1,16 @@
 #include <iostream>
 #include <ctime>
+#include <user.cc>
+#include <project_management.cc>
+#include <project_team.cc>
 using namespace std;
 
-class User;
-class ProjectTeam;
-class ProjectManagement;
+
 class Task;
 class Tags;
 
 
-class ProjectTeam  {
-    private:
-    User team_members_ [5] ;
-    int team_members_count_;
-    User project_leader_;
 
-    public:
-    string
-    get_project_leader_name_ () {
-        return project_leader_.get_user_name ();
-        }
-
-    void
-    addTeamMember (User new_team_member) {
-        team_members_ [team_members_count_] = new_team_member; 
-    }
-    
-    void
-    removeTeamMember () {
-        cout << "Who do you want to remove?" <<endl;
-        int removed_person_choice = 0;
-        for ( int i=0; i<5 ; i++) {
-        cout <<i <<". " <<team_members_ [i].get_user_name () <<" - " <<team_members_ [i].get_user_id () <<endl ;
-        }
-        cout << "Enter Your Choice: ";
-        cin >> removed_person_choice;
-
-        team_members_ [removed_person_choice].removeUser (); 
-    }
-
-    void
-    displayProjectTeam () {
-        for (int i=0 ; i<5 ; i++) {
-        cout <<"User " <<i <<": " <<endl; 
-        team_members_[i].displayUserDetails();
-        }
-    }
-
-    void
-    searchUser (int id) {
-        for (int i=1 ; i<=team_members_count_ ; i++) {
-            if (id == team_members_[i].get_user_id ())
-            team_members_[i].displayUserDetails ();
-        }
-    }
-
-    void
-    searchUser (string user_name) {
-        for (int i=1 ; i<=team_members_count_ ; i++) {
-            if (user_name == team_members_[i].get_user_name ())
-            team_members_[i].displayUserDetails ();
-        }
-    }
-
-};
-
-class ProjectManagement {
-    private:
-    string project_name_;
-    int project_id_;
-    ProjectTeam team_;
-    string project_due_date_;
-    int no_of_tasks_;
-    public:
-    ProjectManagement()
-    {
-        project_name_="";
-        project_id_=0;
-        project_due_date_="";
-    }
-    ProjectManagement(string name,int id,ProjectTeam team,string due_date)
-    {
-        project_name_=name;
-        project_id_=id;
-        project_due_date_=project_due_date_;
-    }
-    
-    string
-    get_project_name_ () {
-        return project_name_;
-    }
-
-    int
-    get_project_id_ () {
-        return project_id_;
-    }
-
-    void
-    displayProjectDetails () {
-        cout <<"Project Name: " <<project_name_ <<endl;
-        cout <<"Project ID: " <<project_id_ <<endl;
-        cout <<"Project Due Date: " <<project_due_date_ <<endl;
-        cout <<"Project Leader: " <<team_.get_project_leader_name_() <<endl;
-        cout <<"Project Team: "  <<endl;
-        team_.displayProjectTeam ();
-    }
-
-    
-};
 
 
 // seperate text file for tags to store all tags
@@ -262,127 +165,6 @@ class Task  {
 };
 
 
-class User {
-    private:
-    static int user_count_;
-    int user_id_;
-    static int vacant_id_slots_ [10];
-    static int vacant_id_slots_counter_;
-    string user_name_;
-    string user_email_;
-    string user_password_;
-    ProjectManagement project_ [5];
-    int project_count;
-    
-    public:
-    User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
-        bool vacant_id_found = 0;
-        for (int i=0; i<10 ; i++) 
-        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
-            vacant_id_slots_ [i] == user_id_;
-            vacant_id_found = 1;
-            break;
-        }
-        if (!vacant_id_found)
-        user_id_ = user_count_ + 1;
-
-        user_count_++;
-    }
-    
-    User()
-    {
-        user_id_ = user_count_ + 1;
-        user_name_="";
-        user_email_="";
-        user_password_="";
-        user_count_ ++;
-    }
-
-    void
-    displayUserDetails () {
-        cout<<"User id: "<<user_id_
-            <<"User Name: "<<user_name_
-            <<"User Email: "<<user_email_
-            <<"User Password: "<<user_password_;
-    }
-
-    int 
-    get_user_id() {
-        return user_id_;
-    }
-
-    int
-    get_project_count() {
-        return project_count;
-    }
-    
-    string 
-    get_user_name() {
-        return user_name_;
-    }
-
-    ProjectManagement& get_project(int index) {
-        return project_[index];
-    }
-
-    void
-    display_projects_ () {
-        for (int i=0 ; i < project_count ; i++) {
-        cout <<endl <<project_ [i].get_project_id_ () <<" - " <<project_ [i].get_project_name_ () ;  
-        }
-    }
-
-    void
-    viewProfile () {
-        cout <<"Projects: " <<endl;
-
-    }
-
-    void
-    generateReport () {}
-
-
-    void
-    addProject (ProjectManagement newproject ) {
-        project_ [ project_count ] = newproject;
-        project_count++;
-    }
-
-    void
-    setUser (string username,string email,string password) {
-        bool vacant_id_found = 0;
-        for (int i=0; i<10 ; i++) 
-        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
-            vacant_id_slots_ [i] == user_id_;
-            vacant_id_found = 1;
-            break;
-        }
-        if (!vacant_id_found)
-        user_id_ = user_count_ + 1;
-        user_name_="";
-        user_email_="";
-        user_password_="";
-        user_count_ ++;
-    }
-    void
-    removeUser () {
-        vacant_id_slots_ [vacant_id_slots_counter_] = user_id_;
-        user_id_ = 0;
-        user_name_="n/a";
-        user_email_="n/a";
-        user_password_="n/a";
-        user_count_ --;
-    }
-
-
-
-};
-int
-User :: user_count_ = 0;
-int
-User :: vacant_id_slots_ [] = {0};
-int
-User :: vacant_id_slots_counter_ = 0;
 
 // ---------------------------------------------------------------------------------------------------------------------------- //
 
@@ -546,7 +328,7 @@ manageProjects(User& user) {
 
 
 
-int main () {
+ int main () {
 
     int login_switch;
     User newUser;
@@ -621,4 +403,4 @@ int main () {
     } while (!user_login) ;
 
     return 0;
-}
+} 
