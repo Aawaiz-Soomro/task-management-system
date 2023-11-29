@@ -3,6 +3,12 @@
 using namespace std;
 
 class User;
+class ProjectTeam;
+class ProjectManagement;
+class Task;
+class Tags;
+
+
 class ProjectTeam  {
     private:
     User team_members_ [5] ;
@@ -41,7 +47,21 @@ class ProjectTeam  {
         }
     }
 
-    
+    void
+    searchUser (int id) {
+        for (int i=1 ; i<=team_members_count_ ; i++) {
+            if (id == team_members_[i].get_user_id ())
+            team_members_[i].displayUserDetails ();
+        }
+    }
+
+    void
+    searchUser (string user_name) {
+        for (int i=1 ; i<=team_members_count_ ; i++) {
+            if (user_name == team_members_[i].get_user_name ())
+            team_members_[i].displayUserDetails ();
+        }
+    }
 
 };
 
@@ -85,6 +105,8 @@ class ProjectManagement {
         cout <<"Project Team: "  <<endl;
         team_.displayProjectTeam ();
     }
+
+    
 };
 
 
@@ -119,9 +141,8 @@ class Tags {
 };
 
 const int MAX_TASK_TAGS_ = 5;
-class Task : public ProjectManagement {
+class Task  {
     private:
-
     int task_id_;
     string task_name_;
     string task_due_date_;
@@ -352,6 +373,7 @@ class User {
         user_password_="n/a";
         user_count_ --;
     }
+
 
 
 };

@@ -1,40 +1,78 @@
 #include <casses.cc>
 
-
 int main () {
-    
+
     int login_switch;
+    User newUser;
     bool user_login = 0;
 
     do {
-        cout<< "1. Create New User" <<endl
-            << "2. Login" <<endl;
-
-        switch (login_switch) {
-
-            case1:
-            string user_name;
-            string user_email;
-            string user_password;
-
-            cout << "Enter Username: " <<endl ;
-            cin >> user_name;
-            cout << "Enter Email: " ;
-            cin >> user_email;
-            cout << "Enter Password" ;
-            User (user_name,user_email,user_password) ;
-            break;
-
-            case2:
-            cout << "Enter Username: " <<endl ;
-            cin >> user_name;
-            cin >> user_email;
-            cout << "Enter Password" ;
-            break;
-            // call auth function;
         
+        loginMenu (login_switch);
+        switch (login_switch) {
+        
+            case 1:
+            signupForm (newUser);
+            break;
+
+            case 2:
+            loginForm (newUser); 
+            user_login=1;
+            while (user_login)  //when value of the user login will be updated so run the while loop!
+                {
+                    int project_switch;
+                    projectMenu (project_switch);
+
+                    switch(project_switch)
+                    {
+                        case 1:    //Create a Project
+                        createProject(newUser);
+                        break;
+                        
+                        case 2:  //Add a Project
+                        break;
+
+                        case 3:  //Manage Projects
+                        manageProjects(newUser);
+                        break;
+
+                        case 4:  //View Profile
+                        cout<<"Viewing Profile."<<endl;
+                        break;
+                        
+                        case 5:  //Go Back
+                        cout<<"Going back."<<endl;
+                        break;
+
+                        case 6:  //Logged out
+                        cout<<"User logged out successfully."<<endl;
+                        cout<<"Exiting the program."<<endl;
+                        exit(0);
+                        
+                        default:
+                        cout<<"Invalid option. Please try again."<<endl;
+                
+                    }
+
+                }    
+           // }
+           // else {
+           //     cout<<"Login failed. Please try again."<<endl;
+
+           // }
+            
+            
+            break;
+            
+            case 3:
+            cout<<"Exiting the program."<<endl;
+            exit(0);
+
+            default:
+            cout<<"Invalid option. Please try again."<<endl;
         }
-    } while (user_login == 0) ;
-    
-return 0;
+
+    } while (!user_login) ;
+
+    return 0;
 }
