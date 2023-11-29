@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include <project_team.cc>
+
 
 class User {
     private:
@@ -11,8 +11,9 @@ class User {
     string user_name_;
     string user_email_;
     string user_password_;
+    string user_role_;
     ProjectManagement project_ [5];
-    int project_count;
+    int project_count_;
     
     public:
     User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
@@ -37,6 +38,13 @@ class User {
         user_password_="";
         user_count_ ++;
     }
+    
+    User
+    authenticateUser (string check_email, string check_password) {
+        if ( check_email == this->user_email_ )
+        if ( check_password == this->user_password_ )
+        return *this;
+    }
 
     void
     displayUserDetails () {
@@ -53,7 +61,7 @@ class User {
 
     int
     get_project_count() {
-        return project_count;
+        return project_count_;
     }
     
     string 
@@ -61,13 +69,13 @@ class User {
         return user_name_;
     }
 
-    ProjectManagement& get_project(int index) {
+    /* ProjectManagement& get_project(int index) {
         return project_[index];
-    }
+    } */
 
     void
     display_projects_ () {
-        for (int i=0 ; i < project_count ; i++) {
+        for (int i=0 ; i < project_count_ ; i++) {
         cout <<endl <<project_ [i].get_project_id_ () <<" - " <<project_ [i].get_project_name_ () ;  
         }
     }
@@ -82,11 +90,11 @@ class User {
     generateReport () {}
 
 
-    void
+    /* void
     addProject (ProjectManagement newproject ) {
-        project_ [ project_count ] = newproject;
-        project_count++;
-    }
+        project_ [ project_count_ ] = newproject;
+        project_count_++;
+    } */
 
     void
     setUser (string username,string email,string password) {
@@ -123,3 +131,4 @@ int
 User :: vacant_id_slots_ [] = {0};
 int
 User :: vacant_id_slots_counter_ = 0;
+

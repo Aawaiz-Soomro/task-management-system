@@ -1,7 +1,8 @@
 #include <iostream>
+#include <project_team.cpp>
 using namespace std;
-#include <project_team.cc>
 
+const int MAX_NO_OF_TASKS = 5;
 class ProjectManagement {
     private:
     string project_name_;
@@ -9,6 +10,7 @@ class ProjectManagement {
     ProjectTeam team_;
     string project_due_date_;
     int no_of_tasks_;
+    Task project_tasks [MAX_NO_OF_TASKS] ;
     public:
     ProjectManagement()
     {

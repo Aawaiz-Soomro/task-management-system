@@ -1,6 +1,8 @@
+//
 #include <iostream>
 using namespace std;
-#include <user.cc>
+#include <user.cpp>
+
 
 class ProjectTeam  {
     private:
@@ -12,7 +14,7 @@ class ProjectTeam  {
     string
     get_project_leader_name_ () {
         return project_leader_.get_user_name ();
-        }
+    }
 
     void
     addTeamMember (User new_team_member) {
@@ -40,20 +42,25 @@ class ProjectTeam  {
         }
     }
 
-    void
+    User
     searchUser (int id) {
         for (int i=1 ; i<=team_members_count_ ; i++) {
-            if (id == team_members_[i].get_user_id ())
+            if (id == team_members_[i].get_user_id ()) {
             team_members_[i].displayUserDetails ();
+            return team_members_ [i] ;
+            }
         }
     }
 
-    void
+    User
     searchUser (string user_name) {
         for (int i=1 ; i<=team_members_count_ ; i++) {
-            if (user_name == team_members_[i].get_user_name ())
+            if (user_name == team_members_[i].get_user_name ()) {
             team_members_[i].displayUserDetails ();
+            return team_members_ [i] ;        
+            }
         }
     }
 
 };
+//

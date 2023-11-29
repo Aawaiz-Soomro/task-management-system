@@ -1,4 +1,8 @@
-#include <casses.cc>
+#include <tasks.cpp>
+#include <global_functions.cpp>
+#include <project_team.cpp>
+#include <project_management.cpp>
+#include <user.cpp>
 
 int main () {
 
@@ -12,11 +16,11 @@ int main () {
         switch (login_switch) {
         
             case 1:
-            signupForm (newUser);
+            signupForm ();
             break;
 
             case 2:
-            loginForm (newUser); 
+            loginForm (); 
             user_login=1;
             while (user_login)  //when value of the user login will be updated so run the while loop!
                 {
@@ -26,14 +30,14 @@ int main () {
                     switch(project_switch)
                     {
                         case 1:    //Create a Project
-                        createProject(newUser);
+                        createProject();
                         break;
                         
                         case 2:  //Add a Project
                         break;
 
                         case 3:  //Manage Projects
-                        manageProjects(newUser);
+                        manageProjects();
                         break;
 
                         case 4:  //View Profile
@@ -75,4 +79,4 @@ int main () {
     } while (!user_login) ;
 
     return 0;
-}
+} 
