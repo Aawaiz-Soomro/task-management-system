@@ -2,8 +2,70 @@
 #include <ctime>
 using namespace std;
 
+class User;
+class ProjectTeam;
+class ProjectManagement;
+class Task;
+class Tags;
 
-class ProjectManangement {
+
+class ProjectTeam  {
+    private:
+    User team_members_ [5] ;
+    int team_members_count_;
+    User project_leader_;
+
+    public:
+    string
+    get_project_leader_name_ () {
+        return project_leader_.get_user_name ();
+        }
+
+    void
+    addTeamMember (User new_team_member) {
+        team_members_ [team_members_count_] = new_team_member; 
+    }
+    
+    void
+    removeTeamMember () {
+        cout << "Who do you want to remove?" <<endl;
+        int removed_person_choice = 0;
+        for ( int i=0; i<5 ; i++) {
+        cout <<i <<". " <<team_members_ [i].get_user_name () <<" - " <<team_members_ [i].get_user_id () <<endl ;
+        }
+        cout << "Enter Your Choice: ";
+        cin >> removed_person_choice;
+
+        team_members_ [removed_person_choice].removeUser (); 
+    }
+
+    void
+    displayProjectTeam () {
+        for (int i=0 ; i<5 ; i++) {
+        cout <<"User " <<i <<": " <<endl; 
+        team_members_[i].displayUserDetails();
+        }
+    }
+
+    void
+    searchUser (int id) {
+        for (int i=1 ; i<=team_members_count_ ; i++) {
+            if (id == team_members_[i].get_user_id ())
+            team_members_[i].displayUserDetails ();
+        }
+    }
+
+    void
+    searchUser (string user_name) {
+        for (int i=1 ; i<=team_members_count_ ; i++) {
+            if (user_name == team_members_[i].get_user_name ())
+            team_members_[i].displayUserDetails ();
+        }
+    }
+
+};
+
+class ProjectManagement {
     private:
     string project_name_;
     int project_id_;
@@ -11,13 +73,13 @@ class ProjectManangement {
     string project_due_date_;
     int no_of_tasks_;
     public:
-    ProjectManangement()
+    ProjectManagement()
     {
         project_name_="";
         project_id_=0;
         project_due_date_="";
     }
-    ProjectManangement(string name,int id,ProjectTeam team,string due_date)
+    ProjectManagement(string name,int id,ProjectTeam team,string due_date)
     {
         project_name_=name;
         project_id_=id;
@@ -40,24 +102,13 @@ class ProjectManangement {
         cout <<"Project ID: " <<project_id_ <<endl;
         cout <<"Project Due Date: " <<project_due_date_ <<endl;
         cout <<"Project Leader: " <<team_.get_project_leader_name_() <<endl;
-    //    cout <<"Project Team: "  <<endl;
-    }
-};
-
-class ProjectTeam : public ProjectManangement {
-    private:
-    string team_members_ [20] ;
-    string project_leader_name_;
-
-    public:
-    string
-    get_project_leader_name_ () {
-        return project_leader_name_;
+        cout <<"Project Team: "  <<endl;
+        team_.displayProjectTeam ();
     }
 
-
-
+    
 };
+
 
 // seperate text file for tags to store all tags
 class Tags {
@@ -90,9 +141,8 @@ class Tags {
 };
 
 const int MAX_TASK_TAGS_ = 5;
-class Task : public ProjectManangement {
+class Task  {
     private:
-
     int task_id_;
     string task_name_;
     string task_due_date_;
@@ -104,7 +154,10 @@ class Task : public ProjectManangement {
     public:
 
     Task ()  {}
-
+    int
+    get_task_id() {
+        return task_id_;
+    }
 
     void
     changeTaskStatus (int option) {
@@ -145,8 +198,7 @@ class Task : public ProjectManangement {
         int due_month = ( stoi (task_due_date_) % 1000000) / 10000;
         int due_year = stoi (task_due_date_) % 10000;
 
-
-        
+ 
         if (today_year == due_year)
         if (today_month == due_month)
         // this block of code is only executed if todays year and month matches due dates year and month
@@ -214,24 +266,63 @@ class User {
     private:
     static int user_count_;
     int user_id_;
+    static int vacant_id_slots_ [10];
+    static int vacant_id_slots_counter_;
     string user_name_;
     string user_email_;
     string user_password_;
-    ProjectManangement project_ [5];
+    ProjectManagement project_ [5];
     int project_count;
     
     public:
-    User(string username,string email,string password,int userid):user_name_(username),user_email_(email),user_password_(password) {
+    User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
+        bool vacant_id_found = 0;
+        for (int i=0; i<10 ; i++) 
+        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
+            vacant_id_slots_ [i] == user_id_;
+            vacant_id_found = 1;
+            break;
+        }
+        if (!vacant_id_found)
+        user_id_ = user_count_ + 1;
+
         user_count_++;
     }
     
     User()
     {
-        user_id_ = user_count_;
+        user_id_ = user_count_ + 1;
         user_name_="";
         user_email_="";
         user_password_="";
         user_count_ ++;
+    }
+
+    void
+    displayUserDetails () {
+        cout<<"User id: "<<user_id_
+            <<"User Name: "<<user_name_
+            <<"User Email: "<<user_email_
+            <<"User Password: "<<user_password_;
+    }
+
+    int 
+    get_user_id() {
+        return user_id_;
+    }
+
+    int
+    get_project_count() {
+        return project_count;
+    }
+    
+    string 
+    get_user_name() {
+        return user_name_;
+    }
+
+    ProjectManagement& get_project(int index) {
+        return project_[index];
     }
 
     void
@@ -252,99 +343,282 @@ class User {
 
 
     void
-    add_project (ProjectManangement newproject ) {
+    addProject (ProjectManagement newproject ) {
         project_ [ project_count ] = newproject;
         project_count++;
     }
+
+    void
+    setUser (string username,string email,string password) {
+        bool vacant_id_found = 0;
+        for (int i=0; i<10 ; i++) 
+        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
+            vacant_id_slots_ [i] == user_id_;
+            vacant_id_found = 1;
+            break;
+        }
+        if (!vacant_id_found)
+        user_id_ = user_count_ + 1;
+        user_name_="";
+        user_email_="";
+        user_password_="";
+        user_count_ ++;
+    }
+    void
+    removeUser () {
+        vacant_id_slots_ [vacant_id_slots_counter_] = user_id_;
+        user_id_ = 0;
+        user_name_="n/a";
+        user_email_="n/a";
+        user_password_="n/a";
+        user_count_ --;
+    }
+
 
 
 };
 int
 User :: user_count_ = 0;
+int
+User :: vacant_id_slots_ [] = {0};
+int
+User :: vacant_id_slots_counter_ = 0;
+
+// ---------------------------------------------------------------------------------------------------------------------------- //
+
+void
+loginMenu (int &login_switch) {
+    cout<< "1. Create New User" <<endl
+    << "2. Login" <<endl 
+    << "3. Exit Program" <<endl ;
+    cin >> login_switch;
+}
+
+void
+signupForm (User& newUser) {
+    string temp_user_name;
+    string temp_user_email;
+    string temp_user_password;
+
+    cout << "Enter Username: "  ;
+    cin >> temp_user_name;
+    cout << "Enter Email: " ;
+    cin >> temp_user_email;
+    cout << "Enter Password: " ;
+    cin >> temp_user_password;
+
+    newUser= User (temp_user_name,temp_user_email,temp_user_password) ;
+    cout<<"New user created successfully."<<endl;
+    cout <<endl;
+}
+
+void
+loginForm (User& user) {
+    string temp_user_email;
+    string temp_user_password;
+
+    cout << "Enter E-Mail: " ;
+    cin >> temp_user_email;
+    cout << "Enter Password: " ;
+    cin >> temp_user_password;
+
+    
+    // Assuming you have an authenticateUser function
+    // if (authenticateUser(temp_user_email, temp_user_password)) {
+    cout << "Logged into the account successfully." << endl;
+    // Set user_login to true or manage login status accordingly
+    // user_login = true;
+    // } else {
+    //     cout << "Login failed. Please try again." << endl;
+    // }
+    cout << endl;
+}
+
+void
+projectMenu (int &project_switch) {
+    cout<< "1. Create a Project" <<endl
+        << "2. Add Project" <<endl
+        << "3. Manage Project" <<endl
+        << "4. View Profile" <<endl
+        << "5. Go Back"<<endl
+        << "6. Logout"<<endl;
+    
+    cin >> project_switch;
+}
+void 
+createProject(User &user) {
+        string project_name;
+        string project_due_date;
+        ProjectTeam team;
+        cout<<"Enter Project Name: "; 
+        cin>>project_name;
+        cout<<"Enter Project Due Date: ";
+        cin>>project_due_date;    
+
+        user.addProject(ProjectManagement(project_name,0, team,project_due_date));
+        cout<<"Project have been successfully created."<<endl;
+        cout<<endl;
+}
+void
+editTasks(User& user){
+    int edit_task_option;
+    cout<< "1. Search for the Task"<<endl
+        << "2. Add Tags"<<endl
+        << "3. Notes and Comments"<<endl
+        << "4. Go Back"<<endl;
+    
+    cin>>edit_task_option;
+    switch(edit_task_option) {
+        case 1:  //Search for the task
+        break;
+
+        case 2:  //Add tags
+        break;
+
+        case 3:  //Notes and comments
+        break;
+
+        case 4:  //Go Back
+        cout<<"Going back."<<endl;
+        break;
+
+        default:
+        cout<< "Invalid option. Please try again." << endl;
+        
+    }   
+}
+void
+manageProjects(User& user) {
+    int project_options;
+
+  //  cout<<"Projects for User: "<<user.get_user_name()<<endl;
+    for(int i=0;i<user.get_project_count();i++) {
+        cout<<user.get_project(i).get_project_id_()<<" - "<<user.get_project(i).get_project_name_()<<endl;
+
+    }
+    
+    cout<<"Select a Project: "<<endl;
+    cin>>project_options;
+
+    ProjectManagement selected_project;
+    for(int i=0;i<user.get_project_count();i++)
+    {
+        if(user.get_project(i).get_project_id_() == project_options)
+        {
+            selected_project= user.get_project(i);
+            break;
+        }
+
+    }
+    if (selected_project.get_project_id_() !=0)
+    {
+        int tasks_options;
+            cout<< "1. Create a Task" << endl
+                << "2. Edit a Task" << endl
+                << "3. Go Back" << endl;
+
+            cin>>tasks_options;
+
+            switch(tasks_options)
+            {
+                case 1:  //Create a Task
+                break;
+
+                case 2:  //Edit a Task
+                editTasks(user);
+                break;
+
+                case 3: //Go Back
+                cout<<"Going back."<<endl;
+                break;
+
+                default:
+                cout<<"Invalid option. Please try again." << endl;
+                
+
+            }
+        }
+        else {
+            cout << "Invalid project selection. Please try again." << endl;
+        }
+        
+    }
+
 
 
 int main () {
 
     int login_switch;
-    string temp_user_name;
-    string temp_user_email;
-    string temp_user_password;
+    User newUser;
     bool user_login = 0;
 
     do {
-        cout<< "1. Create New User" <<endl
-            << "2. Login" <<endl ;
-        cin >> login_switch;
-
+        
+        loginMenu (login_switch);
         switch (login_switch) {
         
             case 1:
-
-            cout << "Enter Username: "  ;
-            cin >> temp_user_name;
-            cout << "Enter Email: " ;
-            cin >> temp_user_email;
-            cout << "Enter Password: " ;
-            cin >> temp_user_password;
-
-            User (temp_user_name,temp_user_email,temp_user_password, 0) ;
-            cout<<"New user created successfully."<<endl;
-            cout <<endl;
+            signupForm (newUser);
             break;
 
             case 2:
-            
-            cout << "Enter E-Mail: " ;
-            cin >> temp_user_email;
-            cout << "Enter Password: " ;
-            cin >> temp_user_password;
-            do
-            {
-                int project_switch;
-                string project_name;
-                int project_id;
-                string project_due_date;
-                ProjectTeam team;
-                cout<< "1. Create a Project" <<endl
-                    << "2. Add Project" <<endl
-                    << "3. Manage Project" <<endl
-                    << "4. View Profile" <<endl;
-                switch(project_switch)
+            loginForm (newUser); 
+            user_login=1;
+            while (user_login)  //when value of the user login will be updated so run the while loop!
                 {
-                    case 1:    // Create a Project
-                    cout<<"Enter Project Name: "; 
-                    cin>>project_name;
-                    cout<<"Enter Project Id: ";
-                    cin>>project_id;
-                    cout<<"Enter Project Due Date: ";
-                    cin>>project_due_date;
-                    ProjectManangement(project_name,0,team,project_due_date);
-                    cout<<"Project have been successfully created."<<endl;
-                    break;
-                    
-                    case 2:  //Add a Project
-                    break;
+                    int project_switch;
+                    projectMenu (project_switch);
 
-                    case 3:  //Manage Projects
-                    
-                    
+                    switch(project_switch)
+                    {
+                        case 1:    //Create a Project
+                        createProject(newUser);
+                        break;
+                        
+                        case 2:  //Add a Project
+                        break;
 
+                        case 3:  //Manage Projects
+                        manageProjects(newUser);
+                        break;
 
+                        case 4:  //View Profile
+                        cout<<"Viewing Profile."<<endl;
+                        break;
+                        
+                        case 5:  //Go Back
+                        cout<<"Going back."<<endl;
+                        break;
 
-                }
-            } while (1);
-            user_login = 1;
-            cout <<endl;
+                        case 6:  //Logged out
+                        cout<<"User logged out successfully."<<endl;
+                        cout<<"Exiting the program."<<endl;
+                        exit(0);
+                        
+                        default:
+                        cout<<"Invalid option. Please try again."<<endl;
+                
+                    }
+
+                }    
+           // }
+           // else {
+           //     cout<<"Login failed. Please try again."<<endl;
+
+           // }
+            
+            
             break;
-            // call auth function;
-        
+            
+            case 3:
+            cout<<"Exiting the program."<<endl;
+            exit(0);
+
+            default:
+            cout<<"Invalid option. Please try again."<<endl;
         }
 
-    } while (user_login == 0) ;
-    if(user_login=1)
-    {
-        
-        
-    }
-return 0;
+    } while (!user_login) ;
+
+    return 0;
 }
