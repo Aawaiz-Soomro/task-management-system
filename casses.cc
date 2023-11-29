@@ -2,17 +2,46 @@
 #include <ctime>
 using namespace std;
 
-
+class User;
 class ProjectTeam  {
     private:
-    string team_members_ [20] ;
-    string project_leader_name_;
+    User team_members_ [5] ;
+    int team_members_count_;
+    User project_leader_;
 
     public:
     string
     get_project_leader_name_ () {
-        return project_leader_name_;
+        return project_leader_.get_user_name ();
+        }
+
+    void
+    addTeamMember (User new_team_member) {
+        team_members_ [team_members_count_] = new_team_member; 
     }
+    
+    void
+    removeTeamMember () {
+        cout << "Who do you want to remove?" <<endl;
+        int removed_person_choice = 0;
+        for ( int i=0; i<5 ; i++) {
+        cout <<i <<". " <<team_members_ [i].get_user_name () <<" - " <<team_members_ [i].get_user_id () <<endl ;
+        }
+        cout << "Enter Your Choice: ";
+        cin >> removed_person_choice;
+
+        team_members_ [removed_person_choice].removeUser (); 
+    }
+
+    void
+    displayProjectTeam () {
+        for (int i=0 ; i<5 ; i++) {
+        cout <<"User " <<i <<": " <<endl; 
+        team_members_[i].displayUserDetails();
+        }
+    }
+
+    
 
 };
 
@@ -53,7 +82,8 @@ class ProjectManagement {
         cout <<"Project ID: " <<project_id_ <<endl;
         cout <<"Project Due Date: " <<project_due_date_ <<endl;
         cout <<"Project Leader: " <<team_.get_project_leader_name_() <<endl;
-    //    cout <<"Project Team: "  <<endl;
+        cout <<"Project Team: "  <<endl;
+        team_.displayProjectTeam ();
     }
 };
 
@@ -215,6 +245,8 @@ class User {
     private:
     static int user_count_;
     int user_id_;
+    static int vacant_id_slots_ [10];
+    static int vacant_id_slots_counter_;
     string user_name_;
     string user_email_;
     string user_password_;
@@ -223,17 +255,36 @@ class User {
     
     public:
     User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
+        bool vacant_id_found = 0;
+        for (int i=0; i<10 ; i++) 
+        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
+            vacant_id_slots_ [i] == user_id_;
+            vacant_id_found = 1;
+            break;
+        }
+        if (!vacant_id_found)
+        user_id_ = user_count_ + 1;
+
         user_count_++;
     }
     
     User()
     {
-        user_id_ = user_count_;
+        user_id_ = user_count_ + 1;
         user_name_="";
         user_email_="";
         user_password_="";
         user_count_ ++;
     }
+
+    void
+    displayUserDetails () {
+        cout<<"User id: "<<user_id_
+            <<"User Name: "<<user_name_
+            <<"User Email: "<<user_email_
+            <<"User Password: "<<user_password_;
+    }
+
     int 
     get_user_id() {
         return user_id_;
@@ -271,15 +322,46 @@ class User {
 
 
     void
-    add_project (ProjectManagement newproject ) {
+    addProject (ProjectManagement newproject ) {
         project_ [ project_count ] = newproject;
         project_count++;
+    }
+
+    void
+    setUser (string username,string email,string password) {
+        bool vacant_id_found = 0;
+        for (int i=0; i<10 ; i++) 
+        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
+            vacant_id_slots_ [i] == user_id_;
+            vacant_id_found = 1;
+            break;
+        }
+        if (!vacant_id_found)
+        user_id_ = user_count_ + 1;
+        user_name_="";
+        user_email_="";
+        user_password_="";
+        user_count_ ++;
+    }
+    void
+    removeUser () {
+        vacant_id_slots_ [vacant_id_slots_counter_] = user_id_;
+        user_id_ = 0;
+        user_name_="n/a";
+        user_email_="n/a";
+        user_password_="n/a";
+        user_count_ --;
     }
 
 
 };
 int
 User :: user_count_ = 0;
+int
+User :: vacant_id_slots_ [] = {0};
+int
+User :: vacant_id_slots_counter_ = 0;
+
 // ---------------------------------------------------------------------------------------------------------------------------- //
 
 void
@@ -351,7 +433,7 @@ createProject(User &user) {
         cout<<"Enter Project Due Date: ";
         cin>>project_due_date;    
 
-        user.add_project(ProjectManagement(project_name,0, team,project_due_date));
+        user.addProject(ProjectManagement(project_name,0, team,project_due_date));
         cout<<"Project have been successfully created."<<endl;
         cout<<endl;
 }
