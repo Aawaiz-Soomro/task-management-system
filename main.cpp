@@ -46,6 +46,7 @@ int main () {
                         
                         case 5:  //Go Back
                         cout<<"Going back."<<endl;
+                        loginMenu(login_switch);
                         break;
 
                         case 6:  //Logged out
