@@ -56,6 +56,7 @@ int main () {
                         
                         default:
                         cout<<"Invalid option. Please try again."<<endl;
+                        cout<<endl;
                 
                     }
 
