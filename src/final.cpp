@@ -56,8 +56,9 @@ loginForm () {
 
 void
 projectMenu (int &project_switch) {
-    cout<< "1. Create a Project" <<endl
-        << "2. Add Project" <<endl
+    cout
+        /* << "1. Create a Project" <<endl
+        << "2. Add Project" <<endl */
         << "3. Manage Project" <<endl
         << "4. View Profile" <<endl
         << "5. Go Back"<<endl
@@ -69,7 +70,7 @@ void
 createProject() {
         string project_name;
         string project_due_date;
-        ProjectTeam team;
+        TaskTeam team;
         cout<<"Enter Project Name: "; 
         cin>>project_name;
         cout<<"Enter Project Due Date: ";
@@ -189,12 +190,12 @@ int main () {
 
                     switch(project_switch)
                     {
-                        case 1:    //Create a Project
+                        /* case 1:    //Create a Project
                         createProject();
                         break;
                         
                         case 2:  //Add a Project
-                        break;
+                        break; */
 
                         case 3:  //Manage Projects
                         manageProjects();

@@ -5,6 +5,8 @@
 #include "project_team.h"
 using namespace std;
 
+
+
 class User {
     private:
     static int user_count_;
@@ -15,7 +17,6 @@ class User {
     string user_email_;
     string user_password_;
     string user_role_;
-    // ProjectManagement project_ [5];
     int project_count_;
     
     public:
@@ -82,15 +83,49 @@ class User {
         cout <<endl <<get_project(i).get_project_id_ () <<" - " <<get_project(i).get_project_name_ () ;  
         }
     } */
-
+    
     void
     viewProfile () {
-        cout <<"Projects: " <<endl;
+        cout <<"User Details: " <<endl <<endl ;
+        cout <<"ID: " ;
+        cout << this -> user_id_ <<endl;
+        cout <<"Name: " ;
+        cout << this-> user_name_ <<endl;
+        cout <<"Email: " ;
+        cout << this-> user_email_ <<endl;
 
+        cout << "Current Project: " <<endl;
+        current_project.displayProjectDetails () ;
+
+        cout << "Tasks Assigned: " <<endl <<endl;
+        /* for (int i=0; i < 5 ; i++) {
+
+        } */
+
+        cout << "1. Change Name: " ;
+        cout << "2. Change Email" ;
+        cout << "3. Change Password" ;
+        
     }
 
     void
-    generateReport () {}
+    generateReport () {
+        cout <<"User Details: " <<endl <<endl ;
+        cout <<"ID: " ;
+        cout << this -> user_id_ <<endl;
+        cout <<"Name: " ;
+        cout << this-> user_name_ <<endl;
+        cout <<"Email: " ;
+        cout << this-> user_email_ <<endl;
+
+        cout << "Current Project: " <<endl;
+        current_project.displayProjectDetails () ;
+
+        cout << "Tasks Assigned: " <<endl <<endl;
+        /* for (int i=0; i < 5 ; i++) {
+
+        } */
+    }
 
 
     /* void
@@ -134,5 +169,13 @@ int
 User :: vacant_id_slots_ [] = {0};
 int
 User :: vacant_id_slots_counter_ = 0;
+
+class UserMember : public User {
+
+};
+
+class UserAdmin : public UserMember {
+    
+};
 
 #endif

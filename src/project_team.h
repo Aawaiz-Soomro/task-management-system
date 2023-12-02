@@ -4,17 +4,14 @@
 #include "tasks.h"
 #include "user.h"
 using namespace std;
-class ProjectTeam  {
+
+
+class TaskTeam  {
     private:
     User team_members_ [5] ;
     int team_members_count_;
-    User project_leader_;   
 
     public:
-    string
-    get_project_leader_name_ () {
-        return project_leader_.get_user_name ();
-    }
 
     void
     addTeamMember (User new_team_member) {
@@ -35,7 +32,7 @@ class ProjectTeam  {
     }
 
     void
-    displayProjectTeam () {
+    displayTaskTeam () {
         for (int i=0 ; i<5 ; i++) {
         cout <<"User " <<i <<": " <<endl; 
         team_members_[i].displayUserDetails();
@@ -65,11 +62,10 @@ class ProjectTeam  {
 };
 const int MAX_NO_OF_TASKS = 5;
 
-class ProjectManagement {
+    class ProjectManagement {
     private:
     string project_name_;
     int project_id_;
-    ProjectTeam team_;
     string project_due_date_;
     int no_of_tasks_;
     Task project_tasks [MAX_NO_OF_TASKS] ;
@@ -80,7 +76,7 @@ class ProjectManagement {
         project_id_=0;
         project_due_date_="";
     }
-    ProjectManagement(string name,int id,ProjectTeam team,string due_date)
+    ProjectManagement(string name,int id,string due_date)
     {
         project_name_=name;
         project_id_=id;
@@ -96,20 +92,18 @@ class ProjectManagement {
     get_project_id_ () {
         return project_id_;
     }
-
+    
     void
     displayProjectDetails () {
         cout <<"Project Name: " <<project_name_ <<endl;
         cout <<"Project ID: " <<project_id_ <<endl;
         cout <<"Project Due Date: " <<project_due_date_ <<endl;
-        cout <<"Project Leader: " <<team_.get_project_leader_name_() <<endl;
-        cout <<"Project Team: "  <<endl;
-        team_.displayProjectTeam ();
     }
+
+    friend class User;
 
     
 };
-
-
+ProjectManagement current_project;
 #endif
 //
