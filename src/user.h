@@ -1,6 +1,9 @@
-#include <iostream>
-using namespace std;
+#ifndef USER_H
+#define USER_H
 
+#include <iostream>
+#include "project_team.h"
+using namespace std;
 
 class User {
     private:
@@ -12,7 +15,7 @@ class User {
     string user_email_;
     string user_password_;
     string user_role_;
-    ProjectManagement project_ [5];
+    // ProjectManagement project_ [5];
     int project_count_;
     
     public:
@@ -73,12 +76,12 @@ class User {
         return project_[index];
     } */
 
-    void
+    /*void
     display_projects_ () {
         for (int i=0 ; i < project_count_ ; i++) {
-        cout <<endl <<project_ [i].get_project_id_ () <<" - " <<project_ [i].get_project_name_ () ;  
+        cout <<endl <<get_project(i).get_project_id_ () <<" - " <<get_project(i).get_project_name_ () ;  
         }
-    }
+    } */
 
     void
     viewProfile () {
@@ -132,3 +135,4 @@ User :: vacant_id_slots_ [] = {0};
 int
 User :: vacant_id_slots_counter_ = 0;
 
+#endif

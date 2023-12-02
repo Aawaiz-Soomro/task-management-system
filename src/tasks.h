@@ -1,11 +1,10 @@
+#ifndef TASKS_H
+#define TASKS_H
+
 #include <iostream>
 #include <ctime>
 using namespace std;
 
-
-class Task;
-class Tags;
-class Notes;
 
 
 // seperate text file for tags to store all tags
@@ -69,7 +68,7 @@ class Notes {
         note_text_ = note_text;
     }
 
-    string
+    void
     displayNote () {
         cout << note_text_ <<endl;
     }
@@ -242,7 +241,7 @@ class Task  {
     }
 
 };
-
+#endif
 
 
 

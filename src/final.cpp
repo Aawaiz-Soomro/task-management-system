@@ -1,11 +1,11 @@
-#include <iostream>
+#include<iostream>
+#include<string>
+#include<ctime>
+#include "project_team.h"
+#include "tasks.h"
+#include "user.h"
+
 using namespace std;
-
-#include <tasks.cpp>
-#include <project_team.cpp>
-#include <project_management.cpp>
-#include <user.cpp>
-
 void
 loginMenu (int &login_switch) {
     cout<< "1. Create New User" <<endl
@@ -27,7 +27,7 @@ signupForm () {
     cout << "Enter Password: " ;
     cin >> temp_user_password;
 
-   // newUser= User (temp_user_name,temp_user_email,temp_user_password) ;
+    // newUser= User (temp_user_name,temp_user_email,temp_user_password) ;
     cout<<"New user created successfully."<<endl;
     cout <<endl;
 }
@@ -149,6 +149,8 @@ manageProjects() {
 
                 case 3: //Go Back
                 cout<<"Going back."<<endl;
+                int project_switch;
+                projectMenu(project_switch);
                 break;
 
                 default:
@@ -162,3 +164,82 @@ manageProjects() {
         }
         
     }
+int main () {
+
+    int login_switch;
+    User newUser;
+    bool user_login = 0;
+
+    do {
+        
+        loginMenu (login_switch);
+        switch (login_switch) {
+        
+            case 1:
+            signupForm ();
+            break;
+
+            case 2:
+            loginForm (); 
+            user_login=1;
+            while (user_login)  //when value of the user login will be updated so run the while loop!
+                {
+                    int project_switch;
+                    projectMenu (project_switch);
+
+                    switch(project_switch)
+                    {
+                        case 1:    //Create a Project
+                        createProject();
+                        break;
+                        
+                        case 2:  //Add a Project
+                        break;
+
+                        case 3:  //Manage Projects
+                        manageProjects();
+                        break;
+
+                        case 4:  //View Profile
+                        cout<<"Viewing Profile."<<endl;
+                        break;
+                        
+                        case 5:  //Go Back
+                        cout<<"Going back."<<endl;
+                        loginMenu(login_switch);
+                        break;
+
+                        case 6:  //Logged out
+                        cout<<"User logged out successfully."<<endl;
+                        cout<<"Exiting the program."<<endl;
+                        exit(0);
+                        
+                        default:
+                        cout<<"Invalid option. Please try again."<<endl;
+                        cout<<endl;
+                
+                    }
+
+                }    
+           // }
+           // else {
+           //     cout<<"Login failed. Please try again."<<endl;
+
+           // }
+            
+            
+            break;
+            
+            case 3:
+            cout<<"Exiting the program."<<endl;
+            exit(0);
+
+            default:
+            cout<<"Invalid option. Please try again."<<endl;
+        }
+
+    } while (!user_login) ;
+
+    return 0;
+} 
+// ---------------------------------------------------------------------------------------------------------------------------- //
