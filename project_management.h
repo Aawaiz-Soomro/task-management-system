@@ -1,6 +1,6 @@
 #include <iostream>
-#include <project_team.cpp>
-#include <tasks.cpp> 
+#include <project_team.h>
+#include <tasks.h> 
 using namespace std;
 
 const int MAX_NO_OF_TASKS = 5;

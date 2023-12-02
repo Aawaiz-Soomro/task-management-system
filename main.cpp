@@ -1,8 +1,8 @@
-#include <tasks.cpp>
-#include <global_functions.cpp>
-#include <project_team.cpp>
-#include <project_management.cpp>
-#include <user.cpp>
+#include <tasks.h>
+#include <global_functions.h>
+#include <project_team.h>
+#include <project_management.h>
+#include <user.h>
 
 int main () {
 

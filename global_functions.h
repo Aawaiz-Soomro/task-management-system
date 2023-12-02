@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
 
-#include <tasks.cpp>
-#include <project_team.cpp>
-#include <project_management.cpp>
-#include <user.cpp>
+#include <tasks.h>
+#include <project_team.h>
+#include <project_management.h>
+#include <user.h>
 
 void
 loginMenu (int &login_switch) {
