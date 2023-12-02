@@ -12,6 +12,7 @@ class ProjectManagement {
     string project_due_date_;
     int no_of_tasks_;
     Task project_tasks [MAX_NO_OF_TASKS] ;
+    
     public:
     ProjectManagement()
     {
