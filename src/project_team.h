@@ -64,23 +64,29 @@ const int MAX_NO_OF_TASKS = 5;
 const int MAX_PROJECT_USERS = 20;
     class ProjectManagement {
     private:
-    string project_name_;
     int project_id_;
+    string project_name_;
+    string project_description_;
     string project_due_date_;
     int no_of_tasks_;
     User project_users [MAX_PROJECT_USERS];
     Task project_tasks [MAX_NO_OF_TASKS] ;
+    
     public:
     ProjectManagement()
     {
-        project_name_="";
         project_id_=0;
+        project_name_="";
+        project_description_ = "";
         project_due_date_="";
+
+        
     }
-    ProjectManagement(string name,int id,string due_date)
+    ProjectManagement(string name,int id,string project_desc, string due_date)  
     {
         project_name_=name;
         project_id_=id;
+        project_description_ = project_desc;
         project_due_date_=project_due_date_;
     }
     

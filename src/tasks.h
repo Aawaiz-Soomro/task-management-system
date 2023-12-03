@@ -14,6 +14,16 @@ class Tags {
     int tag_id_;
 
     public:
+
+    Tags () {
+        tag_id_ = 0;
+        tag_name_ = "";
+    }
+
+    Tags (string name, string text) {
+        tag_name_ = name;
+    }
+
     int
     get_tag_id_ () {
         return tag_id_;
@@ -42,7 +52,20 @@ class Notes {
     int note_id_;
     string note_text_;
 
+    
     public:
+
+    Notes () {
+        note_id_ = 0;
+        note_name_ = "";
+        note_text_ = "";
+    }
+
+    Notes (string name, string text) {
+        note_name_ = name;
+        note_text_ = text;
+    }
+
     int
     get_note_id_ () {
         return note_id_;
@@ -88,10 +111,28 @@ class Task  {
     Notes task_notes_ [MAX_TASK_NOTES_];
     int notes_count_ = 0;
     int task_members_;
+    static int task_count;
 
     public:
 
-    Task ()  {}
+    Task ()  {
+
+        task_id_ = 0;
+        task_name_ = "";
+        task_due_date_ = "";
+        task_status_ = "To-do";
+    }
+    
+    void
+    createTask (string name, string due_date) {
+        if (task_count < MAX_NO_OF_TASKS)
+        task_id_ = task_count + 1;
+        
+        task_name_ = name;
+        task_due_date_ = due_date;
+
+    }
+    
     int
     get_task_id() {
         return task_id_;
@@ -241,6 +282,9 @@ class Task  {
     }
 
 };
+
+int
+Task :: task_count = 0;
 #endif
 
 

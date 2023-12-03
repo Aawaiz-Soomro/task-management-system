@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include "project_team.h"
+#include "tasks.h"
 using namespace std;
 
 
-
+const int MAX_NO_OF_USER_TASKS = 5;
 class User {
     private:
     static int user_count_;
@@ -18,13 +19,17 @@ class User {
     string user_password_;
     string user_role_;
     int project_count_;
-    
+    Task user_tasks [MAX_NO_OF_USER_TASKS];
+
+
     public:
     User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
+        
         bool vacant_id_found = 0;
         for (int i=0; i<10 ; i++) 
         if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
-            vacant_id_slots_ [i] == user_id_;
+            user_id_ == vacant_id_slots_ [i] ;
+            vacant_id_slots_ [i] = 0;
             vacant_id_found = 1;
             break;
         }
@@ -36,7 +41,17 @@ class User {
     
     User()
     {
+        bool vacant_id_found = 0;
+        for (int i=0; i<10 ; i++) 
+        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
+            user_id_ == vacant_id_slots_ [i] ;
+            vacant_id_slots_ [i] = 0;
+            vacant_id_found = 1;
+            break;
+        }
+        if (!vacant_id_found)
         user_id_ = user_count_ + 1;
+
         user_name_="";
         user_email_="";
         user_password_="";
@@ -145,9 +160,9 @@ class User {
         }
         if (!vacant_id_found)
         user_id_ = user_count_ + 1;
-        user_name_="";
-        user_email_="";
-        user_password_="";
+        user_name_=username;
+        user_email_=email;
+        user_password_= password;
         user_count_ ++;
     }
     void
