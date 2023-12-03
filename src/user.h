@@ -43,11 +43,11 @@ class User {
         user_count_ ++;
     }
     
-    User
+    bool
     authenticateUser (string check_email, string check_password) {
         if ( check_email == this->user_email_ )
         if ( check_password == this->user_password_ )
-        return *this;
+        return 1;
     }
 
     void

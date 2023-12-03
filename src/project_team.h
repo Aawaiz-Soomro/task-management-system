@@ -61,13 +61,14 @@ class TaskTeam  {
 
 };
 const int MAX_NO_OF_TASKS = 5;
-
+const int MAX_PROJECT_USERS = 20;
     class ProjectManagement {
     private:
     string project_name_;
     int project_id_;
     string project_due_date_;
     int no_of_tasks_;
+    User project_users [MAX_PROJECT_USERS];
     Task project_tasks [MAX_NO_OF_TASKS] ;
     public:
     ProjectManagement()
@@ -104,6 +105,5 @@ const int MAX_NO_OF_TASKS = 5;
 
     
 };
-ProjectManagement current_project;
+//ProjectManagement current_project;
 #endif
-//

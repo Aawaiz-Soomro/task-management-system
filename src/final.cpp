@@ -11,11 +11,10 @@ loginMenu (int &login_switch) {
     cout<< "1. Create New User" <<endl
     << "2. Login" <<endl 
     << "3. Exit Program" <<endl ;
-    cin >> login_switch;
-}
+    cin >> login_switch;}
 
 void
-signupForm () {
+signupForm (User &newuser) {
     string temp_user_name;
     string temp_user_email;
     string temp_user_password;
@@ -27,13 +26,13 @@ signupForm () {
     cout << "Enter Password: " ;
     cin >> temp_user_password;
 
-    // newUser= User (temp_user_name,temp_user_email,temp_user_password) ;
+    newuser = User (temp_user_name,temp_user_email,temp_user_password) ;
     cout<<"New user created successfully."<<endl;
     cout <<endl;
 }
 
 void
-loginForm () {
+loginForm (User &newuser, bool &user_login) {
     string temp_user_email;
     string temp_user_password;
 
@@ -43,14 +42,14 @@ loginForm () {
     cin >> temp_user_password;
 
     
-    // Assuming you have an authenticateUser function
-    // if (authenticateUser(temp_user_email, temp_user_password)) {
-    cout << "Logged into the account successfully." << endl;
-    // Set user_login to true or manage login status accordingly
-    // user_login = true;
-    // } else {
-    //     cout << "Login failed. Please try again." << endl;
-    // }
+    if ( newuser.authenticateUser (temp_user_email, temp_user_password) ) {
+        cout << "Logged into the account successfully." << endl;
+        user_login = 1;
+    } 
+    else {
+        cout << "Login failed. Please try again." << endl;
+    }
+
     cout << endl;
 }
 
@@ -177,12 +176,12 @@ int main () {
         switch (login_switch) {
         
             case 1:
-            signupForm ();
+            signupForm (newUser);
             break;
 
             case 2:
-            loginForm (); 
-            user_login=1;
+            loginForm (newUser, user_login); 
+
             while (user_login)  //when value of the user login will be updated so run the while loop!
                 {
                     int project_switch;
