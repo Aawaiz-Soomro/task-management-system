@@ -95,16 +95,16 @@ class User {
         cout << this-> user_email_ <<endl;
 
         cout << "Current Project: " <<endl;
-        current_project.displayProjectDetails () ;
+        // current_project.displayProjectDetails () ;
 
         cout << "Tasks Assigned: " <<endl <<endl;
         /* for (int i=0; i < 5 ; i++) {
 
         } */
 
-        cout << "1. Change Name: " ;
-        cout << "2. Change Email" ;
-        cout << "3. Change Password" ;
+        cout << "1. Change Name: " <<endl;
+        cout << "2. Change Email" <<endl;
+        cout << "3. Change Password" <<endl;
         
     }
 
@@ -119,7 +119,7 @@ class User {
         cout << this-> user_email_ <<endl;
 
         cout << "Current Project: " <<endl;
-        current_project.displayProjectDetails () ;
+        // current_project.displayProjectDetails () ;
 
         cout << "Tasks Assigned: " <<endl <<endl;
         /* for (int i=0; i < 5 ; i++) {

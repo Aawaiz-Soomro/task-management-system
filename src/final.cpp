@@ -203,6 +203,7 @@ int main () {
 
                         case 4:  //View Profile
                         cout<<"Viewing Profile."<<endl;
+                        newUser.viewProfile();
                         break;
                         
                         case 5:  //Go Back
