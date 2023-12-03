@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <ctime>
+#include "project_team.h"
 using namespace std;
 
 
@@ -97,7 +98,7 @@ class Notes {
     }
 
 };
-
+const int MAX_NO_OF_TASKS = 5;
 const int MAX_TASK_TAGS_ = 5;
 const int MAX_TASK_NOTES_ = 5;
 class Task  {

@@ -10,13 +10,16 @@ using namespace std;
 
 void
 loginMenu (int &login_switch) {
+    cout<<"******************* LOGIN MENU *************************"<<endl;
     cout<< "1. Create New User" <<endl
     << "2. Login" <<endl 
     << "3. Exit Program" <<endl ;
+    cout<<"********************************************************"<<endl;
     cin >> login_switch;}
 
 void
 signupForm (User &newuser) {
+    cout<<"******************* SIGNUP MENU *************************"<<endl;
     string temp_user_name;
     string temp_user_email;
     string temp_user_password;
@@ -31,10 +34,12 @@ signupForm (User &newuser) {
     newuser = User (temp_user_name,temp_user_email,temp_user_password) ;
     cout<<"New user created successfully."<<endl;
     cout <<endl;
+    cout<<"*********************************************************"<<endl;
 }
 
 void
 loginForm (User &newuser, bool &user_login) {
+    cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
     string temp_user_password;
 
@@ -53,10 +58,12 @@ loginForm (User &newuser, bool &user_login) {
     }
 
     cout << endl;
+    cout<<"********************************************************"<<endl;
 }
 
 void
 projectMenu (int &project_switch) {
+    cout<<"******************* PROJECT MENU *************************"<<endl;
     cout
         /* << "1. Create a Project" <<endl
         << "2. Add Project" <<endl */
@@ -66,6 +73,7 @@ projectMenu (int &project_switch) {
         << "6. Logout"<<endl;
     
     cin >> project_switch;
+    cout<<"**********************************************************"<<endl;
 }
 void 
 createProject() {
@@ -82,35 +90,44 @@ createProject() {
         cout<<endl;
 }
 void
-editTasks(User& user){
+editTasks(User& newUser){
+    cout<<"*******************  EDIT TASKS *************************"<<endl;
     int edit_task_option;
-    cout<< "1. Search for the Task"<<endl
+    do {
+        
+        cout<< "1. Search for the Task"<<endl
         << "2. Add Tags"<<endl
         << "3. Notes and Comments"<<endl
         << "4. Go Back"<<endl;
     
-    cin>>edit_task_option;
-    switch(edit_task_option) {
-        case 1:  //Search for the task
-        break;
+        cin>>edit_task_option;
+        switch(edit_task_option) {
+            case 1:  //Search for the task
+            cout<<"Searching for the task. "<<endl;
+            break;
 
-        case 2:  //Add tags
-        break;
+            case 2:  //Add tags
+            cout<<"Adding tags. "<<endl;
+            break;
 
-        case 3:  //Notes and comments
-        break;
+            case 3:  //Notes and comments
+            cout<<"Notes and comments. "<<endl;
+            break;
 
-        case 4:  //Go Back
-        cout<<"Going back."<<endl;
-        break;
+            case 4:  //Go Back
+            cout<<"Going back to the previous menu."<<endl;
+            break;
 
-        default:
-        cout<< "Invalid option. Please try again." << endl;
-        
-    }   
-}
+            default:
+            cout<< "Invalid option. Please try again." << endl;        
+        }   
+    
+    }while (edit_task_option!=4);
+    cout<<"*********************************************************"<<endl;
+    } 
+    
 void
-manageProjects() {
+manageProjects(User& newUser) {
     int project_options;
 
   //  cout<<"Projects for User: "<<user.get_user_name()<<endl;
@@ -119,8 +136,8 @@ manageProjects() {
 
     //}
     
-    cout<<"Select a Project: "<<endl;
-    cin>>project_options;
+     //cout<<"Select a Project: "<<endl;
+    // cin>>project_options;
 
     ProjectManagement selected_project;
     /* for(int i=0;i<user.get_project_count();i++)
@@ -131,9 +148,11 @@ manageProjects() {
             break;
         }
     } */
-    if (selected_project.get_project_id_() !=0)
-    {
+   //  if (selected_project.get_project_id_() !=0)
+    //  {
         int tasks_options;
+    do {
+        
             cout<< "1. Create a Task" << endl
                 << "2. Edit a Task" << endl
                 << "3. Go Back" << endl;
@@ -143,28 +162,27 @@ manageProjects() {
             switch(tasks_options)
             {
                 case 1:  //Create a Task
+                cout<<"Creating a task. "<<endl;
                 break;
 
                 case 2:  //Edit a Task
-                // editTask();
+                editTasks(newUser);
                 break;
 
                 case 3: //Go Back
-                cout<<"Going back."<<endl;
-                int project_switch;
-                projectMenu(project_switch);
+                cout<<"Going back to the previous menu."<<endl;
                 break;
 
                 default:
                 cout<<"Invalid option. Please try again." << endl;
                 
 
-            }
-        }
-        else {
-            cout << "Invalid project selection. Please try again." << endl;
-        }
+           }
+         }
+      //   else {
+       //    cout << "Invalid project selection. Please try again." << endl;
+      //  }
         
-    }
-
+     while(tasks_options!=3);
+   }
 #endif

@@ -60,7 +60,6 @@ class TaskTeam  {
     }
 
 };
-const int MAX_NO_OF_TASKS = 5;
 const int MAX_PROJECT_USERS = 20;
     class ProjectManagement {
     private:

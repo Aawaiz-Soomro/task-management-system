@@ -60,8 +60,8 @@ class User {
     
     bool
     authenticateUser (string check_email, string check_password) {
-        if ( check_email == this->user_email_ )
-        if ( check_password == this->user_password_ )
+        if ( check_email == this->user_email_ ){}
+        if ( check_password == this->user_password_ ){}
         return 1;
     }
 
@@ -120,6 +120,8 @@ class User {
         cout << "1. Change Name: " <<endl;
         cout << "2. Change Email" <<endl;
         cout << "3. Change Password" <<endl;
+        cout<<endl;
+        cout<<endl;
         
     }
 

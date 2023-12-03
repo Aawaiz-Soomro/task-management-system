@@ -1,7 +1,6 @@
 #include <iostream>
 #include "global_functions.h"
 
-
 int main () {
 
     int login_switch;
@@ -34,18 +33,21 @@ int main () {
                         case 2:  //Add a Project
                         break; */
 
-                        case 3:  //Manage Projects
-                        manageProjects();
+                        case 3:  //Manage Project
+                        cout<<"******************** MANAGE PROJECT MENU ********************"<<endl;
+                        manageProjects(newUser);
+                        cout<<"*************************************************************"<<endl;
                         break;
 
                         case 4:  //View Profile
-                        cout<<"Viewing Profile."<<endl;
+                        cout<<"********************** VIEWING PROFILE ********************"<<endl;
                         newUser.viewProfile();
+                        cout<<"***********************************************************"<<endl;
                         break;
                         
                         case 5:  //Go Back
-                        cout<<"Going back."<<endl;
-                        loginMenu(login_switch);
+                        cout<<"Going back to the previous menu."<<endl;
+                        loginForm(newUser, user_login);
                         break;
 
                         case 6:  //Logged out
@@ -59,14 +61,7 @@ int main () {
                 
                     }
 
-                }    
-           // }
-           // else {
-           //     cout<<"Login failed. Please try again."<<endl;
-
-           // }
-            
-            
+                } 
             break;
             
             case 3:
