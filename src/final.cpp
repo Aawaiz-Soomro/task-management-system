@@ -4,8 +4,9 @@
 int main () {
 
     int login_switch;
+    Project current_project;
     User newUser;
-    bool user_login = 0;
+    bool user_login = 1;
 
     do {
         
@@ -13,7 +14,7 @@ int main () {
         switch (login_switch) {
         
             case 1:
-            signupForm (newUser);
+            signupForm (newUser, current_project);
             break;
 
             case 2:
@@ -47,6 +48,7 @@ int main () {
                         
                         case 5:  //Go Back
                         cout<<"Going back to the previous menu."<<endl;
+                        user_login = 0;
                         loginForm(newUser, user_login);
                         break;
 

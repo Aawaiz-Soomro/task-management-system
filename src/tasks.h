@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <ctime>
-#include "project_team.h"
+#include "project.h"
 using namespace std;
 
 
@@ -121,17 +121,17 @@ class Task  {
         task_id_ = 0;
         task_name_ = "";
         task_due_date_ = "";
-        task_status_ = "To-do";
+        task_status_ = "";
     }
     
     void
     createTask (string name, string due_date) {
-        if (task_count < MAX_NO_OF_TASKS)
-        task_id_ = task_count + 1;
-        
-        task_name_ = name;
-        task_due_date_ = due_date;
-
+        if (task_count < MAX_NO_OF_TASKS) {
+            task_id_ = task_count + 1; 
+            task_name_ = name;
+            task_due_date_ = due_date;
+            task_status_ = "To-do";
+        }
     }
     
     int
@@ -282,10 +282,12 @@ class Task  {
         task_due_date_ = new_due_date;
     }
 
+    friend class Project;
 };
 
 int
 Task :: task_count = 0;
+
 #endif
 
 

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
-#include "project_team.h"
+#include "project.h"
 #include "tasks.h"
 #include "user.h"
 using namespace std;
@@ -18,7 +18,7 @@ loginMenu (int &login_switch) {
     cin >> login_switch;}
 
 void
-signupForm (User &newuser) {
+signupForm (User &newuser, Project &c_project) {
     cout<<"******************* SIGNUP MENU *************************"<<endl;
     string temp_user_name;
     string temp_user_email;
@@ -31,7 +31,8 @@ signupForm (User &newuser) {
     cout << "Enter Password: " ;
     cin >> temp_user_password;
 
-    newuser = User (temp_user_name,temp_user_email,temp_user_password) ;
+    c_project.createUser(temp_user_name,temp_user_email,temp_user_password) ;
+
     cout<<"New user created successfully."<<endl;
     cout <<endl;
     cout<<"*********************************************************"<<endl;
@@ -85,7 +86,7 @@ createProject() {
         cout<<"Enter Project Due Date: ";
         cin>>project_due_date;    
 
-    //    user.addProject(ProjectManagement(project_name,0, team,project_due_date));
+    //    user.addProject(Project(project_name,0, team,project_due_date));
         cout<<"Project have been successfully created."<<endl;
         cout<<endl;
 }
@@ -139,7 +140,7 @@ manageProjects(User& newUser) {
      //cout<<"Select a Project: "<<endl;
     // cin>>project_options;
 
-    ProjectManagement selected_project;
+    Project selected_project;
     /* for(int i=0;i<user.get_project_count();i++)
     {
         if(user.get_project(i).get_project_id_() == project_options)

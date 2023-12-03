@@ -2,7 +2,7 @@
 #define USER_H
 
 #include <iostream>
-#include "project_team.h"
+#include "project.h"
 #include "tasks.h"
 using namespace std;
 
@@ -10,7 +10,6 @@ using namespace std;
 const int MAX_NO_OF_USER_TASKS = 5;
 class User {
     private:
-    static int user_count_;
     int user_id_;
     static int vacant_id_slots_ [10];
     static int vacant_id_slots_counter_;
@@ -20,9 +19,10 @@ class User {
     string user_role_;
     int project_count_;
     Task user_tasks [MAX_NO_OF_USER_TASKS];
-
-
     public:
+    static int user_count_;
+    int task_count_;
+
     User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
         
         bool vacant_id_found = 0;
@@ -60,9 +60,18 @@ class User {
     
     bool
     authenticateUser (string check_email, string check_password) {
-        if ( check_email == this->user_email_ ){}
-        if ( check_password == this->user_password_ ){}
+
+        if ( check_email == this->user_email_ ) {
+
+        if ( check_password == this->user_password_ ) 
         return 1;
+        else
+        return 0;
+
+        }
+        else
+        return 0;
+    
     }
 
     void
@@ -88,7 +97,7 @@ class User {
         return user_name_;
     }
 
-    /* ProjectManagement& get_project(int index) {
+    /* Project& get_project(int index) {
         return project_[index];
     } */
 
@@ -146,13 +155,13 @@ class User {
 
 
     /* void
-    addProject (ProjectManagement newproject ) {
+    addProject (Project newproject ) {
         project_ [ project_count_ ] = newproject;
         project_count_++;
     } */
 
     void
-    setUser (string username,string email,string password) {
+    createUser (string username,string email,string password) {
         bool vacant_id_found = 0;
         for (int i=0; i<10 ; i++) 
         if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
@@ -162,11 +171,13 @@ class User {
         }
         if (!vacant_id_found)
         user_id_ = user_count_ + 1;
+
         user_name_=username;
         user_email_=email;
         user_password_= password;
         user_count_ ++;
     }
+
     void
     removeUser () {
         vacant_id_slots_ [vacant_id_slots_counter_] = user_id_;
@@ -177,8 +188,16 @@ class User {
         user_count_ --;
     }
 
+    void
+    AddTask (int task_id) {
+        // int user_task_count = project_users_[user_id - 1].task_count_;
+        // use friend member to access project tasks
+        //user_tasks [task_count_] = ;
+    }
 
 
+    friend class Project;
+    friend class Task;
 };
 int
 User :: user_count_ = 0;
@@ -194,5 +213,4 @@ class UserMember : public User {
 class UserAdmin : public UserMember {
     
 };
-
 #endif
