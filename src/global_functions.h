@@ -192,7 +192,7 @@ createTask(Project& c_project, User& loginUser) {
     cout<<"***********************************************************"<<endl;
 }
 void
-editTasks(User& loginUser){
+editTasks(User& loginUser, Project &c_project, int current_user_id){
     cout<<"*******************  EDIT TASKS *************************"<<endl;
     int edit_task_option;
     do {
@@ -217,12 +217,27 @@ editTasks(User& loginUser){
             break;
 
             case 4:
-            cout <<"Edit Task Status." <<endl;
+            cout <<"Select the task that you want to edit." <<endl;
+            c_project.displayUserTasks (current_user_id);
+            cout <<endl <<"Select your Task status selection: " <<endl ;
             cout<< "1. To-Do" <<endl
                 <<"2. In-Progress" <<endl
                 <<"3. Completed" <<endl ;
 
+            int task_option = 0;
+            
+            switch (task_option) {
 
+            case 1:
+            c_project.changeTaskStatus (current_user_id, 0, "To-Do");
+            break;
+
+            case 2:
+            c_project.changeTaskStatus (current_user_id, 0, "In-Progress");
+            break;
+
+            case 3:
+            c_project.changeTaskStatus (current_user_id, 0, "Completed");
             break;
 
             case 5:  //Go Back
@@ -234,12 +249,13 @@ editTasks(User& loginUser){
             cout<< "Invalid option. Please try again." << endl;        
         }   
     
-    }while (edit_task_option!=4);
+    }
     cout<<"*********************************************************"<<endl;
-    } 
+    } while (edit_task_option!=4); 
+}
     
 void
-manageProjects(User& loginUser,Project& c_project) {
+manageProjects(User& loginUser,Project& c_project, int c_user_id) {
     int project_options;
 
   //  cout<<"Projects for User: "<<user.get_user_name()<<endl;
@@ -251,7 +267,7 @@ manageProjects(User& loginUser,Project& c_project) {
      //cout<<"Select a Project: "<<endl;
     // cin>>project_options;
 
-    Project selected_project;
+    //Project selected_project;
     /* for(int i=0;i<user.get_project_count();i++)
     {
         if(user.get_project(i).get_project_id_() == project_options)
@@ -279,7 +295,7 @@ manageProjects(User& loginUser,Project& c_project) {
                 break;
 
                 case 2:  //Edit a Task
-                editTasks(loginUser);
+                editTasks(loginUser, c_project, c_user_id);
                 break;
 
                 case 3: //Go Back

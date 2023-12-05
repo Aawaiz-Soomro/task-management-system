@@ -52,6 +52,7 @@ class Notes {
     string note_name_;
     int note_id_;
     string note_text_;
+    
 
     
     public:
@@ -98,6 +99,14 @@ class Notes {
     }
 
 };
+
+class PublicNotes : public Notes {
+string note_author;
+};
+
+class PrivateNotes : public Notes {
+
+};
 const int MAX_NO_OF_TASKS = 5;
 const int MAX_TASK_TAGS_ = 5;
 const int MAX_TASK_NOTES_ = 5;
@@ -109,7 +118,7 @@ class Task  {
     string task_status_;
     Tags task_tags_ [MAX_TASK_TAGS_];
     int tags_count_ = 0;
-    Notes task_notes_ [MAX_TASK_NOTES_];
+    PublicNotes task_notes_ [MAX_TASK_NOTES_];
     int notes_count_ = 0;
     int task_members_;
     static int task_count;
@@ -141,22 +150,8 @@ class Task  {
     }
 
     void
-    changeTaskStatus (int option) {
-        switch (option) {
-
-            case 1:
-            task_status_ = "To-Do";
-            break;
-
-            case 2:
-            task_status_ = "In-Progress";
-            break;
-
-            case 3:
-            task_status_ = "Completed" ;
-            break;
-
-        }
+    changeTaskStatus (string task_status) {
+        task_status_ = task_status;
     }
 
     void
@@ -226,7 +221,7 @@ class Task  {
     }
 
     void
-    addTaskNotes (Notes new_task_note ) {
+    addTaskNotes (PublicNotes new_task_note ) {
 
         bool different = 1;
         for (int i=0 ; i<notes_count_ ; i++) 

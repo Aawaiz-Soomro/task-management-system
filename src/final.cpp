@@ -36,7 +36,7 @@ int main () {
 
                         case 1:  //Manage Project
                         cout<<"******************** MANAGE PROJECT MENU ********************"<<endl;
-                        manageProjects(loginUser,current_project);
+                        manageProjects(loginUser,current_project, current_user_id);
                         cout<<"*************************************************************"<<endl;
                         break;
 

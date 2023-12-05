@@ -184,11 +184,24 @@ const int MAX_PROJECT_USERS = 20;
     }
 
     void
+    changeTaskStatus (int user_id, int task_id, string task_status) {
+        project_tasks_[task_id].Task :: changeTaskStatus (task_status);
+        project_users_[user_id].User :: changeTaskStatus (task_id, task_status);
+    }
+
+
+    void
     displayTasks () {
         int temp_tasks_count = project_tasks_ [0].task_count;
         for (int i=0 ; i < temp_tasks_count - 1 ; i++) {
         project_tasks_->displayTaskDetails();
         }
+    }
+
+
+    void
+    displayUserTasks ( int user_id ) {
+        project_users_[user_id].displayAssignedTasks ();
     }
 
 

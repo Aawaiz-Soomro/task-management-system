@@ -222,10 +222,7 @@ class User {
 
         }
     }*/
-    void
-    displayAssignedTasks() {
 
-    }
     void
     generateReport () {
         cout <<"User Details: " <<endl <<endl ;
@@ -297,6 +294,19 @@ class User {
             cout << "Invalid user_id or task_id." << endl;
         }
     }
+
+    void
+    displayAssignedTasks () {
+        for (int i=0 ; i < user_task_count_ ; i++) {
+        user_tasks[user_task_count_].displayTaskDetails();
+        }
+    }
+
+    void
+    changeTaskStatus (int task_id, string task_status) {
+        user_tasks[task_id].changeTaskStatus (task_status);
+    }
+
 
     friend class Project;
     friend class Task;
