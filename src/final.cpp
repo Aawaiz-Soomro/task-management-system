@@ -7,6 +7,7 @@ int main () {
     Project current_project;
     User loginUser;
     bool user_login = 0;
+    int current_user_id = 0;
     do {
         
         loginMenu (login_switch);
@@ -17,7 +18,7 @@ int main () {
             break;
 
             case 2:
-            loginForm (loginUser, user_login); 
+            loginForm (loginUser, user_login, current_user_id); 
 
             while (user_login)  //when value of the user login will be updated so run the while loop!
                 {
@@ -48,7 +49,7 @@ int main () {
                         case 3:  //Go Back
                         cout<<"Going back to the previous menu."<<endl;
                         user_login = 0;
-                        loginForm(loginUser, user_login);
+                        loginForm(loginUser, user_login, current_user_id);
                         break;
 
                         case 4:  //Logged out

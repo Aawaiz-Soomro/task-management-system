@@ -61,8 +61,8 @@ signupForm (User& loginUser, Project &c_project) {
     cout<<"*********************************************************"<<endl;
 }
 
-int
-loginForm (User& loginUser, bool& user_login) {
+void
+loginForm (User& loginUser, bool& user_login, int current_user_id) {
     cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
     string temp_user_password;
@@ -73,6 +73,7 @@ loginForm (User& loginUser, bool& user_login) {
     cin  >> temp_user_password;
 
     if ( loginUser.authenticateUser (temp_user_email, temp_user_password) ) {
+        current_user_id = loginUser.authenticateUser (temp_user_email, temp_user_password);
         cout << "Logged into the account successfully." << endl;
     //    loginUser.set_user_email(temp_user_email);
         user_login = 1;

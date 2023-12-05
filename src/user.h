@@ -23,7 +23,7 @@ class User {
     public:
     string user_role_;
     static int user_count_;
-    int task_count_;
+    int user_task_count_;
 
     User(string username,string email,string password):user_name_(username),user_email_(email),user_password_(password) {
         
@@ -277,13 +277,23 @@ class User {
         user_count_ --;
     }
 
-    void
+    /* void
     AddTask (int task_id) {
         // int user_task_count = project_users_[user_id - 1].task_count_;
         // use friend member to access project tasks
         //user_tasks [task_count_] = ;
-    }
+    } */
 
+    void
+    AddTask (Task add_task, int user_id) {
+        if(user_id > 0 && add_task.get_task_id () > 0 && add_task.get_task_id () <= MAX_NO_OF_TASKS) {
+            user_id.user_tasks [user_task_count] = project_tasks_ [task_id] ;
+            user_task_count_++;
+            cout<<"Task added successfully."<<endl;
+        } else {
+            cout << "Invalid user_id or task_id." << endl;
+        }
+    }
 
     friend class Project;
     friend class Task;

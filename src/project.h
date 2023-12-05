@@ -189,6 +189,11 @@ const int MAX_PROJECT_USERS = 20;
     }
 
     void
+    generateReport (int id) {
+        project_users_ [id].generateReport();
+    }
+
+    void
     createTask (string name, string due_date) {
         int temp_task_count = project_tasks_ [0].task_count;
         project_tasks_[temp_task_count].Task:: createTask (name, due_date);
@@ -198,14 +203,15 @@ const int MAX_PROJECT_USERS = 20;
     void
     AddTask (int task_id, int user_id) {
         if(user_id > 0 && user_id <= MAX_PROJECT_USERS && task_id > 0 && task_id <= MAX_NO_OF_TASKS) {
-            int user_task_count = project_users_[user_id].task_count_;
+            int user_task_count = project_users_[user_id].user_task_count_;
             project_users_[user_id].user_tasks [user_task_count] = project_tasks_ [task_id] ;
-            project_users_[user_id].task_count_++;
+            project_users_[user_id].user_task_count_++;
             cout<<"Task added successfully."<<endl;
         } else {
             cout << "Invalid user_id or task_id." << endl;
         }
     }
+
     void
     displayTasks () {
         int temp_tasks_count = project_tasks_ [0].task_count;
