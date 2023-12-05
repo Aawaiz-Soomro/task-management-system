@@ -16,10 +16,10 @@ class User {
     string user_name_;
     string user_email_;
     string user_password_;
-    string user_role_;
     int project_count_;
     Task user_tasks [MAX_NO_OF_USER_TASKS];
     public:
+    string user_role_;
     static int user_count_;
     int task_count_;
 
@@ -42,7 +42,7 @@ class User {
     User()
     {
         bool vacant_id_found = 0;
-        for (int i=0; i<10 ; i++) 
+        /* for (int i=0; i<10 ; i++) 
         if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
             user_id_ == vacant_id_slots_ [i] ;
             vacant_id_slots_ [i] = 0;
@@ -50,13 +50,15 @@ class User {
             break;
         }
         if (!vacant_id_found)
-        user_id_ = user_count_ + 1;
-
+        user_id_ = 0;
+    */
         user_name_="";
         user_email_="";
         user_password_="";
-        user_count_ ++;
-    }
+        user_role_ = "" ;
+        user_id_ = 0;
+    //    user_count_ ++;
+    } 
     
     bool
     authenticateUser (string check_email, string check_password) {

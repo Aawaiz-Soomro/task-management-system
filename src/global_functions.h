@@ -23,6 +23,7 @@ signupForm (User &newuser, Project &c_project) {
     string temp_user_name;
     string temp_user_email;
     string temp_user_password;
+    string temp_user_role;
 
     cout << "Enter Username: "  ;
     cin >> temp_user_name;
@@ -30,8 +31,10 @@ signupForm (User &newuser, Project &c_project) {
     cin >> temp_user_email;
     cout << "Enter Password: " ;
     cin >> temp_user_password;
+    cout << "Enter UserRole: " ;
+    cin >> temp_user_role;
 
-    c_project.createUser(temp_user_name,temp_user_email,temp_user_password) ;
+    c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role) ;
 
     cout<<"New user created successfully."<<endl;
     cout <<endl;
@@ -89,6 +92,19 @@ createProject() {
     //    user.addProject(Project(project_name,0, team,project_due_date));
         cout<<"Project have been successfully created."<<endl;
         cout<<endl;
+}
+void 
+createTask(Project& c_project, User& newUser) {
+    cout<<"*******************  CREATE TASKS *************************"<<endl;
+    string temp_name;
+    string temp_due_date;
+    c_project.createTask(temp_name,temp_due_date);
+    c_project.displayProjectDetails ();
+    int task_id;
+    cout << "Enter Task ID";
+    cin >> task_id;
+    c_project.AddTask (task_id, newUser.get_user_id ());
+    cout<<"***********************************************************"<<endl;
 }
 void
 editTasks(User& newUser){

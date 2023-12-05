@@ -100,10 +100,11 @@ const int MAX_PROJECT_USERS = 20;
     }
 
     void
-    createUser (string username,string email,string password) {
+    createUser (string username,string email,string password,string role) {
        // project_users_[0].User :: createUser (username, email,password) ;
         bool vacant_id_found = 0;
         int user_index = 0;
+
         for (int i=0; i<10 ; i++) 
         if ( project_users_[0].vacant_id_slots_ [i] != 0 )  {
             user_index = project_users_[0].vacant_id_slots_ [i] - 1;
@@ -112,6 +113,7 @@ const int MAX_PROJECT_USERS = 20;
             project_users_[user_index].user_name_=username;
             project_users_[user_index].user_email_=email;
             project_users_[user_index].user_password_= password;
+            project_users_[user_index].user_role_ = role;
             vacant_id_found = 1;
             break;
         }
@@ -121,6 +123,7 @@ const int MAX_PROJECT_USERS = 20;
         project_users_[temp_user_count].user_id_ = temp_user_count + 1;
         project_users_[temp_user_count].user_email_ = email;
         project_users_[temp_user_count].user_password_ = password;
+        project_users_[temp_user_count].user_role_ = role;
         }
 
         project_users_[0].user_count_ ++;
@@ -153,6 +156,13 @@ const int MAX_PROJECT_USERS = 20;
     AddTask (int task_id, int user_id) {
         int user_task_count = project_users_[user_id - 1].task_count_;
         project_users_[user_id - 1].user_tasks [user_task_count] = project_tasks_ [task_id - 1] ;
+    }
+    void
+    displayTasks () {
+        int temp_tasks_count = project_tasks_ [0].task_count;
+        for (int i=0 ; i < temp_tasks_count - 1 ; i++) {
+        project_tasks_->displayTaskDetails();
+        }
     }
 
 

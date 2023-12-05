@@ -5,8 +5,8 @@ int main () {
 
     int login_switch;
     Project current_project;
-    User newUser;
-    bool user_login = 1;
+    User loginUser;
+    bool user_login = 0;
 
     do {
         
@@ -14,11 +14,11 @@ int main () {
         switch (login_switch) {
         
             case 1:
-            signupForm (newUser, current_project);
+            signupForm (loginUser, current_project);
             break;
 
             case 2:
-            loginForm (newUser, user_login); 
+            loginForm (loginUser, user_login); 
 
             while (user_login)  //when value of the user login will be updated so run the while loop!
                 {
@@ -36,20 +36,20 @@ int main () {
 
                         case 3:  //Manage Project
                         cout<<"******************** MANAGE PROJECT MENU ********************"<<endl;
-                        manageProjects(newUser);
+                        manageProjects(loginUser);
                         cout<<"*************************************************************"<<endl;
                         break;
 
                         case 4:  //View Profile
                         cout<<"********************** VIEWING PROFILE ********************"<<endl;
-                        newUser.viewProfile();
+                        loginUser.viewProfile();
                         cout<<"***********************************************************"<<endl;
                         break;
                         
                         case 5:  //Go Back
                         cout<<"Going back to the previous menu."<<endl;
                         user_login = 0;
-                        loginForm(newUser, user_login);
+                        loginForm(loginUser, user_login);
                         break;
 
                         case 6:  //Logged out
