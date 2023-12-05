@@ -62,7 +62,7 @@ class User {
     //    user_count_ ++;
     } 
     
-    int
+    bool
     authenticateUser (string check_email, string check_password) {
         ifstream userFile("users.txt");
         if (userFile.is_open()) {
@@ -75,10 +75,14 @@ class User {
                     userFile >> stored_password;
                     // Check the credentials
                     if (check_email == stored_email && check_password == stored_password) {
+                        cout << "Stored Email: " <<stored_email;
+                        cout << "Stored Password: " <<stored_password;
                         userFile.close();
-                        return user_id_;
+                        cout <<"Logged In" <<endl;
+                        return 1;
                     }
                     else
+                        cout <<"Login failed, User not found " <<endl;
                         return 0;
                 }
             }
@@ -87,7 +91,6 @@ class User {
         } else {
             cout << "Error: Unable to open the file." << endl;
         }
-            return false; // User authentication failed
         }
       /*
         if ( check_email == this->user_email_ ) {

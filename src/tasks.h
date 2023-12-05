@@ -247,7 +247,7 @@ class Task  {
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
     }
 
-    void
+    /* void
     removeTaskNotes (Notes new_task_note ) {
 
         for (int i=0 ; i<notes_count_ ; i++) {
@@ -258,7 +258,7 @@ class Task  {
             break;
         }
         }
-    }
+    } */
 
     void
     displayTaskDetails () {

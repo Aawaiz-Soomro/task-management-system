@@ -103,12 +103,12 @@ const int MAX_PROJECT_USERS = 20;
     get_due_date () {
         return project_due_date_;
     }
-    void
+    int
     createUser (string username,string email,string password,string role) {
         // project_users_[0].User :: createUser (username, email,password) ;
         bool vacant_id_found = 0;
         int user_index = 0;
-        
+        int new_user_id = 0;
         for (int i=0; i<10 ; i++) 
         if ( project_users_[0].vacant_id_slots_ [i] != 0 )  {
             user_index = project_users_[0].vacant_id_slots_ [i] - 1;
@@ -119,6 +119,7 @@ const int MAX_PROJECT_USERS = 20;
             project_users_[user_index].user_password_= password;
             project_users_[user_index].user_role_ = role;
             vacant_id_found = 1;
+            new_user_id = project_users_[user_index].user_id_;
             break;
         }
         if (!vacant_id_found) {
@@ -128,43 +129,20 @@ const int MAX_PROJECT_USERS = 20;
         project_users_[temp_user_count].user_email_ = email;
         project_users_[temp_user_count].user_password_ = password;
         project_users_[temp_user_count].user_role_ = role;
+        new_user_id = project_users_[temp_user_count + 1].user_id_;
         }
 
-        project_users_[0].user_count_ ++; 
-         /* 
-         for (int i = 0; i < 10; i++) {
-        if (project_users_[user_index].vacant_id_slots_[i] != 0) {
-            user_index = project_users_[user_index].vacant_id_slots_[i] - 1;
+        project_users_[0].user_count_ ++;
 
-            project_users_[user_index].user_id_ = project_users_[user_index].vacant_id_slots_[i];
-            project_users_[user_index].vacant_id_slots_[i] = 0;
-
-            project_users_[user_index].user_name_ = username;
-            project_users_[user_index].user_email_ = email;
-            project_users_[user_index].user_password_ = password;
-            project_users_[user_index].user_role_ = role;
-
-            vacant_id_found = 1;
-            break;
-        }
-        }
-
-        if (!vacant_id_found) {
-            int temp_user_count = project_users_[0].user_count_;
-            
-            project_users_[temp_user_count].user_id_ = temp_user_count + 1;
-            project_users_[temp_user_count].user_email_ = email;
-            project_users_[temp_user_count].user_password_ = password;
-            project_users_[temp_user_count].user_role_ = role;
-
-            project_users_[0].user_count_++;
-        } */
+        return new_user_id; 
     }
 
     bool
     authenticateUser (string check_email, string check_password) {
-        for (int i=0; i < project_users_[0].user_count_ ; i++ ) {
-            return project_users_[i].authenticateUser (check_email, check_password) ;
+        for (int i=1; i < project_users_[0].user_count_ ; i++ ) {
+            if  (project_users_[i].authenticateUser (check_email, check_password)) {
+                return i;
+            }
         }
     }
 

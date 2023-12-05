@@ -16,7 +16,44 @@ loginMenu (int &login_switch) {
         << "2. Login" <<endl 
         << "3. Exit Program" <<endl 
         <<"********************************************************"<<endl;
-    cin >> login_switch;}
+    cin >> login_switch;
+}
+
+bool
+authenticateUser (string check_email, string check_password) {
+    ifstream userFile("users.txt");
+    if (userFile.is_open()) {
+    string field, stored_email, stored_password;
+
+        while (userFile >> field) {
+            if (field == "Email:") {
+                userFile >> stored_email;
+                
+            }
+            else if (field == "Password:") {
+                userFile >> stored_password;
+                // Check the credentials
+                if (check_email == stored_email && check_password == stored_password) {
+                    cout << "Stored Email Is: " <<stored_email;
+                    cout << "Stored Password Is: " <<stored_email;
+                    userFile.close();
+                    cout <<"Logged In" <<endl;
+                    return 1;
+                }
+                else
+                    cout <<"Login failed, User not found " <<endl;
+                    return 0;
+            }
+            //else if (field ==  "ID") {
+            // 
+            //}
+        }
+
+    userFile.close();
+    } else {
+        cout << "Error: Unable to open the file." << endl;
+    }
+}
 
 void
 signupForm (User& loginUser, Project &c_project) {
@@ -36,9 +73,9 @@ signupForm (User& loginUser, Project &c_project) {
     cin >> temp_user_role;
 
 
-
+    
     // Save the user to a file
-    ofstream userFile("users.txt", ios::app);  // Open file in append mode
+    /* ofstream userFile("users.txt", ios::app);  // Open file in append mode
     if (userFile.is_open()) {
         userFile << "Username: " << temp_user_name << endl
                  << "Email: " << temp_user_email <<endl
@@ -52,17 +89,36 @@ signupForm (User& loginUser, Project &c_project) {
     }
 
     c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role ) ;
+ */
+
+    
+    
+    int new_user_id = c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role ) ;
+    ofstream userFile("users.txt", ios::app);  // Open file in append mode
+    if (userFile.is_open()) {
+        userFile << "ID: " << new_user_id <<endl
+                 << "Username: " << temp_user_name <<endl
+                 << "Email: " << temp_user_email <<endl
+                 << "Password: " << temp_user_password << endl
+                 << "UserRole: " << temp_user_role << endl
+                 << "------------------------------"<<endl;
+        userFile.close();
+        cout << "User information saved to file." << endl;
+    } else {
+        cout << "Error: Unable to open the file." << endl;
+    }
+
     /* loginUser.set_user_name(temp_user_name);
     loginUser.set_user_email(temp_user_email);
-    loginUser.set_user_password(temp_user_password); */
-
+    loginUser.set_user_password(temp_user_password);
+    */
     cout<<"New user created successfully."<<endl;
     cout <<endl;
     cout<<"*********************************************************"<<endl;
 }
 
 void
-loginForm (User& loginUser, bool& user_login, int current_user_id) {
+loginForm (Project& c_project, User loginUser, bool& user_login, int &current_user_id) {
     cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
     string temp_user_password;
@@ -72,13 +128,14 @@ loginForm (User& loginUser, bool& user_login, int current_user_id) {
     cout << "Enter Password: " ;
     cin  >> temp_user_password;
 
-    if ( loginUser.authenticateUser (temp_user_email, temp_user_password) ) {
-        current_user_id = loginUser.authenticateUser (temp_user_email, temp_user_password);
+    if ( c_project.authenticateUser (temp_user_email, temp_user_password) ) {
+        current_user_id = c_project.authenticateUser (temp_user_email, temp_user_password);
         cout << "Logged into the account successfully." << endl;
-    //    loginUser.set_user_email(temp_user_email);
         user_login = 1;
+        // loginUser.set_user_email(temp_user_email);
     } 
     else {
+        cout <<"ID:" << c_project.authenticateUser (temp_user_email, temp_user_password) <<endl;
         cout << "Login failed. Please try again." << endl;
     }
 
@@ -159,9 +216,19 @@ editTasks(User& loginUser){
             cout<<"Notes and comments. "<<endl;
             break;
 
-            case 4:  //Go Back
+            case 4:
+            cout <<"Edit Task Status." <<endl;
+            cout<< "1. To-Do" <<endl
+                <<"2. In-Progress" <<endl
+                <<"3. Completed" <<endl ;
+
+
+            break;
+
+            case 5:  //Go Back
             cout<<"Going back to the previous menu."<<endl;
             break;
+
 
             default:
             cout<< "Invalid option. Please try again." << endl;        
