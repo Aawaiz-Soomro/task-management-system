@@ -285,9 +285,9 @@ class User {
     } */
 
     void
-    AddTask (Task add_task, int user_id) {
-        if(user_id > 0 && add_task.get_task_id () > 0 && add_task.get_task_id () <= MAX_NO_OF_TASKS) {
-            user_id.user_tasks [user_task_count] = project_tasks_ [task_id] ;
+    AddTask (Task add_task) {
+        if(user_id_ > 0 && add_task.get_task_id () > 0 && add_task.get_task_id () <= MAX_NO_OF_TASKS) {
+            user_tasks [user_task_count_] = add_task ;
             user_task_count_++;
             cout<<"Task added successfully."<<endl;
         } else {
