@@ -111,7 +111,7 @@ class User {
         cout<<"User id: "<<user_id_ <<endl
             <<"User Name: "<<user_name_ <<endl
             <<"User Email: "<<user_email_ <<endl; 
-        }
+    }
 
     int 
     get_user_id() {
