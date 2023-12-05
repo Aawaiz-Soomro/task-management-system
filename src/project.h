@@ -60,6 +60,7 @@ class TaskTeam  {
     }
 
 };
+class User;
 const int MAX_PROJECT_USERS = 20;
     class Project {
     private:
@@ -98,13 +99,16 @@ const int MAX_PROJECT_USERS = 20;
     get_project_id_ () {
         return project_id_;
     }
-
+    string 
+    get_due_date () {
+        return project_due_date_;
+    }
     void
     createUser (string username,string email,string password,string role) {
-       // project_users_[0].User :: createUser (username, email,password) ;
+        // project_users_[0].User :: createUser (username, email,password) ;
         bool vacant_id_found = 0;
         int user_index = 0;
-
+        
         for (int i=0; i<10 ; i++) 
         if ( project_users_[0].vacant_id_slots_ [i] != 0 )  {
             user_index = project_users_[0].vacant_id_slots_ [i] - 1;
@@ -126,10 +130,37 @@ const int MAX_PROJECT_USERS = 20;
         project_users_[temp_user_count].user_role_ = role;
         }
 
-        project_users_[0].user_count_ ++;
+        project_users_[0].user_count_ ++; 
+         /* 
+         for (int i = 0; i < 10; i++) {
+        if (project_users_[user_index].vacant_id_slots_[i] != 0) {
+            user_index = project_users_[user_index].vacant_id_slots_[i] - 1;
+
+            project_users_[user_index].user_id_ = project_users_[user_index].vacant_id_slots_[i];
+            project_users_[user_index].vacant_id_slots_[i] = 0;
+
+            project_users_[user_index].user_name_ = username;
+            project_users_[user_index].user_email_ = email;
+            project_users_[user_index].user_password_ = password;
+            project_users_[user_index].user_role_ = role;
+
+            vacant_id_found = 1;
+            break;
+        }
+        }
+
+        if (!vacant_id_found) {
+            int temp_user_count = project_users_[0].user_count_;
+            
+            project_users_[temp_user_count].user_id_ = temp_user_count + 1;
+            project_users_[temp_user_count].user_email_ = email;
+            project_users_[temp_user_count].user_password_ = password;
+            project_users_[temp_user_count].user_role_ = role;
+
+            project_users_[0].user_count_++;
+        } */
     }
 
-    
     void
     displayProjectDetails () {
         cout <<"Project Name: " <<project_name_ <<endl;
@@ -154,8 +185,14 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     AddTask (int task_id, int user_id) {
-        int user_task_count = project_users_[user_id - 1].task_count_;
-        project_users_[user_id - 1].user_tasks [user_task_count] = project_tasks_ [task_id - 1] ;
+        if(user_id > 0 && user_id <= MAX_PROJECT_USERS && task_id > 0 && task_id <= MAX_NO_OF_TASKS) {
+            int user_task_count = project_users_[user_id - 1].task_count_;
+            project_users_[user_id - 1].user_tasks [user_task_count] = project_tasks_ [task_id - 1] ;
+            project_users_[user_id - 1].task_count_++;
+            cout<<"Task added successfully."<<endl;
+        } else {
+            cout << "Invalid user_id or task_id." << endl;
+        }
     }
     void
     displayTasks () {

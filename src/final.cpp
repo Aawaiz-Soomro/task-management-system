@@ -7,7 +7,6 @@ int main () {
     Project current_project;
     User loginUser;
     bool user_login = 0;
-
     do {
         
         loginMenu (login_switch);
@@ -34,25 +33,25 @@ int main () {
                         case 2:  //Add a Project
                         break; */
 
-                        case 3:  //Manage Project
+                        case 1:  //Manage Project
                         cout<<"******************** MANAGE PROJECT MENU ********************"<<endl;
-                        manageProjects(loginUser);
+                        manageProjects(loginUser,current_project);
                         cout<<"*************************************************************"<<endl;
                         break;
 
-                        case 4:  //View Profile
+                        case 2:  //View Profile
                         cout<<"********************** VIEWING PROFILE ********************"<<endl;
                         loginUser.viewProfile();
                         cout<<"***********************************************************"<<endl;
                         break;
                         
-                        case 5:  //Go Back
+                        case 3:  //Go Back
                         cout<<"Going back to the previous menu."<<endl;
                         user_login = 0;
                         loginForm(loginUser, user_login);
                         break;
 
-                        case 6:  //Logged out
+                        case 4:  //Logged out
                         cout<<"User logged out successfully."<<endl;
                         cout<<"Exiting the program."<<endl;
                         exit(0);

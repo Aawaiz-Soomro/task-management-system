@@ -1,8 +1,9 @@
 #ifndef GLOBAL_FUNCTIONS_H
 #define GLOBAL_FUNCTIONS_H
 #include <iostream>
+#include <fstream>
+
 #include <string>
-#include <ctime>
 #include "project.h"
 #include "tasks.h"
 #include "user.h"
@@ -12,13 +13,13 @@ void
 loginMenu (int &login_switch) {
     cout<<"******************* LOGIN MENU *************************"<<endl;
     cout<< "1. Create New User" <<endl
-    << "2. Login" <<endl 
-    << "3. Exit Program" <<endl ;
-    cout<<"********************************************************"<<endl;
+        << "2. Login" <<endl 
+        << "3. Exit Program" <<endl 
+        <<"********************************************************"<<endl;
     cin >> login_switch;}
 
 void
-signupForm (User &newuser, Project &c_project) {
+signupForm (User& loginUser, Project &c_project) {
     cout<<"******************* SIGNUP MENU *************************"<<endl;
     string temp_user_name;
     string temp_user_email;
@@ -34,7 +35,26 @@ signupForm (User &newuser, Project &c_project) {
     cout << "Enter UserRole: " ;
     cin >> temp_user_role;
 
-    c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role) ;
+
+
+    // Save the user to a file
+    ofstream userFile("users.txt", ios::app);  // Open file in append mode
+    if (userFile.is_open()) {
+        userFile << "Username: " << temp_user_name << endl
+                 << "Email: " << temp_user_email <<endl
+                 << "Password: " << temp_user_password << endl
+                 << "UserRole: " << temp_user_role << endl
+                 << "------------------------------"<<endl;
+        userFile.close();
+        cout << "User information saved to file." << endl;
+    } else {
+        cout << "Error: Unable to open the file." << endl;
+    }
+
+    c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role ) ;
+    loginUser.set_user_name(temp_user_name);
+    loginUser.set_user_email(temp_user_email);
+    loginUser.set_user_password(temp_user_password);
 
     cout<<"New user created successfully."<<endl;
     cout <<endl;
@@ -42,19 +62,19 @@ signupForm (User &newuser, Project &c_project) {
 }
 
 void
-loginForm (User &newuser, bool &user_login) {
+loginForm (User& loginUser, bool& user_login) {
     cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
     string temp_user_password;
 
     cout << "Enter E-Mail: " ;
-    cin >> temp_user_email;
+    cin  >> temp_user_email;
     cout << "Enter Password: " ;
-    cin >> temp_user_password;
+    cin  >> temp_user_password;
 
-    
-    if ( newuser.authenticateUser (temp_user_email, temp_user_password) ) {
+    if ( loginUser.authenticateUser (temp_user_email, temp_user_password) ) {
         cout << "Logged into the account successfully." << endl;
+        loginUser.set_user_email(temp_user_email);
         user_login = 1;
     } 
     else {
@@ -71,10 +91,10 @@ projectMenu (int &project_switch) {
     cout
         /* << "1. Create a Project" <<endl
         << "2. Add Project" <<endl */
-        << "3. Manage Project" <<endl
-        << "4. View Profile" <<endl
-        << "5. Go Back"<<endl
-        << "6. Logout"<<endl;
+        << "1. Manage Project" <<endl
+        << "2. View Profile" <<endl
+        << "3. Go Back"<<endl
+        << "4. Logout"<<endl;
     
     cin >> project_switch;
     cout<<"**********************************************************"<<endl;
@@ -93,21 +113,28 @@ createProject() {
         cout<<"Project have been successfully created."<<endl;
         cout<<endl;
 }
-void 
-createTask(Project& c_project, User& newUser) {
+void
+createTask(Project& c_project, User& loginUser) {
     cout<<"*******************  CREATE TASKS *************************"<<endl;
     string temp_name;
     string temp_due_date;
-    c_project.createTask(temp_name,temp_due_date);
-    c_project.displayProjectDetails ();
     int task_id;
-    cout << "Enter Task ID";
+    cout<<"Enter Task Name: ";
+    cin >>temp_name;
+    cout<<"Enter Due Date: ";
+    cin>>temp_due_date;
+
+    c_project.createTask(temp_name,temp_due_date);
+
+    c_project.displayProjectDetails ();
+
+    cout << "Enter Task ID: ";
     cin >> task_id;
-    c_project.AddTask (task_id, newUser.get_user_id ());
+    c_project.AddTask(task_id, loginUser.get_user_id());
     cout<<"***********************************************************"<<endl;
 }
 void
-editTasks(User& newUser){
+editTasks(User& loginUser){
     cout<<"*******************  EDIT TASKS *************************"<<endl;
     int edit_task_option;
     do {
@@ -144,7 +171,7 @@ editTasks(User& newUser){
     } 
     
 void
-manageProjects(User& newUser) {
+manageProjects(User& loginUser,Project& c_project) {
     int project_options;
 
   //  cout<<"Projects for User: "<<user.get_user_name()<<endl;
@@ -179,11 +206,12 @@ manageProjects(User& newUser) {
             switch(tasks_options)
             {
                 case 1:  //Create a Task
+                createTask(c_project,loginUser);
                 cout<<"Creating a task. "<<endl;
                 break;
 
                 case 2:  //Edit a Task
-                editTasks(newUser);
+                editTasks(loginUser);
                 break;
 
                 case 3: //Go Back

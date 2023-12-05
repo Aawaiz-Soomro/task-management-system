@@ -131,6 +131,7 @@ class Task  {
             task_name_ = name;
             task_due_date_ = due_date;
             task_status_ = "To-do";
+            cout<<"Task created successfully."<<endl;
         }
     }
     

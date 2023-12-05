@@ -1,0 +1,25 @@
+Username: taha
+Email: tahakhan003@gmail.com
+Password: tahakhan
+UserRole: member
+-----------------------------
+Username: aawaiz
+Email: aawaiz@gmail.com
+Password: aawaiz
+UserRole: member
+-----------------------------
+Username: asd
+Email: asd
+Password: asd
+UserRole: asd
+-----------------------------
+Username: asad
+Email: asad@gmail.com
+Password: asad
+UserRole: member
+------------------------------
+Username: nida
+Email: nida.munawar@gmail.com
+Password: nida
+UserRole: member
+------------------------------
