@@ -124,7 +124,7 @@ const int MAX_PROJECT_USERS = 20;
         if (!vacant_id_found) {
         
         int temp_user_count = project_users_[0].user_count_; 
-        project_users_[temp_user_count].user_id_ = temp_user_count + 1;
+        project_users_[temp_user_count + 1].user_id_ = temp_user_count + 1;
         project_users_[temp_user_count].user_email_ = email;
         project_users_[temp_user_count].user_password_ = password;
         project_users_[temp_user_count].user_role_ = role;
@@ -161,6 +161,13 @@ const int MAX_PROJECT_USERS = 20;
         } */
     }
 
+    bool
+    authenticateUser (string check_email, string check_password) {
+        for (int i=0; i < project_users_[0].user_count_ ; i++ ) {
+            return project_users_[i].authenticateUser (check_email, check_password) ;
+        }
+    }
+
     void
     displayProjectDetails () {
         cout <<"Project Name: " <<project_name_ <<endl;
@@ -174,6 +181,7 @@ const int MAX_PROJECT_USERS = 20;
         for (int i=0 ; i < temp_users_count - 1 ; i++) {
         project_users_->displayUserDetails();
         }
+        
     }
 
     void

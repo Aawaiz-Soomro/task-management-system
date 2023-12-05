@@ -52,16 +52,16 @@ signupForm (User& loginUser, Project &c_project) {
     }
 
     c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role ) ;
-    loginUser.set_user_name(temp_user_name);
+    /* loginUser.set_user_name(temp_user_name);
     loginUser.set_user_email(temp_user_email);
-    loginUser.set_user_password(temp_user_password);
+    loginUser.set_user_password(temp_user_password); */
 
     cout<<"New user created successfully."<<endl;
     cout <<endl;
     cout<<"*********************************************************"<<endl;
 }
 
-void
+int
 loginForm (User& loginUser, bool& user_login) {
     cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
@@ -74,7 +74,7 @@ loginForm (User& loginUser, bool& user_login) {
 
     if ( loginUser.authenticateUser (temp_user_email, temp_user_password) ) {
         cout << "Logged into the account successfully." << endl;
-        loginUser.set_user_email(temp_user_email);
+    //    loginUser.set_user_email(temp_user_email);
         user_login = 1;
     } 
     else {

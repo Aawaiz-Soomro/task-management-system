@@ -29,7 +29,7 @@ class User {
         
         bool vacant_id_found = 0;
         for (int i=0; i<10 ; i++) 
-        if ( vacant_id_slots_ [i] != 0 && vacant_id_slots_ [i] < (user_count_ + 1) ) {
+        if ( vacant_id_slots_ [i] != 0 ) {
             user_id_ = vacant_id_slots_ [i] ;
             vacant_id_slots_ [i] = 0;
             vacant_id_found = 1;
@@ -62,7 +62,7 @@ class User {
     //    user_count_ ++;
     } 
     
-    bool
+    int
     authenticateUser (string check_email, string check_password) {
         ifstream userFile("users.txt");
         if (userFile.is_open()) {
@@ -76,8 +76,10 @@ class User {
                     // Check the credentials
                     if (check_email == stored_email && check_password == stored_password) {
                         userFile.close();
-                        return true;
+                        return user_id_;
                     }
+                    else
+                        return 0;
                 }
             }
 
@@ -247,7 +249,7 @@ class User {
         project_count_++;
     } */
 
-    void
+    /* void
     createUser (string username,string email,string password) {
         bool vacant_id_found = 0;
         for (int i=0; i<10 ; i++) 
@@ -263,7 +265,7 @@ class User {
         user_email_=email;
         user_password_= password;
         user_count_ ++;
-    }
+    } */
 
     void
     removeUser () {

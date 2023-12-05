@@ -23,3 +23,8 @@ Email: nida.munawar@gmail.com
 Password: nida
 UserRole: member
 ------------------------------
+Username: asd
+Email: asd
+Password: asd
+UserRole: admin
+------------------------------
