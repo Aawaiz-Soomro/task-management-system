@@ -171,7 +171,7 @@ class Task  {
     }
 
     void
-    sendDueDateAlert () {
+    sendDueDateAlert (string user_email) {
         //calculate current time using time.h library
         time_t current_time;
         struct tm* local_time;
@@ -194,9 +194,9 @@ class Task  {
         if (today_month == due_month)
         // this block of code is only executed if todays year and month matches due dates year and month
         if (today_day > due_day)
-        cout << "You are " <<today_day - due_day <<" days past your due date, please complete your task as soon as possible" ;
-        else if (today_day + 3 >= due_day)  
-        cout << "Please complete your task, you only have " <<due_day - today_day << " days to complete your task" ;
+        cout << "You are " <<today_day - due_day <<" days past your due date for Task id: " <<task_id_ <<" named: " <<task_name_ <<", please complete your task as soon as possible" ;
+        else if (today_day + 3 >= due_day) 
+        cout << "Please complete your task, you only have " <<due_day - today_day << " days to complete your task: " <<task_id_ <<" named: " <<task_name_ ;
 
     }
     

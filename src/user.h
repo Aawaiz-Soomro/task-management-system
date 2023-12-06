@@ -361,6 +361,13 @@ class User {
         user_count_ --;
     }
 
+    void
+    sendDueDateAlert (int task_id) {
+
+        user_tasks[task_id].sendDueDateAlert(user_email_);
+    }
+
+
     /* void
     AddTask (int task_id) {
         // int user_task_count = project_users_[user_id - 1].task_count_;
