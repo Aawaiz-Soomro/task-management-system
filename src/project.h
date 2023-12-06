@@ -219,6 +219,11 @@ const int MAX_PROJECT_USERS = 20;
         project_tasks_[task_id].Task::editTaskDueDate(new_due_date);
     }
 
+    void
+    sendDueDateAlert (int user_id) {
+        project_users_ [user_id].sendDueDateAlert ();
+    }
+
 
 
     friend class User;

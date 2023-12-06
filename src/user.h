@@ -362,9 +362,10 @@ class User {
     }
 
     void
-    sendDueDateAlert (int task_id) {
-
-        user_tasks[task_id].sendDueDateAlert(user_email_);
+    sendDueDateAlert () {
+        for (int i=0 ; i < user_task_count_ ; i++) { 
+        user_tasks[i].sendDueDateAlert(user_email_);
+        }
     }
 
 

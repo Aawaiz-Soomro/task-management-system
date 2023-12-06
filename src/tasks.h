@@ -189,15 +189,25 @@ class Task  {
         int due_month = ( stoi (task_due_date_) % 1000000) / 10000;
         int due_year = stoi (task_due_date_) % 10000;
 
+        string body = "";
  
         if (today_year == due_year)
         if (today_month == due_month)
         // this block of code is only executed if todays year and month matches due dates year and month
-        if (today_day > due_day)
-        cout << "You are " <<today_day - due_day <<" days past your due date for Task id: " <<task_id_ <<" named: " <<task_name_ <<", please complete your task as soon as possible" ;
-        else if (today_day + 3 >= due_day) 
+        if (today_day > due_day) {
+            /* body = "You are " + std::to_string(today_day - due_day) + " days past your due date for Task id: " +
+            task_id + " named: " + task_name + ", please complete your task as soon as possible"; */
+        cout << "You are " <<today_day - due_day <<" days past your due date for Task id: " <<task_id_ <<" named: " <<task_name_ <<", please complete your task as soon as possible" ; 
+        }
+        else if (today_day + 3 >= due_day) {
         cout << "Please complete your task, you only have " <<due_day - today_day << " days to complete your task: " <<task_id_ <<" named: " <<task_name_ ;
+        /* body = "Please complete your task, you only have " + std::to_string(due_day - today_day) + " days to complete your task: " +
+               task_id + " named: " + task_name; */
+        }
+        else
+        return;
 
+    //    sendEmail(user_email, subject, body);
     }
     
     void
