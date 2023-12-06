@@ -9,6 +9,8 @@
 #include "user.h"
 using namespace std;
 
+
+int user_count=0;
 void
 loginMenu (int &login_switch) {
     cout<<"******************* LOGIN MENU *************************"<<endl;
@@ -18,13 +20,13 @@ loginMenu (int &login_switch) {
         <<"********************************************************"<<endl;
     cin >> login_switch;
 }
-
+/*
 bool
-authenticateUser (string check_email, string check_password) {
+authenticateUser (string check_email, string check_password,int check_user_id) {
     ifstream userFile("users.txt");
     if (userFile.is_open()) {
     string field, stored_email, stored_password;
-
+    int stored_user_id;
         while (userFile >> field) {
             if (field == "Email:") {
                 userFile >> stored_email;
@@ -32,28 +34,66 @@ authenticateUser (string check_email, string check_password) {
             }
             else if (field == "Password:") {
                 userFile >> stored_password;
+            }
+            else if (field == "ID:") {
+                userFile >> stored_user_id;
                 // Check the credentials
-                if (check_email == stored_email && check_password == stored_password) {
-                    cout << "Stored Email Is: " <<stored_email;
-                    cout << "Stored Password Is: " <<stored_email;
+                if (check_email == stored_email && check_password == stored_password && check_user_id == stored_user_id) {
+                    cout << "Stored Email Is: " <<stored_email <<endl;
+                    cout << "Stored Password Is: " <<stored_email <<endl;
+                    cout << "Stored User ID Is :"<<stored_user_id <<endl;
                     userFile.close();
                     cout <<"Logged In" <<endl;
                     return 1;
                 }
-                else
-                    cout <<"Login failed, User not found " <<endl;
-                    return 0;
+                
             }
-            //else if (field ==  "ID") {
-            // 
-            //}
+            
         }
-
     userFile.close();
     } else {
         cout << "Error: Unable to open the file." << endl;
     }
+    return 0;
+} */
+bool authenticateUser (string check_email, string check_password, int check_user_id) {
+    ifstream userFile("users.txt");
+    if (userFile.is_open()) {
+        string field, stored_email, stored_password;
+        int stored_user_id;
+        while (userFile >> field) {
+            if (field == "Email:") {
+                userFile >> stored_email;
+            }
+            else if (field == "Password:") {
+                userFile >> stored_password;
+            }
+            else if (field == "ID:") {
+                userFile >> stored_user_id;
+            }
+            // Check the credentials after reading all fields for a user
+            if (!stored_email.empty() && !stored_password.empty() && stored_user_id != 0) {
+                if (check_email == stored_email && check_password == stored_password) {
+                    cout << "Stored Email Is: " << stored_email << endl;
+                    cout << "Stored Password Is: " << stored_password << endl;
+                    cout << "Stored User ID Is :"<< stored_user_id << endl;
+                    check_user_id = stored_user_id;
+                    userFile.close();
+                    cout <<"Logged In" << endl; 
+                    return 1;
+                }
+                // Reset the stored values for the next user
+                stored_email = "";
+                stored_password = "";
+            }
+        }
+        userFile.close();
+    } else {
+        cout << "Error: Unable to open the file." << endl;
+    }
+    return false;
 }
+
 
 void
 signupForm (User& loginUser, Project &c_project) {
@@ -72,27 +112,7 @@ signupForm (User& loginUser, Project &c_project) {
     cout << "Enter UserRole: " ;
     cin >> temp_user_role;
 
-
-    
-    // Save the user to a file
-    /* ofstream userFile("users.txt", ios::app);  // Open file in append mode
-    if (userFile.is_open()) {
-        userFile << "Username: " << temp_user_name << endl
-                 << "Email: " << temp_user_email <<endl
-                 << "Password: " << temp_user_password << endl
-                 << "UserRole: " << temp_user_role << endl
-                 << "------------------------------"<<endl;
-        userFile.close();
-        cout << "User information saved to file." << endl;
-    } else {
-        cout << "Error: Unable to open the file." << endl;
-    }
-
-    c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role ) ;
- */
-
-    
-    
+    // int new_user_id = ++user_count;
     int new_user_id = c_project.createUser(temp_user_name,temp_user_email,temp_user_password, temp_user_role ) ;
     ofstream userFile("users.txt", ios::app);  // Open file in append mode
     if (userFile.is_open()) {
@@ -112,13 +132,15 @@ signupForm (User& loginUser, Project &c_project) {
     loginUser.set_user_email(temp_user_email);
     loginUser.set_user_password(temp_user_password);
     */
+    loginUser.set_user_id(new_user_id);
     cout<<"New user created successfully."<<endl;
+    cout<<new_user_id;
     cout <<endl;
     cout<<"*********************************************************"<<endl;
 }
 
 void
-loginForm (Project& c_project, User loginUser, bool& user_login, int &current_user_id) {
+loginForm (Project& c_project, bool& user_login, int &current_user_id) {
     cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
     string temp_user_password;
@@ -128,14 +150,15 @@ loginForm (Project& c_project, User loginUser, bool& user_login, int &current_us
     cout << "Enter Password: " ;
     cin  >> temp_user_password;
 
-    if ( c_project.authenticateUser (temp_user_email, temp_user_password) ) {
-        current_user_id = c_project.authenticateUser (temp_user_email, temp_user_password);
-        cout << "Logged into the account successfully." << endl;
-        user_login = 1;
-        // loginUser.set_user_email(temp_user_email);
-    } 
+    int retrieved_user_id=0;
+    bool auth_user_id = authenticateUser(temp_user_email,temp_user_password,retrieved_user_id);
+    
+    if (auth_user_id ) {
+        current_user_id = retrieved_user_id;
+        cout<< "Logged into the account successfully. "<<endl;
+        user_login =1;
+    }
     else {
-        cout <<"ID:" << c_project.authenticateUser (temp_user_email, temp_user_password) <<endl;
         cout << "Login failed. Please try again." << endl;
     }
 

@@ -2,6 +2,7 @@
 #define TASKS_H
 
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include "project.h"
 using namespace std;
@@ -171,7 +172,6 @@ class Task  {
 
     void
     sendDueDateAlert () {
-        
         //calculate current time using time.h library
         time_t current_time;
         struct tm* local_time;
@@ -301,8 +301,5 @@ class Task  {
 int
 Task :: task_count = 0;
 
-#endif
-
-
-
+#endif  
 // ---------------------------------------------------------------------------------------------------------------------------- //

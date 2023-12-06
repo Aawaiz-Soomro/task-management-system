@@ -1,98 +1,60 @@
-Username: taha
-Email: tahakhan003@gmail.com
+ID: 1
+Username: tahakhan
+Email: tahakhan@gmail.com
 Password: tahakhan
 UserRole: member
------------------------------
-Username: aawaiz
-Email: aawaiz@gmail.com
-Password: aawaiz
+------------------------------
+ID: 2
+Username: irfanjunejo
+Email: irfanjunejo@gmail.com
+Password: irfanjunejo
 UserRole: member
------------------------------
-Username: asd
-Email: asd
-Password: asd
-UserRole: asd
------------------------------
+------------------------------
+ID: 1
 Username: asad
 Email: asad@gmail.com
 Password: asad
 UserRole: member
 ------------------------------
+ID: 2
+Username: sus
+Email: sus@gmail.com
+Password: sus
+UserRole: member
+------------------------------
+ID: 1
 Username: nida
-Email: nida.munawar@gmail.com
+Email: nida@gmail.com
 Password: nida
 UserRole: member
 ------------------------------
-Username: asd
-Email: asd
-Password: asd
-UserRole: admin
-------------------------------
-Username: asd
-Email: asd
-Password: asd
-UserRole: admin
-------------------------------
-Username: tahakhan123123
-Email: tahakhan123123@gmail.com
-Password: tahakhan123123
-UserRole: admin
-------------------------------
-Username: tahakhan123123
-Email: ss
-Password: ss
-UserRole: ss
-------------------------------
-Username: rabada
-Email: rabada
-Password: rabada
-UserRole: rabada
-------------------------------
-Username: aaaa
-Email: aaaa
-Password: aaaa
-UserRole: aaaa
-------------------------------
-Username: a
-Email: a
-Password: a
-UserRole: a
-------------------------------
-Username: asd
-Email: asd
-Password: asd
-UserRole: asd
-------------------------------
-Username: a
-Email: a
-Password: a
-UserRole: a
-------------------------------
-Username: a
-Email: a
-Password: a
-UserRole: a
-------------------------------
-Username: a
-Email: a
-Password: a
-UserRole: a
+ID: 1
+Username: art
+Email: art
+Password: art123
+UserRole: member
 ------------------------------
 ID: 1
-Username: tahabhai
-Email: tahabhai@barebhai.com
-Password: tahabhai123
-UserRole: admin
+Username: hasan
+Email: hasantariq
+Password: hasantariq
+UserRole: member
+------------------------------
+ID: 2
+Username: babar
+Email: babarazam
+Password: babar.azam
+UserRole: member
+------------------------------
+ID: 3
+Username: naseem
+Email: naseemshah@gmail.com
+Password: naseemshah
+UserRole: member
 ------------------------------
 ID: 1
-Username: asd
-Email: asd
-Password: asd
-UserRole: asd
-------------------------------
-ID: 1
-Username: asd
-Email: asd
-Password: asd
-UserRole: admin
+Username: khan
+Email: khan@gmail.com
+Password: khan123
+UserRole: member
 ------------------------------

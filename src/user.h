@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+
 #include "project.h"
 #include "tasks.h"
 using namespace std;
@@ -108,25 +110,95 @@ class User {
     
     
         
+    // Function to update user details in the file
+    void updateDetailsInFile(const User& updatedUser) {
+    ifstream inFile("users.txt");
+    ofstream tempFile("temp_users.txt");
+
+    if (inFile.is_open() && tempFile.is_open()) {
+        int stored_user_id;
+        string stored_user_name, stored_user_email, stored_user_password;
+
+        while (inFile >> stored_user_id >> stored_user_name >> stored_user_email >> stored_user_password) {
+            if (stored_user_id == updatedUser.get_user_id()) {
+                // Update user details in the file
+                tempFile << "ID: " << stored_user_id << endl;
+                tempFile << "Name: " << updatedUser.get_user_name() << endl;
+                tempFile << "Email: " << updatedUser.get_user_email() << endl;
+                tempFile << "Password: " << updatedUser.get_user_password() << endl;
+            } else {
+                // Copy other users' details to the temporary file
+                tempFile << "ID: " << stored_user_id << endl;
+                tempFile << "Name: " << stored_user_name << endl;
+                tempFile << "Email: " << stored_user_email << endl;
+                tempFile << "Password: " << stored_user_password << endl;
+            }
+        }
+
+        inFile.close();
+        tempFile.close();
+
+        // Replace the original file with the temporary file
+        remove("users.txt");
+        rename("temp_users.txt", "users.txt");
+    } else {
+        cout << "Error: Unable to open the file." << endl;
+    }
+    }
+
+
+    void displayUserDetails() {
+     ifstream userFile("users.txt",ios::in);
+    if(userFile.is_open())
+    {
+        int stored_user_id;
+        string stored_user_name, stored_user_email, stored_user_password;
+
+        while (userFile >> stored_user_id >> stored_user_name >> stored_user_email >> stored_user_password) {
+            // Display user details
+            cout << "User ID: " << stored_user_id << endl
+                 << "User Name: " << stored_user_name << endl
+                 << "User Email: " << stored_user_email << endl;
+        }
+
+        if (!userFile.eof()) {
+            cout << "Error: Failed to read all data from 'users.txt'." << endl;
+        }
+
+        userFile.close();
+    } else {
+        cout << "Error: Unable to open the file." << endl;
+    }
+    }
+    
 
     void
-    displayUserDetails () {
-        cout<<"User id: "<<user_id_ <<endl
-            <<"User Name: "<<user_name_ <<endl
-            <<"User Email: "<<user_email_ <<endl; 
+    displayUsersDetails () {
+        cout << "User ID: "<< user_id_ << endl
+             << "Name: "   << user_name_ <<endl
+             << "Email: "  << user_email_ << endl;
+
     }
 
     int 
-    get_user_id() {
+    get_user_id() const{
         return user_id_;
     }
     int
-    get_project_count() {
+    get_project_count() const{
         return project_count_;
     }
     string 
-    get_user_name() {
+    get_user_name() const{
         return user_name_;
+    }
+    string
+    get_user_email () const{
+        return user_email_;
+    }
+    string 
+    get_user_password () const  {
+        return user_password_;
     }
     void 
     set_user_email(string email) {
@@ -140,6 +212,10 @@ class User {
     set_user_name(string name) {
         user_name_=name;
     }
+    void
+    set_user_id (int id) {
+        user_id_=id;
+    }
     /* Project& get_project(int index) {
         return project_[index];
     } */
@@ -152,14 +228,15 @@ class User {
     } */
     void
     viewProfile () {
-        string name;
-        string email;
-        string password;
+        string new_name;
+        string new_email;
+        string new_password;
         int view_profile_options;
 
         cout <<"User Details: " <<endl ;
         displayUserDetails();
         cout <<endl;
+
         cout << "Current Project: " <<endl;
         // displayCurrentProjectDetails();
         cout << "Tasks Assigned: " <<endl <<endl;
@@ -173,27 +250,28 @@ class User {
              << "4. Exit" <<endl;
         cout << "Enter your choice."<<endl;
         cin>>view_profile_options;
+
             switch(view_profile_options) {
                 case 1: //Change Name
                 cout<<"Enter New Name: ";
-                cin>>name;
-                set_user_name(name);
+                cin>>new_name;
+                set_user_name(new_name);
                 cout<<"Name changed successfully."<<endl;
-                cout<<name;
+                cout<<new_name;
                 break;
 
                 case 2: //Change Email
                 cout << "Enter New Email: ";
-                cin >> email;
-                set_user_email(email);
+                cin >> new_email;
+                set_user_email(new_email);
                 cout << "Email changed successfully." << endl;
-                cout<<email;
+                cout<<new_email;
                 break;
 
                 case 3: //Change Password
                 cout << "Enter New Password: ";
-                cin >> password;
-                set_user_password(password);
+                cin >> new_password;
+                set_user_password(new_password);
                 cout << "Password changed successfully." << endl;
                 break;
 
@@ -205,6 +283,11 @@ class User {
                 cout << "Invalid option. Please try again." << endl;
                 break;
 
+            }
+             // Update user details in the file if changes were made
+            if (view_profile_options >= 1 && view_profile_options <= 3) {
+                User updatedUser( new_name, new_email, new_password);
+                updateDetailsInFile(updatedUser);
             }
         cout<<endl;
         } while(view_profile_options!=4);
@@ -241,6 +324,7 @@ class User {
 
         } */
     }
+
 
 
     /* void
