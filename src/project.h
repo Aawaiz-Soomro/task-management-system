@@ -214,6 +214,18 @@ const int MAX_PROJECT_USERS = 20;
         project_users_ [user_id].User::addTaskNotes (task_id, add_note);
     }
 
+    void
+    displayPublicNotes (int task_id) {
+        project_tasks_ [task_id].displayPublicNotes();
+    }
+
+    void
+    displayPrivateNotes (int user_id, int task_id) {
+        project_users_ [user_id].displayPrivateNotes(task_id);
+    }
+
+
+
 
     void
     displayUserTasks ( int user_id ) {

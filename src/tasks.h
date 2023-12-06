@@ -108,6 +108,12 @@ class PublicNotes : public Notes {
             note_author = author;
     }
     PublicNotes () {}
+
+    void
+    displayNote () {
+    cout << note_author <<": " <<endl;
+    Notes::displayNote() ;
+    }
 };
 
 class PrivateNotes : public Notes {
@@ -303,6 +309,20 @@ class Task  {
     void
     editTaskDueDate (string new_due_date) {
         task_due_date_ = new_due_date;
+    }
+
+    void
+    displayPrivateNotes () {
+        for (int i=0 ; i< this ->private_notes_count_ ; i++) {
+            private_task_notes_ [i].displayNote();
+        }
+    }
+
+    void
+    displayPublicNotes () {
+        for (int i=0 ; i< this ->public_notes_count_ ; i++) {
+            public_task_notes_ [i].displayNote();
+        }
     }
 
     friend class Project;
