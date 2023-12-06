@@ -58,3 +58,9 @@ Email: khan@gmail.com
 Password: khan123
 UserRole: member
 ------------------------------
+ID: 1
+Username: asd
+Email: asd
+Password: asd
+UserRole: admin
+------------------------------

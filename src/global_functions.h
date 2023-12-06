@@ -243,7 +243,7 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             cout <<"Select the task that you want to edit." <<endl;
             c_project.displayUserTasks (current_user_id);
             cout <<endl <<"Select your Task status selection: " <<endl ;
-            cout<< "1. To-Do" <<endl
+            cout<<"1. To-Do" <<endl
                 <<"2. In-Progress" <<endl
                 <<"3. Completed" <<endl ;
 
