@@ -39,25 +39,6 @@ class TaskTeam  {
         }
     }
 
-    User
-    searchUser (int id) {
-        for (int i=1 ; i<=team_members_count_ ; i++) {
-            if (id == team_members_[i].get_user_id ()) {
-            team_members_[i].displayUserDetails ();
-            return team_members_ [i] ;
-            }
-        }
-    }
-
-    User
-    searchUser (string user_name) {
-        for (int i=1 ; i<=team_members_count_ ; i++) {
-            if (user_name == team_members_[i].get_user_name ()) {
-            team_members_[i].displayUserDetails ();
-            return team_members_ [i] ;        
-            }
-        }
-    }
 
 };
 class User;
@@ -248,6 +229,26 @@ const int MAX_PROJECT_USERS = 20;
         }
     }
     return false;
+    }
+
+    User
+    searchUser (int id) {
+        for (int i=1 ; i<=user_count ; i++) {
+            if (id == project_users_[i].get_user_id ()) {
+            project_users_->displayUsersDetails();
+            return project_users_ [i] ;
+            }
+        }
+    }
+
+    User
+    searchUser (string user_name) {
+        for (int i=1 ; i<=user_count ; i++) {
+            if (user_name == project_users_[i].get_user_name ()) {
+            project_users_->displayUsersDetails();
+            return project_users_ [i] ;
+            }
+        }
     }
 
 

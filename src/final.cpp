@@ -11,6 +11,7 @@ int main () {
         
         loginMenu (login_switch);
         switch (login_switch) {
+            
         
             case 1:
             signupForm (loginUser, current_project);
@@ -22,9 +23,10 @@ int main () {
                 {
                     int project_switch;
                     projectMenu (project_switch);
-
+                    current_user_id = 1;
                     switch(project_switch)
                     {
+                        current_user_id = 1;
                         /* case 1:    //Create a Project
                         createProject();
                         break;
