@@ -2,13 +2,48 @@
 #define GLOBAL_FUNCTIONS_H
 #include <iostream>
 #include <fstream>
-
+// #include <curl/curl.h>
 #include <string>
 #include "project.h"
 #include "tasks.h"
 #include "user.h"
 using namespace std;
 
+/* void sendEmail(const std::string& recipient, const std::string& subject, const std::string& body) {
+    CURL* curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+    if (curl) {
+        // Set the SMTP server details
+        curl_easy_setopt(curl, CURLOPT_URL, "smtps://smtp.gmail.com:465");
+        curl_easy_setopt(curl, CURLOPT_USE_SSL, CURLUSESSL_ALL);
+        curl_easy_setopt(curl, CURLOPT_MAIL_FROM, "<aawaizsoomro502@gmail.com>");
+        curl_easy_setopt(curl, CURLOPT_USERNAME, "<aawaizsoomro502@gmail.com>");
+        curl_easy_setopt(curl, CURLOPT_PASSWORD, "<password>");
+
+        // Set recipient email
+        struct curl_slist* recipients = nullptr;
+        recipients = curl_slist_append(recipients, recipient.c_str());
+        curl_easy_setopt(curl, CURLOPT_MAIL_RCPT, recipients);
+
+        // Set email content
+        std::string emailData = "Subject: " + subject + "\r\n\r\n" + body;
+        curl_easy_setopt(curl, CURLOPT_READDATA, &emailData);
+        curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+
+        // Perform the email send
+        res = curl_easy_perform(curl);
+
+        // Cleanup
+        curl_slist_free_all(recipients);
+        curl_easy_cleanup(curl);
+    }
+
+    if (res != CURLE_OK) {
+        std::cerr << "Email sending failed: " << curl_easy_strerror(res) << std::endl;
+    }
+} */
 
 int user_count=0;
 void
