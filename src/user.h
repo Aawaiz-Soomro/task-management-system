@@ -288,6 +288,7 @@ class User {
     AddTask (Task add_task) {
         if(user_id_ > 0 && add_task.get_task_id () > 0 && add_task.get_task_id () <= MAX_NO_OF_TASKS) {
             user_tasks [user_task_count_] = add_task ;
+            user_tasks [user_task_count_].set_task_id (user_task_count_);
             user_task_count_++;
             cout<<"Task added successfully."<<endl;
         } else {
@@ -305,6 +306,12 @@ class User {
     void
     changeTaskStatus (int task_id, string task_status) {
         user_tasks[task_id].changeTaskStatus (task_status);
+    }
+
+    void
+    addTaskNotes (int task_id, PrivateNotes add_note) {
+        // user id not working properly (fixed but need to re-check)
+        user_tasks [task_id].addTaskNotes(add_note);
     }
 
 

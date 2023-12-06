@@ -198,10 +198,25 @@ const int MAX_PROJECT_USERS = 20;
         }
     }
 
+    void
+    addTaskNotes (int user_id, int task_id, PublicNotes add_note) {
+        project_tasks_ [task_id].addTaskNotes(add_note);
+    }
+
+    void
+    addTaskNotes (int user_id, int task_id, PrivateNotes add_note) {
+        project_users_ [user_id].User::addTaskNotes (task_id, add_note);
+    }
+
 
     void
     displayUserTasks ( int user_id ) {
         project_users_[user_id].displayAssignedTasks ();
+    }
+
+    void
+    editTaskDueDate (int task_id,string new_due_date) {
+        project_tasks_[task_id].Task::editTaskDueDate(new_due_date);
     }
 
 

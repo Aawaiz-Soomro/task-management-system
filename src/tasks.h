@@ -118,8 +118,10 @@ class Task  {
     string task_status_;
     Tags task_tags_ [MAX_TASK_TAGS_];
     int tags_count_ = 0;
-    PublicNotes task_notes_ [MAX_TASK_NOTES_];
-    int notes_count_ = 0;
+    PublicNotes public_task_notes_ [MAX_TASK_NOTES_];
+    PrivateNotes private_task_notes_ [MAX_TASK_NOTES_];
+    int public_notes_count_;
+    int private_notes_count_ ;
     int task_members_;
     static int task_count;
 
@@ -147,6 +149,11 @@ class Task  {
     int
     get_task_id() {
         return task_id_;
+    }
+
+    void
+    set_task_id (int new_task_id) {
+        task_id_ = new_task_id;
     }
 
     void
@@ -223,19 +230,21 @@ class Task  {
     void
     addTaskNotes (PublicNotes new_task_note ) {
 
-        bool different = 1;
-        for (int i=0 ; i<notes_count_ ; i++) 
-        if ( task_notes_ [i].get_note_id_ () == new_task_note.get_note_id_ () ) {
-        different = 0;
-        cout << "This tag already exists in this task" <<endl ;
-        break;
+        if (public_notes_count_ < MAX_TASK_NOTES_) {
+        public_task_notes_ [public_notes_count_] = new_task_note ;
+        ++public_notes_count_;
+        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" ;
         }
+        else
+        cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
+    }
 
-        
-        if ( different )
-        if (notes_count_ < MAX_TASK_NOTES_) {
-        task_notes_ [notes_count_] = new_task_note ;
-        ++notes_count_;
+    void
+    addTaskNotes (PrivateNotes new_task_note ) {
+
+        if (public_notes_count_ < MAX_TASK_NOTES_) {
+        private_task_notes_ [private_notes_count_] = new_task_note ;
+        ++private_notes_count_;
         cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" ;
         }
         else
@@ -246,9 +255,9 @@ class Task  {
     removeTaskNotes (Notes new_task_note ) {
 
         for (int i=0 ; i<notes_count_ ; i++) {
-        if ( task_notes_ [i].get_note_id_ () == new_task_note.get_note_id_ () ) {
-            task_notes_ [i].set_note_id_ (0);
-            task_notes_ [i].set_note_name_ ("n/a");
+        if ( public_task_notes_ [i].get_note_id_ () == new_task_note.get_note_id_ () ) {
+            public_task_notes_ [i].set_note_id_ (0);
+            public_task_notes_ [i].set_note_name_ ("n/a");
             --notes_count_;
             break;
         }
@@ -268,8 +277,8 @@ class Task  {
         }
 
         cout <<"Task Notes: " <<endl;
-        for (int i=0 ; i<notes_count_; i++) {
-        cout <<task_notes_ [i].get_note_id_ () <<" - " <<task_notes_ [i].get_note_name_ () ;
+        for (int i=0 ; i<public_notes_count_; i++) {
+        cout <<public_task_notes_ [i].get_note_id_ () <<" - " <<public_task_notes_ [i].get_note_name_ () ;
         }
     }
 
