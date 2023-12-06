@@ -101,10 +101,18 @@ class Notes {
 };
 
 class PublicNotes : public Notes {
-string note_author;
+    string note_author;
+    public:
+    PublicNotes (string name, string text, string author) : Notes (name, text) {
+            note_author = author;
+    }
+    PublicNotes () {}
 };
 
 class PrivateNotes : public Notes {
+    public:
+    PrivateNotes (string name, string text) : Notes (name, text) {}
+    PrivateNotes () {}
 
 };
 const int MAX_NO_OF_TASKS = 5;
