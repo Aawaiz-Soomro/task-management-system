@@ -229,7 +229,14 @@ const int MAX_PROJECT_USERS = 20;
     sendDueDateAlert (int user_id) {
         project_users_ [user_id].sendDueDateAlert ();
     }
-
+    bool taskExists(int task_id)  {
+    for ( Task& task : project_tasks_) {
+        if (project_tasks_[task_id].get_task_id() == task_id) {
+            return true;
+        }
+    }
+    return false;
+    }
 
 
     friend class User;

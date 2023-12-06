@@ -253,12 +253,15 @@ void
 editTasks(User& loginUser, Project &c_project, int current_user_id){
     cout<<"*******************  EDIT TASKS *************************"<<endl;
     int edit_task_option;
+    int task_option = 0;
     do {
         
         cout<< "1. Search for the Task"<<endl
-        << "2. Add Tags"<<endl
-        << "3. Notes and Comments"<<endl
-        << "4. Go Back"<<endl;
+            << "2. Add Tags"<<endl
+            << "3. Add Private Notes" <<endl 
+            << "4. Add Public Notes"<<endl
+            << "5. Change Task Status"<<endl
+            << "6. Go Back"<<endl;
     
         cin>>edit_task_option;
         switch(edit_task_option) {
@@ -268,13 +271,30 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
 
             case 2:  //Add tags
             cout<<"Adding tags. "<<endl;
+            
+            int task_id;
+            // c_project.displayTasks();
+            c_project.displayUserTasks(current_user_id);
+            cout << "Select the task to add tags: ";
+            cin  >> task_id;
+
+            if (c_project.taskExists(task_id)) {
+                Tags new_task_tag;
+                c_project.addTaskTags(current_user_id,task_id,new_task_tag);
+            } else {
+                cout<<"Invalid task selection. Please try again. "<<endl;
+            }
             break;
 
-            case 3:  //Notes and comments
-            cout<<"Notes and comments. "<<endl;
+            case 3:  //Private Notes
+            cout<<"Adding Private Notes. "<<endl;
             break;
 
-            case 4:
+            case 4:  //Public Notes
+            cout<<"Adding Public Notes. "<<endl;
+            break;
+
+            case 5:  //Task status change 
             cout <<"Select the task that you want to edit." <<endl;
             c_project.displayUserTasks (current_user_id);
             cout <<endl <<"Select your Task status selection: " <<endl ;
@@ -282,7 +302,7 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
                 <<"2. In-Progress" <<endl
                 <<"3. Completed" <<endl ;
 
-            int task_option = 0;
+            
             
             switch (task_option) {
 
@@ -298,18 +318,17 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             c_project.changeTaskStatus (current_user_id, 0, "Completed");
             break;
 
-            case 5:  //Go Back
-            cout<<"Going back to the previous menu."<<endl;
-            break;
-
-
             default:
             cout<< "Invalid option. Please try again." << endl;        
-        }   
+            }   
+            break;
+
+            case 6: //Go back
+            cout<<"Going back to the previous menu."<<endl;
     
-    }
+        }
     cout<<"*********************************************************"<<endl;
-    } while (edit_task_option!=4); 
+    } while (edit_task_option!=6); 
 }
     
 void
