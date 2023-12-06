@@ -64,3 +64,9 @@ Email: asd
 Password: asd
 UserRole: admin
 ------------------------------
+ID: 1
+Username: popu
+Email: popu
+Password: popu
+UserRole: popu
+------------------------------
