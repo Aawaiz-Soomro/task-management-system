@@ -20,11 +20,11 @@ loginMenu (int &login_switch) {
 }
 
 bool
-authenticateUser (string check_email, string check_password) {
+authenticateUser (string check_email, string check_password,int check_user_id) {
     ifstream userFile("users.txt");
     if (userFile.is_open()) {
     string field, stored_email, stored_password;
-
+    int stored_user_id;
         while (userFile >> field) {
             if (field == "Email:") {
                 userFile >> stored_email;
@@ -32,29 +32,28 @@ authenticateUser (string check_email, string check_password) {
             }
             else if (field == "Password:") {
                 userFile >> stored_password;
+            }
+            else if (field == "ID:") {
+                userFile >> stored_user_id;
                 // Check the credentials
-                if (check_email == stored_email && check_password == stored_password) {
-                    cout << "Stored Email Is: " <<stored_email;
-                    cout << "Stored Password Is: " <<stored_email;
+                if (check_email == stored_email && check_password == stored_password && check_user_id == stored_user_id) {
+                    cout << "Stored Email Is: " <<stored_email <<endl;
+                    cout << "Stored Password Is: " <<stored_email <<endl;
+                    cout << "Stored User ID Is :"<<stored_user_id <<endl;
                     userFile.close();
                     cout <<"Logged In" <<endl;
                     return 1;
                 }
-                else
-                    cout <<"Login failed, User not found " <<endl;
-                    return 0;
+                
             }
-            //else if (field ==  "ID") {
-            // 
-            //}
+            
         }
-
     userFile.close();
     } else {
         cout << "Error: Unable to open the file." << endl;
     }
+    return 0;
 }
-
 void
 signupForm (User& loginUser, Project &c_project) {
     cout<<"******************* SIGNUP MENU *************************"<<endl;
@@ -118,26 +117,38 @@ signupForm (User& loginUser, Project &c_project) {
 }
 
 void
-loginForm (Project& c_project, User loginUser, bool& user_login, int &current_user_id) {
+loginForm (Project& c_project, bool& user_login, int &current_user_id) {
     cout<<"******************* LOGIN FORM *************************"<<endl;
     string temp_user_email;
     string temp_user_password;
+    int temp_user_id;
 
     cout << "Enter E-Mail: " ;
     cin  >> temp_user_email;
     cout << "Enter Password: " ;
     cin  >> temp_user_password;
+    cout << "Enter User ID: " ;
+    cin  >> temp_user_id;
 
-    if ( c_project.authenticateUser (temp_user_email, temp_user_password) ) {
-        current_user_id = c_project.authenticateUser (temp_user_email, temp_user_password);
+    bool auth_user_id = authenticateUser(temp_user_email,temp_user_password,temp_user_id);
+    
+    if (auth_user_id ) {
+        current_user_id = temp_user_id ;
+        cout<< "Logged into the account successfully. "<<endl;
+        user_login =1;
+    }
+    else {
+        cout << "Login failed. Please try again." << endl;
+    }
+    /*
+    if ( authenticateUser (temp_user_email, temp_user_password,temp_user_id) ) {
         cout << "Logged into the account successfully." << endl;
         user_login = 1;
         // loginUser.set_user_email(temp_user_email);
     } 
     else {
-        cout <<"ID:" << c_project.authenticateUser (temp_user_email, temp_user_password) <<endl;
         cout << "Login failed. Please try again." << endl;
-    }
+    } */
 
     cout << endl;
     cout<<"********************************************************"<<endl;

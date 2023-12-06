@@ -96,3 +96,15 @@ Email: asd
 Password: asd
 UserRole: admin
 ------------------------------
+ID: 1
+Username: saif
+Email: saifmemon@gmail.com
+Password: saifmemon
+UserRole: member
+------------------------------
+ID: 1
+Username: azaan
+Email: azaanmemon@gmail.com
+Password: azaanmemon
+UserRole: member
+------------------------------
