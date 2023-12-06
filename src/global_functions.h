@@ -1,5 +1,6 @@
 #ifndef GLOBAL_FUNCTIONS_H
 #define GLOBAL_FUNCTIONS_H
+
 #include <iostream>
 #include <fstream>
 // #include <curl/curl.h>
@@ -249,11 +250,27 @@ createTask(Project& c_project, User& loginUser) {
     c_project.AddTask(task_id, loginUser.get_user_id());
     cout<<"***********************************************************"<<endl;
 }
+
+PrivateNotes
+global_createPrivateNote (string priv_note_name,string priv_note_text) {
+    PrivateNotes pn1 (priv_note_name, priv_note_text) ;
+    return pn1 ;
+}
+
+PublicNotes
+global_createPublicNote (string priv_note_name,string priv_note_text, string author) {
+    PublicNotes pn1 (priv_note_name, priv_note_text, author) ;
+    return pn1 ;
+}
+
 void
 editTasks(User& loginUser, Project &c_project, int current_user_id){
     cout<<"*******************  EDIT TASKS *************************"<<endl;
     int edit_task_option;
     int task_option = 0;
+    string pub_note_name,pub_note_text,author;
+    string priv_note_name,priv_note_text;
+
     do {
         
         cout<< "1. Search for the Task"<<endl
@@ -288,10 +305,26 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
 
             case 3:  //Private Notes
             cout<<"Adding Private Notes. "<<endl;
+            cout << "Enter note name: ";
+            cin >> priv_note_name;
+            cout << "Enter note text: ";
+            cin >> priv_note_text;
+            //global_createPrivateNote (priv_note_name,priv_note_text) ;
+            //PrivateNotes private_notes(priv_note_name,priv_note_text);
+            c_project.addTaskNotes(current_user_id,task_id, global_createPrivateNote (priv_note_name,priv_note_text) );
             break;
 
             case 4:  //Public Notes
             cout<<"Adding Public Notes. "<<endl;
+            cout << "Enter Note Name: ";
+            cin  >> pub_note_name;
+            cout << "Enter Note text: ";
+            cin  >> pub_note_text;
+            cout << "Enter Author Name: ";
+            cin  >> author;
+            //PublicNotes public_notes(pub_note_name,pub_note_text,author);
+            //c_project.addTaskNotes(current_user_id,task_id,public_notes);
+            c_project.addTaskNotes(current_user_id,task_id, global_createPublicNote (pub_note_name,pub_note_text,author) );
             break;
 
             case 5:  //Task status change 
@@ -329,7 +362,7 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
         }
     cout<<"*********************************************************"<<endl;
     } while (edit_task_option!=6); 
-}
+}   
     
 void
 manageProjects(User& loginUser,Project& c_project, int c_user_id) {
