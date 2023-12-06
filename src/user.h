@@ -406,6 +406,11 @@ class User {
         user_tasks [task_id].addTaskNotes(add_note);
     }
 
+    void
+    addTaskTags ( int task_id, Tags new_task_tag) {
+        user_tasks [task_id]. Task:: addTaskTags (new_task_tag);
+    }
+
 
     friend class Project;
     friend class Task;

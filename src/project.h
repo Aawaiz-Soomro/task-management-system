@@ -178,9 +178,15 @@ const int MAX_PROJECT_USERS = 20;
         project_tasks_ [0].task_count++;
     }
 
+
     void
     AddTask (int user_id, int task_id) {
         project_users_ [user_id].AddTask (project_tasks_ [task_id]);
+    }
+
+    void
+    addTaskTags (int user_id, int task_id, Tags new_task_tag) {
+        project_tasks_[task_id]. Task:: addTaskTags (new_task_tag);
     }
 
     void
