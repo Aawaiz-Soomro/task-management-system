@@ -233,7 +233,7 @@ const int MAX_PROJECT_USERS = 20;
 
     User
     searchUser (int id) {
-        for (int i=1 ; i<=user_count ; i++) {
+        for (int i=1 ; i<= project_users_[0].user_count_ ; i++) {
             if (id == project_users_[i].get_user_id ()) {
             project_users_->displayUsersDetails();
             return project_users_ [i] ;
@@ -243,7 +243,7 @@ const int MAX_PROJECT_USERS = 20;
 
     User
     searchUser (string user_name) {
-        for (int i=1 ; i<=user_count ; i++) {
+        for (int i=1 ; i<= project_users_[0].user_count_ ; i++) {
             if (user_name == project_users_[i].get_user_name ()) {
             project_users_->displayUsersDetails();
             return project_users_ [i] ;
