@@ -152,11 +152,13 @@ const int MAX_PROJECT_USERS = 20;
         project_users_ [id].generateReport();
     }
 
-    void
+    int
     createTask (string name, string due_date) {
         int temp_task_count = project_tasks_ [0].task_count;
-        project_tasks_[temp_task_count].Task:: createTask (name, due_date);
+        int task_id = project_tasks_[temp_task_count].Task:: createTask (name, due_date);
         project_tasks_ [0].task_count++;
+        return task_id;
+        
     }
 
 

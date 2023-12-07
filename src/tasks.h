@@ -150,7 +150,7 @@ class Task  {
         task_status_ = "";
     }
     
-    void
+    int
     createTask (string name, string due_date) {
         if (task_count < MAX_NO_OF_TASKS) {
             task_id_ = task_count + 1; 
@@ -158,6 +158,7 @@ class Task  {
             task_due_date_ = due_date;
             task_status_ = "To-do";
             cout<<"Task created successfully."<<endl;
+            return task_id_;
         }
     }
     

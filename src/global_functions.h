@@ -241,12 +241,10 @@ createTask(Project& c_project, User& loginUser) {
     cout<<"Enter Due Date: ";
     cin>>temp_due_date;
 
-    c_project.createTask(temp_name,temp_due_date);
+    task_id = c_project.createTask(temp_name,temp_due_date);
 
-    c_project.displayProjectDetails ();
+    //c_project.displayProjectDetails ();
 
-    cout << "Enter Task ID: ";
-    cin >> task_id;
     c_project.AddTask(task_id, loginUser.get_user_id());
     cout<<"***********************************************************"<<endl;
 }
