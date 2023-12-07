@@ -259,7 +259,7 @@ class Task  {
         if (public_notes_count_ < MAX_TASK_NOTES_) {
         public_task_notes_ [public_notes_count_] = new_task_note ;
         ++public_notes_count_;
-        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
+        cout << "Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
@@ -271,7 +271,7 @@ class Task  {
         if (public_notes_count_ < MAX_TASK_NOTES_) {
         private_task_notes_ [private_notes_count_] = new_task_note ;
         ++private_notes_count_;
-        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
+        cout << "Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
@@ -296,7 +296,7 @@ class Task  {
         cout <<"Task Name: " <<task_name_ <<endl;
         cout <<"Task Due Date: " <<task_due_date_ <<endl;
         cout <<"Task Status: " <<task_status_ <<endl;
-
+/* 
         cout <<"Task Tags: " <<endl;
         cout <<"Tags count is: " <<tags_count_ <<endl;
         cout <<"Task tags [0] Name: " <<task_tags_ [0].get_tag_name_ ();
@@ -305,12 +305,21 @@ class Task  {
         cout <<"Task tags [1] ID: " <<task_tags_ [1].get_tag_id_ ();
         for (int i=0 ; i<tags_count_; i++) {
         cout <<task_tags_ [i].get_tag_id_ () <<" - " <<task_tags_ [i].get_tag_name_ () <<endl ;
-        }
-
-        /* cout <<"Task Notes: " <<endl;
-        for (int i=0 ; i<public_notes_count_; i++) {
-        cout <<public_task_notes_ [i].get_note_id_ () <<" - " <<public_task_notes_ [i].get_note_name_ () ;
         } */
+
+        cout <<"Public Task Notes: " <<endl;
+        /* for (int i=0 ; i<public_notes_count_; i++) {
+        cout <<public_task_notes_ [i].get_note_id_ () <<" - " <<public_task_notes_ [i].get_note_name_ () <<endl;
+        } */
+        displayPublicNotes();
+
+        cout <<"PrivateTask Notes: " <<endl;
+        /* for (int i=0 ; i<private_notes_count_; i++) {
+        cout <<private_task_notes_ [i].get_note_id_ () <<" - " <<private_task_notes_ [i].get_note_name_ () <<endl;
+        } */
+
+        displayPrivateNotes();
+
     }
 
     void

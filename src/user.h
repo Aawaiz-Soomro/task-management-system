@@ -405,7 +405,7 @@ class User {
     void
     addTaskNotes (int task_id, PrivateNotes add_note) {
         // user id not working properly (fixed but need to re-check)
-        user_tasks [task_id].addTaskNotes(add_note);
+        user_tasks [task_id - 1].addTaskNotes(add_note);
     }
 
     void
@@ -415,7 +415,7 @@ class User {
 
     void
     displayPrivateNotes (int task_id) {
-        user_tasks [task_id].displayPrivateNotes();
+        user_tasks [task_id - 1].displayPrivateNotes();
     }
 
 

@@ -172,3 +172,27 @@ Email: k
 Password: k
 UserRole: k
 ------------------------------
+ID: 1
+Username: ac
+Email: ac
+Password: ac
+UserRole: ac
+------------------------------
+ID: 1
+Username: e
+Email: e
+Password: e
+UserRole: e
+------------------------------
+ID: 1
+Username: ae
+Email: ae
+Password: ae
+UserRole: ae
+------------------------------
+ID: 1
+Username: ar
+Email: ar
+Password: ar
+UserRole: ar
+------------------------------

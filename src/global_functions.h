@@ -308,11 +308,10 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             case 3:  //Private Notes
             cout<<"Adding Private Notes. "<<endl;
             cout << "Enter note name: ";
-            getline(cin,priv_note_name);
+            cin>>priv_note_name;
             cin.ignore();
             cout << "Enter note text: ";
-            getline(cin,priv_note_text);
-            cin.ignore();
+            cin>>priv_note_text;
             //global_createPrivateNote (priv_note_name,priv_note_text) ;
             //PrivateNotes private_notes(priv_note_name,priv_note_text);
             c_project.addTaskNotes(current_user_id,task_id, global_createPrivateNote (priv_note_name,priv_note_text) );

@@ -196,22 +196,22 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     addTaskNotes (int user_id, int task_id, PublicNotes add_note) {
-        project_tasks_ [task_id].addTaskNotes(add_note);
+        project_tasks_ [task_id - 1].addTaskNotes(add_note);
     }
 
     void
     addTaskNotes (int user_id, int task_id, PrivateNotes add_note) {
-        project_users_ [user_id].User::addTaskNotes (task_id, add_note);
+        project_users_ [user_id - 1].User::addTaskNotes (task_id, add_note);
     }
 
     void
     displayPublicNotes (int task_id) {
-        project_tasks_ [task_id].displayPublicNotes();
+        project_tasks_ [task_id - 1].displayPublicNotes();
     }
 
     void
     displayPrivateNotes (int user_id, int task_id) {
-        project_users_ [user_id].displayPrivateNotes(task_id);
+        project_users_ [user_id - 1].displayPrivateNotes(task_id);
     }
 
 
