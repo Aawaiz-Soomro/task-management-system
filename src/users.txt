@@ -70,3 +70,9 @@ Email: popu
 Password: popu
 UserRole: popu
 ------------------------------
+ID: 1
+Username: tahakhanjan
+Email: tahakhanjan@gmail.com
+Password: tahakhanjan
+UserRole: admin
+------------------------------

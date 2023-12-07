@@ -232,7 +232,7 @@ createProject() {
         cout<<endl;
 }
 void
-createTask(Project& c_project, User& loginUser) {
+createTask(Project& c_project, int current_user_id) {
     cout<<"*******************  CREATE TASKS *************************"<<endl;
     string temp_name;
     string temp_due_date;
@@ -246,7 +246,7 @@ createTask(Project& c_project, User& loginUser) {
 
     //c_project.displayProjectDetails ();
 
-    c_project.AddTask(task_id, loginUser.get_user_id());
+    c_project.AddTask(task_id, current_user_id);
     cout<<"***********************************************************"<<endl;
 }
 
@@ -401,7 +401,7 @@ manageProjects(User& loginUser,Project& c_project, int c_user_id) {
             switch(tasks_options)
             {
                 case 1:  //Create a Task
-                createTask(c_project,loginUser);
+                createTask(c_project,c_user_id);
                 cout<<"Creating a task. "<<endl;
                 break;
 
