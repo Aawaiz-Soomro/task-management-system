@@ -196,3 +196,9 @@ Email: ar
 Password: ar
 UserRole: ar
 ------------------------------
+ID: 1
+Username: asd
+Email: asd
+Password: asd
+UserRole: asd
+------------------------------

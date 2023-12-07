@@ -255,11 +255,11 @@ class Task  {
 
     void
     addTaskNotes (PublicNotes new_task_note ) {
-
+        cout << "Entering addTaskNotes function in Task class" << endl;
         if (public_notes_count_ < MAX_TASK_NOTES_) {
-        public_task_notes_ [public_notes_count_] = new_task_note ;
-        ++public_notes_count_;
-        cout << "Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
+            public_task_notes_ [public_notes_count_] = new_task_note ;
+            ++public_notes_count_;
+            cout << "Public Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
@@ -267,11 +267,11 @@ class Task  {
 
     void
     addTaskNotes (PrivateNotes new_task_note ) {
-
-        if (public_notes_count_ < MAX_TASK_NOTES_) {
-        private_task_notes_ [private_notes_count_] = new_task_note ;
-        ++private_notes_count_;
-        cout << "Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
+        cout << "Entering addTaskNotes function in Task class" << endl;
+        if (private_notes_count_ < MAX_TASK_NOTES_) {
+            private_task_notes_ [private_notes_count_] = new_task_note ;
+            ++private_notes_count_;
+            cout << "Private Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;

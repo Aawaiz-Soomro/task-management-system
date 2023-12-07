@@ -281,8 +281,8 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
     
         cin>>edit_task_option;
         switch(edit_task_option) {
-            case 1:  //Search for the task
-            cout<<"Searching for the task. "<<endl;
+            case 1:  //Search for the task  
+            cout << "Searching for the task. " << endl;
             break;
 
             case 2:  //Add tags
@@ -297,7 +297,7 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             
             cout<<"Enter the tag you want to add: "<<endl;
             cin>>tags;
-            
+
             if (1) {
             Tags new_task_tag(tags);    
             c_project.addTaskTags(current_user_id,task_id,new_task_tag);
@@ -307,11 +307,11 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
 
             case 3:  //Private Notes
             cout<<"Adding Private Notes. "<<endl;
+            cin.ignore ();
             cout << "Enter note name: ";
-            cin>>priv_note_name;
-            cin.ignore();
+            getline(cin, priv_note_name);
             cout << "Enter note text: ";
-            cin>>priv_note_text;
+            getline(cin, priv_note_text);
             //global_createPrivateNote (priv_note_name,priv_note_text) ;
             //PrivateNotes private_notes(priv_note_name,priv_note_text);
             c_project.addTaskNotes(current_user_id,task_id, global_createPrivateNote (priv_note_name,priv_note_text) );
@@ -319,15 +319,18 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
 
             case 4:  //Public Notes
             cout<<"Adding Public Notes. "<<endl;
+            cin.ignore();
             cout << "Enter Note Name: ";
-            cin  >> pub_note_name;
+            getline(cin, pub_note_name);
+
             cout << "Enter Note text: ";
-            cin  >> pub_note_text;
+            getline(cin, pub_note_text);
+
             cout << "Enter Author Name: ";
-            cin  >> author;
+            getline(cin, author);
             //PublicNotes public_notes(pub_note_name,pub_note_text,author);
             //c_project.addTaskNotes(current_user_id,task_id,public_notes);
-            c_project.addTaskNotes(current_user_id,task_id, global_createPublicNote (pub_note_name,pub_note_text,author) );
+            c_project.addTaskNotes(current_user_id,task_id, global_createPublicNote (pub_note_name, pub_note_text, author) );
             break;
 
             case 5:  //Task status change 

@@ -196,12 +196,16 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     addTaskNotes (int user_id, int task_id, PublicNotes add_note) {
+        cout << "Entering addTaskNotes for Public function in Project class" << endl;
         project_tasks_ [task_id - 1].addTaskNotes(add_note);
+        
     }
 
     void
     addTaskNotes (int user_id, int task_id, PrivateNotes add_note) {
-        project_users_ [user_id - 1].User::addTaskNotes (task_id, add_note);
+        cout << "Entering addTaskNotes for Private function in Project class" << endl;
+         //project_users_ [user_id - 1].User::addTaskNotes (task_id, add_note);
+        project_users_ [user_id - 1].addTaskNotes (task_id, add_note);
     }
 
     void

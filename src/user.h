@@ -403,7 +403,8 @@ class User {
     }
 
     void
-    addTaskNotes (int task_id, PrivateNotes add_note) {
+    addTaskNotes (int task_id, PrivateNotes add_note)  {
+        cout << "Entering addTaskNotes function in User class" << endl;
         // user id not working properly (fixed but need to re-check)
         user_tasks [task_id - 1].addTaskNotes(add_note);
     }
