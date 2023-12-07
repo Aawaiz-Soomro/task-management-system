@@ -26,7 +26,7 @@ int main () {
                     current_user_id = 1;
                     switch(project_switch)
                     {
-                        current_user_id = 1;
+                        //current_user_id = 1;
                         /* case 1:    //Create a Project
                         createProject();
                         break;

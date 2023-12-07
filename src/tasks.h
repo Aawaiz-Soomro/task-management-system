@@ -233,7 +233,7 @@ class Task  {
         if (tags_count_ < MAX_TASK_TAGS_) {
         task_tags_ [tags_count_] = new_task_tag ;
         ++tags_count_;
-        cout << "Tag: " <<new_task_tag.get_tag_name_ () <<" added succesfully" ;
+        cout << "Tag: " <<new_task_tag.get_tag_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 tags exceeded, please remove a tag to add another one" <<endl ;
@@ -258,7 +258,7 @@ class Task  {
         if (public_notes_count_ < MAX_TASK_NOTES_) {
         public_task_notes_ [public_notes_count_] = new_task_note ;
         ++public_notes_count_;
-        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" ;
+        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
@@ -270,7 +270,7 @@ class Task  {
         if (public_notes_count_ < MAX_TASK_NOTES_) {
         private_task_notes_ [private_notes_count_] = new_task_note ;
         ++private_notes_count_;
-        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" ;
+        cout << "Tag: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
         }
         else
         cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;

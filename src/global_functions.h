@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 // #include <curl/curl.h>
 #include <string>
 #include "project.h"
@@ -238,7 +239,7 @@ createTask(Project& c_project, User& loginUser) {
     int task_id;
     cout<<"Enter Task Name: ";
     cin >>temp_name;
-    cout<<"Enter Due Date: ";
+    cout<<"Enter Due Date: ";   
     cin>>temp_due_date;
 
     task_id = c_project.createTask(temp_name,temp_due_date);
@@ -304,9 +305,11 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             case 3:  //Private Notes
             cout<<"Adding Private Notes. "<<endl;
             cout << "Enter note name: ";
-            cin >> priv_note_name;
+            getline(cin,priv_note_name);
+            cin.ignore();
             cout << "Enter note text: ";
-            cin >> priv_note_text;
+            getline(cin,priv_note_text);
+            cin.ignore();
             //global_createPrivateNote (priv_note_name,priv_note_text) ;
             //PrivateNotes private_notes(priv_note_name,priv_note_text);
             c_project.addTaskNotes(current_user_id,task_id, global_createPrivateNote (priv_note_name,priv_note_text) );
