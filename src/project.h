@@ -68,7 +68,7 @@ const int MAX_PROJECT_USERS = 20;
         project_name_=name;
         project_id_=id;
         project_description_ = project_desc;
-        project_due_date_=project_due_date_;
+        project_due_date_= due_date;
     }
     
     string
@@ -230,7 +230,6 @@ const int MAX_PROJECT_USERS = 20;
     }
     return false;
     }
-
     User
     searchUser (int id) {
         for (int i=1 ; i<= project_users_[0].user_count_ ; i++) {
@@ -249,7 +248,7 @@ const int MAX_PROJECT_USERS = 20;
             return project_users_ [i] ;
             }
         }
-    }
+    } 
 
 
     friend class User;
