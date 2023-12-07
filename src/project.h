@@ -164,12 +164,14 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     AddTask (int user_id, int task_id) {
-        project_users_ [user_id].AddTask (project_tasks_ [task_id]);
+        project_users_ [user_id].AddTask (project_tasks_ [task_id - 1]);
     }
 
     void
     addTaskTags (int user_id, int task_id, Tags new_task_tag) {
-        project_tasks_[task_id]. Task:: addTaskTags (new_task_tag);
+        project_tasks_[task_id - 1]. Task:: addTaskTags (new_task_tag);
+        project_users_[user_id - 1]. User:: addTaskTags (task_id,new_task_tag);
+
     }
 
     void
@@ -182,9 +184,14 @@ const int MAX_PROJECT_USERS = 20;
     void
     displayTasks () {
         int temp_tasks_count = project_tasks_ [0].task_count;
-        for (int i=0 ; i < temp_tasks_count - 1 ; i++) {
-        project_tasks_->displayTaskDetails();
+        for (int i=0 ; i < temp_tasks_count ; i++) {
+        project_tasks_[i].displayTaskDetails();
         }
+    }
+
+    void
+    displayUserTasks ( int user_id ) {
+        project_users_[user_id].displayAssignedTasks ();
     }
 
     void
@@ -207,13 +214,6 @@ const int MAX_PROJECT_USERS = 20;
         project_users_ [user_id].displayPrivateNotes(task_id);
     }
 
-
-
-
-    void
-    displayUserTasks ( int user_id ) {
-        project_users_[user_id].displayAssignedTasks ();
-    }
 
     void
     editTaskDueDate (int task_id,string new_due_date) {

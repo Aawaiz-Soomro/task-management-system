@@ -169,7 +169,7 @@ signupForm (User& loginUser, Project &c_project) {
     loginUser.set_user_email(temp_user_email);
     loginUser.set_user_password(temp_user_password);
     */
-    loginUser.set_user_id(new_user_id);
+    //loginUser.set_user_id(new_user_id);
     cout<<"New user created successfully."<<endl;
     cout<<new_user_id;
     cout <<endl;
@@ -243,7 +243,7 @@ createTask(Project& c_project, int current_user_id) {
     cin>>temp_due_date;
 
     task_id = c_project.createTask(temp_name,temp_due_date);
-
+    cout << "TASK ID IN MAIN: " <<task_id;
     //c_project.displayProjectDetails ();
 
     c_project.AddTask(task_id, current_user_id);
@@ -269,7 +269,7 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
     int task_option = 0;
     string pub_note_name,pub_note_text,author;
     string priv_note_name,priv_note_text;
-
+    string tags;    
     do {
         
         cout<< "1. Search for the Task"<<endl
@@ -294,12 +294,15 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             cout << "Select the task to add tags: ";
             cin  >> task_id;
 
-            if (c_project.taskExists(task_id)) {
-                Tags new_task_tag;
-                c_project.addTaskTags(current_user_id,task_id,new_task_tag);
-            } else {
-                cout<<"Invalid task selection. Please try again. "<<endl;
+            
+            cout<<"Enter the tag you want to add: "<<endl;
+            cin>>tags;
+            
+            if (1) {
+            Tags new_task_tag(tags);    
+            c_project.addTaskTags(current_user_id,task_id,new_task_tag);
             }
+            
             break;
 
             case 3:  //Private Notes

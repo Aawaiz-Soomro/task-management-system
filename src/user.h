@@ -378,12 +378,14 @@ class User {
 
     void
     AddTask (Task add_task) {
+        cout <<"User ID: " <<user_id_ <<"  " <<"Task ID: " <<add_task.get_task_id () ;
         if(user_id_ > 0 && add_task.get_task_id () > 0 && add_task.get_task_id () <= MAX_NO_OF_TASKS) {
             user_tasks [user_task_count_] = add_task ;
-            user_tasks [user_task_count_].set_task_id (user_task_count_);
+            user_tasks [user_task_count_].set_task_id (user_task_count_ + 1);
             user_task_count_++;
             cout<<"Task added successfully."<<endl;
-        } else {
+        } 
+        else {
             cout << "Invalid user_id or task_id." << endl;
         }
     }
@@ -391,7 +393,7 @@ class User {
     void
     displayAssignedTasks () {
         for (int i=0 ; i < user_task_count_ ; i++) {
-        user_tasks[user_task_count_].displayTaskDetails();
+        user_tasks[user_task_count_ - 1].displayTaskDetails();
         }
     }
 
@@ -408,7 +410,7 @@ class User {
 
     void
     addTaskTags ( int task_id, Tags new_task_tag) {
-        user_tasks [task_id]. Task:: addTaskTags (new_task_tag);
+        user_tasks [task_id-1]. Task:: addTaskTags (new_task_tag);
     }
 
     void

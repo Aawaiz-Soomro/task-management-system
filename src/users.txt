@@ -76,3 +76,99 @@ Email: tahakhanjan@gmail.com
 Password: tahakhanjan
 UserRole: admin
 ------------------------------
+ID: 1
+Username: area
+Email: area51
+Password: area
+UserRole: member
+------------------------------
+ID: 1
+Username: abc
+Email: abc
+Password: abc
+UserRole: member
+------------------------------
+ID: 1
+Username: abc123
+Email: abc123
+Password: abc123
+UserRole: member
+------------------------------
+ID: 1
+Username: lala
+Email: lala
+Password: lala
+UserRole: member
+------------------------------
+ID: 1
+Username: abdaf
+Email: a
+Password: a
+UserRole: a\
+------------------------------
+ID: 1
+Username: 123
+Email: 123
+Password: 123
+UserRole: member
+------------------------------
+ID: 1
+Username: 1
+Email: 1
+Password: 1
+UserRole: member
+------------------------------
+ID: 1
+Username: q
+Email: q
+Password: q
+UserRole: member
+------------------------------
+ID: 1
+Username: q
+Email: q
+Password: q
+UserRole: q
+------------------------------
+ID: 2
+Username: ra
+Email: ra
+Password: ra
+UserRole: ra
+------------------------------
+ID: 1
+Username: ata
+Email: ata
+Password: ata
+UserRole: m
+------------------------------
+ID: 1
+Username: z
+Email: z
+Password: z
+UserRole: z
+------------------------------
+ID: 1
+Username: s
+Email: s
+Password: s
+UserRole: s
+------------------------------
+ID: 1
+Username: t
+Email: t
+Password: t
+UserRole: t
+------------------------------
+ID: 1
+Username: c
+Email: c
+Password: c
+UserRole: c
+------------------------------
+ID: 1
+Username: k
+Email: k
+Password: k
+UserRole: k
+------------------------------

@@ -22,8 +22,9 @@ class Tags {
         tag_name_ = "";
     }
 
-    Tags (string name, string text) {
+    Tags (string name) {
         tag_name_ = name;
+        tag_id_++;
     }
 
     int
@@ -297,14 +298,19 @@ class Task  {
         cout <<"Task Status: " <<task_status_ <<endl;
 
         cout <<"Task Tags: " <<endl;
+        cout <<"Tags count is: " <<tags_count_ <<endl;
+        cout <<"Task tags [0] Name: " <<task_tags_ [0].get_tag_name_ ();
+        cout <<"Task tags [0] ID: " <<task_tags_ [0].get_tag_id_ ();
+        cout <<"Task tags [1] Name: " <<task_tags_ [1].get_tag_name_ ();
+        cout <<"Task tags [1] ID: " <<task_tags_ [1].get_tag_id_ ();
         for (int i=0 ; i<tags_count_; i++) {
-        cout <<task_tags_ [i].get_tag_id_ () <<" - " <<task_tags_ [i].get_tag_name_ () ;
+        cout <<task_tags_ [i].get_tag_id_ () <<" - " <<task_tags_ [i].get_tag_name_ () <<endl ;
         }
 
-        cout <<"Task Notes: " <<endl;
+        /* cout <<"Task Notes: " <<endl;
         for (int i=0 ; i<public_notes_count_; i++) {
         cout <<public_task_notes_ [i].get_note_id_ () <<" - " <<public_task_notes_ [i].get_note_name_ () ;
-        }
+        } */
     }
 
     void
