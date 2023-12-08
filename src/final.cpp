@@ -42,9 +42,10 @@ int main () {
 
                         case 2:  //View Profile
                         cout<<"********************** VIEWING PROFILE ********************"<<endl;
-                        loginUser.viewProfile();
+                        current_project.viewProfile(current_user_id);
                         cout<<"***********************************************************"<<endl;
                         break;
+
                         
                         case 3:  //Go Back
                         cout<<"Going back to the previous menu."<<endl;
@@ -56,6 +57,11 @@ int main () {
                         cout<<"User logged out successfully."<<endl;
                         cout<<"Exiting the program."<<endl;
                         exit(0);
+                        break;
+
+                        case 5:
+                        current_project.displayProjectDetails();
+                        break;
                         
                         default:
                         cout<<"Invalid option. Please try again."<<endl;

@@ -6,41 +6,7 @@
 using namespace std;
 
 
-class TaskTeam  {
-    private:
-    User team_members_ [5] ;
-    int team_members_count_;
 
-    public:
-
-    void
-    addTeamMember (User new_team_member) {
-        team_members_ [team_members_count_] = new_team_member; 
-    }
-    
-    void
-    removeTeamMember () {
-        cout << "Who do you want to remove?" <<endl;
-        int removed_person_choice = 0;
-        for ( int i=0; i<5 ; i++) {
-        cout <<i <<". " <<team_members_ [i].get_user_name () <<" - " <<team_members_ [i].get_user_id () <<endl ;
-        }
-        cout << "Enter Your Choice: ";
-        cin >> removed_person_choice;
-
-        team_members_ [removed_person_choice].removeUser (); 
-    }
-
-    void
-    displayTaskTeam () {
-        for (int i=0 ; i<5 ; i++) {
-        cout <<"User " <<i <<": " <<endl; 
-        team_members_[i].displayUserDetails();
-        }
-    }
-
-
-};
 class User;
 const int MAX_PROJECT_USERS = 20;
     class Project {
@@ -57,10 +23,9 @@ const int MAX_PROJECT_USERS = 20;
     Project()
     {
         project_id_=0;
-        project_name_="";
-        project_description_ = "";
-        project_due_date_="";
-
+        project_name_="My First Project";
+        project_description_ = "This is my first project";
+        project_due_date_="22042024";
         
     }
     Project(string name,int id,string project_desc, string due_date)  
@@ -84,6 +49,12 @@ const int MAX_PROJECT_USERS = 20;
     get_due_date () {
         return project_due_date_;
     }
+
+    void
+    viewProfile (int user_id) {
+        project_users_[user_id].viewProfile ();
+    }
+
     int
     createUser (string username,string email,string password,string role) {
         // project_users_[0].User :: createUser (username, email,password) ;
@@ -106,7 +77,7 @@ const int MAX_PROJECT_USERS = 20;
         if (!vacant_id_found) {
         
         int temp_user_count = project_users_[0].user_count_; 
-        project_users_[temp_user_count + 1].user_id_ = temp_user_count + 1;
+        project_users_[temp_user_count].user_id_ = temp_user_count + 1;
         project_users_[temp_user_count].user_email_ = email;
         project_users_[temp_user_count].user_password_ = password;
         project_users_[temp_user_count].user_role_ = role;
@@ -164,7 +135,7 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     AddTask (int user_id, int task_id) {
-        project_users_ [user_id].AddTask (project_tasks_ [task_id - 1]);
+        project_users_ [user_id-1].AddTask (project_tasks_ [task_id - 1]);
     }
 
     void
@@ -176,8 +147,8 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     changeTaskStatus (int user_id, int task_id, string task_status) {
-        project_tasks_[task_id].Task :: changeTaskStatus (task_status);
-        project_users_[user_id].User :: changeTaskStatus (task_id, task_status);
+        project_tasks_[task_id-1].Task :: changeTaskStatus (task_status);
+        project_users_[user_id-1].User :: changeTaskStatus (task_id, task_status);
     }
 
 
@@ -191,7 +162,7 @@ const int MAX_PROJECT_USERS = 20;
 
     void
     displayUserTasks ( int user_id ) {
-        project_users_[user_id].displayAssignedTasks ();
+        project_users_[user_id-1].displayAssignedTasks ();
     }
 
     void
@@ -240,7 +211,7 @@ const int MAX_PROJECT_USERS = 20;
     searchUser (int id) {
         for (int i=1 ; i<= project_users_[0].user_count_ ; i++) {
             if (id == project_users_[i].get_user_id ()) {
-            project_users_->displayUsersDetails();
+            project_users_[i].displayUsersDetails();
             return project_users_ [i] ;
             }
         }

@@ -399,13 +399,12 @@ class User {
 
     void
     changeTaskStatus (int task_id, string task_status) {
-        user_tasks[task_id].changeTaskStatus (task_status);
+        user_tasks[task_id-1].changeTaskStatus (task_status);
     }
 
     void
     addTaskNotes (int task_id, PrivateNotes add_note)  {
         cout << "Entering addTaskNotes function in User class" << endl;
-        // user id not working properly (fixed but need to re-check)
         user_tasks [task_id - 1].addTaskNotes(add_note);
     }
 
@@ -418,7 +417,7 @@ class User {
     displayPrivateNotes (int task_id) {
         user_tasks [task_id - 1].displayPrivateNotes();
     }
-
+    
 
     friend class Project;
     friend class Task;

@@ -37,6 +37,9 @@ class Tags {
         return tag_name_;
     }
 
+
+
+
     void
     set_tag_name_ (string new_tag_name) {
         tag_name_ = new_tag_name;
@@ -80,9 +83,19 @@ class Notes {
         return note_name_;
     }
 
+    string
+    get_note_text_ () {
+        return note_text_;
+    }
+
     void
     set_note_name_ (string new_note_name) {
         note_name_ = new_note_name;
+    }
+
+    void
+    set_note_text_ (string new_note_text) {
+        note_text_ = new_note_text;
     }
 
     void
@@ -135,7 +148,7 @@ class Task  {
     Tags task_tags_ [MAX_TASK_TAGS_];
     int tags_count_ = 0;
     PublicNotes public_task_notes_ [MAX_TASK_NOTES_];
-    PrivateNotes private_task_notes_ [MAX_TASK_NOTES_];
+    PrivateNotes private_task_notes_ [5];
     int public_notes_count_;
     int private_notes_count_ ;
     int task_members_;
@@ -149,12 +162,16 @@ class Task  {
         task_name_ = "";
         task_due_date_ = "";
         task_status_ = "";
+        private_notes_count_=0;
+        public_notes_count_=0;
     }
     
     int
     createTask (string name, string due_date) {
         if (task_count < MAX_NO_OF_TASKS) {
             task_id_ = task_count + 1; 
+            private_notes_count_ = 0;
+            public_notes_count_ = 0;
             task_name_ = name;
             task_due_date_ = due_date;
             task_status_ = "To-do";
@@ -268,13 +285,17 @@ class Task  {
     void
     addTaskNotes (PrivateNotes new_task_note ) {
         cout << "Entering addTaskNotes function in Task class" << endl;
-        if (private_notes_count_ < MAX_TASK_NOTES_) {
-            private_task_notes_ [private_notes_count_] = new_task_note ;
+            cout<<"hello"<<endl;
+            cout << new_task_note.get_note_name_ () <<endl ;
+            cout << new_task_note.get_note_text_ () <<endl ;
+            //cout <<private_notes_count_ <<endl;
+
+            private_task_notes_ [0].set_note_name_ (new_task_note.get_note_name_()) ; 
+            private_task_notes_ [0].set_note_text_ (new_task_note.get_note_text_()) ; 
             ++private_notes_count_;
             cout << "Private Note: " <<new_task_note.get_note_name_ () <<" added succesfully" <<endl;
-        }
-        else
-        cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
+        //else
+        //cout << "Maximum limit of 5 Notes exceeded, please remove a Note to add another one" <<endl ;
     }
 
     /* void
@@ -296,29 +317,29 @@ class Task  {
         cout <<"Task Name: " <<task_name_ <<endl;
         cout <<"Task Due Date: " <<task_due_date_ <<endl;
         cout <<"Task Status: " <<task_status_ <<endl;
-/* 
+ 
         cout <<"Task Tags: " <<endl;
         cout <<"Tags count is: " <<tags_count_ <<endl;
-        cout <<"Task tags [0] Name: " <<task_tags_ [0].get_tag_name_ ();
+        /* cout <<"Task tags [0] Name: " <<task_tags_ [0].get_tag_name_ ();
         cout <<"Task tags [0] ID: " <<task_tags_ [0].get_tag_id_ ();
         cout <<"Task tags [1] Name: " <<task_tags_ [1].get_tag_name_ ();
-        cout <<"Task tags [1] ID: " <<task_tags_ [1].get_tag_id_ ();
+        cout <<"Task tags [1] ID: " <<task_tags_ [1].get_tag_id_ (); */
         for (int i=0 ; i<tags_count_; i++) {
-        cout <<task_tags_ [i].get_tag_id_ () <<" - " <<task_tags_ [i].get_tag_name_ () <<endl ;
-        } */
+        cout <<task_tags_ [i].get_tag_name_ () <<endl ;
+        } 
 
         cout <<"Public Task Notes: " <<endl;
         /* for (int i=0 ; i<public_notes_count_; i++) {
         cout <<public_task_notes_ [i].get_note_id_ () <<" - " <<public_task_notes_ [i].get_note_name_ () <<endl;
         } */
-        displayPublicNotes();
+        //displayPublicNotes();
 
         cout <<"PrivateTask Notes: " <<endl;
         /* for (int i=0 ; i<private_notes_count_; i++) {
         cout <<private_task_notes_ [i].get_note_id_ () <<" - " <<private_task_notes_ [i].get_note_name_ () <<endl;
         } */
 
-        displayPrivateNotes();
+        //displayPrivateNotes();
 
     }
 

@@ -189,8 +189,8 @@ loginForm (Project& c_project, bool& user_login, int &current_user_id) {
 
     int retrieved_user_id=0;
     bool auth_user_id = authenticateUser(temp_user_email,temp_user_password,retrieved_user_id);
-    
-    if (auth_user_id ) {
+    //if (auth_user_id ) {
+    if (1 ) {
         current_user_id = retrieved_user_id;
         cout<< "Logged into the account successfully. "<<endl;
         user_login =1;
@@ -212,7 +212,8 @@ projectMenu (int &project_switch) {
         << "1. Manage Project" <<endl
         << "2. View Profile" <<endl
         << "3. Go Back"<<endl
-        << "4. Logout"<<endl;
+        << "4. Logout"<<endl
+        << "5. View Current Project" <<endl;
     
     cin >> project_switch;
     cout<<"**********************************************************"<<endl;
@@ -221,7 +222,6 @@ void
 createProject() {
         string project_name;
         string project_due_date;
-        TaskTeam team;
         cout<<"Enter Project Name: "; 
         cin>>project_name;
         cout<<"Enter Project Due Date: ";
@@ -266,10 +266,11 @@ void
 editTasks(User& loginUser, Project &c_project, int current_user_id){
     cout<<"*******************  EDIT TASKS *************************"<<endl;
     int edit_task_option;
-    int task_option = 0;
+    int task_option;
     string pub_note_name,pub_note_text,author;
     string priv_note_name,priv_note_text;
     string tags;    
+    int choice;
     do {
         
         cout<< "1. Search for the Task"<<endl
@@ -299,7 +300,7 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             cin>>tags;
 
             if (1) {
-            Tags new_task_tag(tags);    
+            Tags new_task_tag(tags);
             c_project.addTaskTags(current_user_id,task_id,new_task_tag);
             }
             
@@ -314,7 +315,13 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
             getline(cin, priv_note_text);
             //global_createPrivateNote (priv_note_name,priv_note_text) ;
             //PrivateNotes private_notes(priv_note_name,priv_note_text);
-            c_project.addTaskNotes(current_user_id,task_id, global_createPrivateNote (priv_note_name,priv_note_text) );
+            if (1) {
+                PrivateNotes pn1 (priv_note_name, priv_note_text) ;
+                c_project.addTaskNotes(current_user_id,task_id, pn1 );
+            }
+            cout << "Project Warr gaya" <<endl;
+            
+            //global_createPrivateNote (priv_note_name,priv_note_text);
             break;
 
             case 4:  //Public Notes
@@ -335,40 +342,51 @@ editTasks(User& loginUser, Project &c_project, int current_user_id){
 
             case 5:  //Task status change 
             cout <<"Select the task that you want to edit." <<endl;
+            int task_selection;
+            cin >> task_selection;
+
             c_project.displayUserTasks (current_user_id);
-            cout <<endl <<"Select your Task status selection: " <<endl ;
-            cout<<"1. To-Do" <<endl
-                <<"2. In-Progress" <<endl
-                <<"3. Completed" <<endl ;
 
+                do {
+                    cout <<endl <<"Select your Task status selection: " <<endl ;
+                    cout<<"1. To-Do" <<endl
+                        <<"2. In-Progress" <<endl
+                        <<"3. Completed" <<endl 
+                        <<"4. Go back"<<endl;
+                    cout<<"Enter your choice: ";
+                    cin>> task_option;
+                    switch (task_option) {
+
+                    case 1:
+                    c_project.changeTaskStatus (current_user_id,task_selection, "To-Do");
+                    break;
+
+                    case 2:
+                    c_project.changeTaskStatus (current_user_id, task_selection, "In-Progress");
+                    break;
+
+                    case 3:
+                    c_project.changeTaskStatus (current_user_id, task_selection, "Completed");
+                    break;
+                    
+                    case 4: 
+                    cout<<"Going back to the previous menu."<<endl;
+                    break;
+
+                    default:
+                    cout<< "Invalid option. Please try again." << endl;   
+                    break;     
+                    }   
             
-            
-            switch (task_option) {
-
-            case 1:
-            c_project.changeTaskStatus (current_user_id, 0, "To-Do");
-            break;
-
-            case 2:
-            c_project.changeTaskStatus (current_user_id, 0, "In-Progress");
-            break;
-
-            case 3:
-            c_project.changeTaskStatus (current_user_id, 0, "Completed");
-            break;
-
-            default:
-            cout<< "Invalid option. Please try again." << endl;        
-            }   
-            break;
-
+        
+                } while (task_option!=4);
             case 6: //Go back
             cout<<"Going back to the previous menu."<<endl;
-    
-        }
+            break;
     cout<<"*********************************************************"<<endl;
-    } while (edit_task_option!=6); 
-}   
+    } 
+}  while (edit_task_option!=6);
+}  
     
 void
 manageProjects(User& loginUser,Project& c_project, int c_user_id) {
